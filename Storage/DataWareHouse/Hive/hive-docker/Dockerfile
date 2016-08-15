@@ -9,10 +9,12 @@ MAINTAINER WxChevalier
 #Starts Hive metastore Server
 #Starts Hive Server2
 
+# explicitly set user/group IDs
+RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
 
 # 安装Postgres作为Hive元数据存储
-RUN apt-get update
-RUN apt-get -yq install vim postgresql-9.3 libpostgresql-jdbc-java
+RUN yum update -y
+RUN yum -y install vim postgresql-9.3 libpostgresql-jdbc-java
 
 # 创建元数据库 创建Hive用户并且分配权限privileges
 USER postgres
@@ -26,8 +28,8 @@ RUN /etc/init.d/postgresql start &&\
 USER root
 
 # 构建开发工具
-RUN apt-get update
-RUN apt-get install -y git libprotobuf-dev protobuf-compiler
+RUN yum update -y
+RUN yum install -y git libprotobuf-dev protobuf-compiler
 
 # 安装Maven
 RUN curl -s http://mirror.olnevhost.net/pub/apache/maven/binaries/apache-maven-3.2.1-bin.tar.gz | tar -xz -C /usr/local/

@@ -13,3 +13,5 @@ docker pull inmobi/docker-hive
 ## Run the image
 
 docker run -itP inmobi/docker-hive /etc/hive-bootstrap.sh -bash
+
+还可以借鉴：https://github.com/Jimexist/docker-hive
