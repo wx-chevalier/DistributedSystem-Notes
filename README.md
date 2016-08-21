@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [infrastructure-handbook](#infrastructure-handbook)
+- [Infrastructure Handbook](#infrastructure-handbook)
 - [Distributed:分布式系统](#distributed%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F)
   - [Model:分布式模型](#model%E5%88%86%E5%B8%83%E5%BC%8F%E6%A8%A1%E5%9E%8B)
     - [Synchronization:同步](#synchronization%E5%90%8C%E6%AD%A5)
@@ -20,12 +20,15 @@
       - [Redis](#redis)
         - [DataType:数据类型](#datatype%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
         - [Management:管理](#management%E7%AE%A1%E7%90%86)
+        - [Cluster:集群](#cluster%E9%9B%86%E7%BE%A4)
+        - [Architecture:架构](#architecture%E6%9E%B6%E6%9E%84)
         - [Optimization:优化](#optimization%E4%BC%98%E5%8C%96)
         - [Script:脚本](#script%E8%84%9A%E6%9C%AC)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# infrastructure-handbook
+
+# Infrastructure Handbook
 My Handbook For Infrastructure
 
 # Distributed:分布式系统
@@ -65,19 +68,31 @@ My Handbook For Infrastructure
 ### KeyValue
 #### Redis
 - [Redis基础与配置](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/redis.md)
-- [Redis命令进阶](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/redis-advancedcommands.md)
+- [Redis命令进阶:事务与管道](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/redis-advancedcommands.md)
 
 ##### DataType:数据类型
 - [Redis基础数据类型](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/DataType/redis-datatypes.md)
 - [Redis中的集合类型](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/DataType/redis-datatypes-collection.md)
 - [Redis中的数据队列:订阅/优先权队列](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/DataType/redis-messagequeue.md)
+- [Redis中数据类型的内部实现]()
 
 ##### Management:管理
 - [Redis数据持久化](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/Management/redis-persistence.md)
 - [Redis数据迁移](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/Management/redis-migration.md)
 
+##### Cluster:集群
+
+- [Redis 集群与分片概述]()
+- [Redis Cluster:Redis官方出品的P2P集群搭建方案]()
+- [Codis:豌豆荚出品的基于代理的集群搭建方案]()
+
+##### Architecture:架构
+
+- [Redis网络架构及并发模型]()
+- [Redis客户端架构]()
+
 ##### Optimization:优化
-- [Redis性能优化](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/Optimization/redis-optimization.md)
+- [Redis性能优化:阻塞时延与数据丢失](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/Optimization/redis-optimization.md)
 
 ##### Script:脚本
 - [Redis脚本](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Storage/DataBase/KeyValue/Redis/Script/redis-script.md)
