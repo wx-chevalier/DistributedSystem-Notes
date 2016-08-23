@@ -1,11 +1,24 @@
-# Introduction
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Header](#header)
+- [StatusCode](#statuscode)
+  - [1XX](#1xx)
+  - [2XX/3XX](#2xx3xx)
+  - [4XX](#4xx)
+  - [5XX](#5xx)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+
+> 本文从属于笔者的[HTTP 理解与实践](https://github.com/wxyyxc1992/infrastructure-handbook#HTTP)系列文章，对于HTTP的学习主要包含[HTTP 基础](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/http.md)、[HTTP 请求头与请求体](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/http-request.md)、[HTTP 响应头与状态码](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/http-response.md)、[HTTP 缓存](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/http-cache.md)这四个部分，而对于HTTP相关的扩展与引申，我们还需要了解[HTTPS 理解与实践 ](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/HTTPS/HTTPS.md)、[HTTP/2 基础](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/HTTP2/HTTP2.md)、[WebSocket 基础](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/WebSocket/WebSocket.md)这些部分。本部分知识点同时也归纳于笔者的[我的校招准备之路:从Web前端到服务端应用架构](https://github.com/wxyyxc1992/Coder-Knowledge-Graph/blob/master/interview/my-frontend-backend-interview.md)这篇综述。
+
+#HTTP Response
 ![](http://upload-images.jianshu.io/upload_images/1724103-e8ebcab6c80b9044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-
-
 # Header
-
 响应头域允许服务器传递不能放在状态行的附加信息，这些域主要描述服务器的信息和 Request-URI进一步的信息。响应头域包含Age、Location、Proxy-Authenticate、Public、Retry- After、Server、Vary、Warning、WWW-Authenticate。对响应头域的扩展要求通讯双方都支持，如果存在不支持的响应头 域，一般将会作为实体头域处理。
 
 | Header             | 解释                                       | 示例                                       |
@@ -39,49 +52,29 @@
 | Warning            | 警告实体可能存在的问题                              | Warning: 199 Miscellaneous warning       |
 | WWW-Authenticate   | 表明客户端请求实体应该使用的授权方案                       | WWW-Authenticate: Basic                  |
 
-
-
 # StatusCode
-
 > - [how-to-choose-http-status-code](http://www.infoq.com/cn/news/2015/12/how-to-choose-http-status-code/)
 
-
-
-众所周知，每一个HTTP响应都会带有一个状态码，不过对于很多开发者来说，平时使用最多的几个状态码无外乎就是200、400、404、500等。那其 他众多状态码该应用在何种场景中，什么时候应该使用哪些状态码就成为一个值得我们深入思考的问题了。即便在Facebook这样的公司中，那些聪明的开发者所构建的API也可能只返回200。对于目前的绝大部分服务端接口层设计都会遵循REST规范，而REST规范中推荐选用标准的HTTP 状态码作为返回值。在笔者的[]()与[]()这两篇来自于PayPal与Microsoft的REST设计规范中都建议了部分合适的返回值，而在本文这部分主要是对于通用的HTTP状态码选择进行一些讨论。目前HTTP状态码主要分为如下几类:
-
+众所周知，每一个HTTP响应都会带有一个状态码，不过对于很多开发者来说，平时使用最多的几个状态码无外乎就是200、400、404、500等。那其 他众多状态码该应用在何种场景中，什么时候应该使用哪些状态码就成为一个值得我们深入思考的问题了。即便在Facebook这样的公司中，那些聪明的开发者所构建的API也可能只返回200。对于目前的绝大部分服务端接口层设计都会遵循REST规范，而REST规范中推荐选用标准的HTTP 状态码作为返回值。在笔者的[来自微软的接口设计指南](https://segmentfault.com/a/1190000006037478)与[来自于PayPal的RESTful API标准 ](https://segmentfault.com/a/1190000005924733)这两篇来自于PayPal与Microsoft的REST设计规范中都建议了部分合适的返回值，而在本文这部分主要是对于通用的HTTP状态码选择进行一些讨论。目前HTTP状态码主要分为如下几类:
 - 1xx:信息响应类，表示接收到请求并且继续处理 
-
 - 2xx:处理成功响应类，表示动作被成功接收、理解和接受 
-
 - 3xx:重定向响应类，为了完成指定的动作，必须接受进一步处理 
-
 - 4xx:客户端错误，客户请求包含语法错误或者是不能正确执行 
-
 - 5xx:服务端错误，服务器不能正确执行一个正确的请求 
-
-
 
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2016/7/3/CDBA2E18-FCDB-439A-AD3F-0340E8056795.png)
 
-
-
 ## 1XX
-
 | 状态码  | 含义                                       |
 | ---- | ---------------------------------------- |
 | 100  | 客户端应当继续发送请求。这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。 |
 | 101  | 服务器已经理解了客户端的请求，并将通过Upgrade 消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到在Upgrade 消息头中定义的那些协议。　　只有在切换新的协议更有好处的时候才应该采取类似措施。例如，切换到新的HTTP 版本比旧版本更有优势，或者切换到一个实时且同步的协议以传送利用此类特性的资源。 |
 | 102  | 由WebDAV（RFC 2518）扩展的状态码，代表处理将被继续执行。      |
-
 ## 2XX/3XX
-
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2016/7/3/dadasdsadasxascas.png)
-
-
 
 | 状态码  | 含义                                       |
 | ---- | ---------------------------------------- |
-
 | 200  | 请求已成功，请求所希望的响应头或数据体将随此响应返回。              |
 | 201  | 请求已经被实现，而且有一个新的资源已经依据请求的需要而建立，且其 URI 已经随Location 头信息返回。假如需要的资源无法及时建立的话，应当返回 '202 Accepted'。 |
 | 202  | 服务器已接受请求，但尚未处理。正如它可能被拒绝一样，最终该请求可能会也可能不会被执行。在异步操作的场合下，没有比发送这个状态码更方便的做法了。　　返回202状态码的响应的目的是允许服务器接受其他过程的请求（例如某个每天只执行一次的基于批处理的操作），而不必让客户端一直保持与服务器的连接直到批处理操作全部完成。在接受请求处理并返回202状态码的响应应当在返回的实体中包含一些指示处理当前状态的信息，以及指向处理状态监视器或状态预测的指针，以便用户能够估计操作是否已经完成。 |
@@ -98,16 +91,11 @@
 | 305  | 被请求的资源必须通过指定的代理才能被访问。Location 域中将给出指定的代理所在的 URI 信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源。只有原始服务器才能建立305响应。　　注意：RFC 2068中没有明确305响应是为了重定向一个单独的请求，而且只能被原始服务器建立。忽视这些限制可能导致严重的安全后果。 |
 | 306  | 在最新版的规范中，306状态码已经不再被使用。                  |
 | 307  | 请求的资源现在临时从不同的URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。　　新的临时性的URI 应当在响应的 Location 域中返回。除非这是一个HEAD 请求，否则响应的实体中应当包含指向新的URI 的超链接及简短说明。因为部分浏览器不能识别307响应，因此需要添加上述必要信息以便用户能够理解并向新的 URI 发出访问请求。　　如果这不是一个GET 或者 HEAD 请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。 |
-
 ## 4XX
-
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2016/7/3/cacasfasfrewcascads.png)
-
-
 
 | 状态码  | 含义                                       |
 | ---- | ---------------------------------------- |
-
 | 400  | 1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。　　2、请求参数有误。 |
 | 401  | 当前请求需要用户验证。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。如果当前请求已经包含了 Authorization 证书，那么401响应代表着服务器验证已经拒绝了那些证书。如果401响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。参见RFC 2617。 |
 | 402  | 该状态码是为了将来可能的需求而预留的。                      |
@@ -133,16 +121,11 @@
 | 425  | 在WebDav Advanced Collections 草案中定义，但是未出现在《WebDAV 顺序集协议》（RFC 3658）中。 |
 | 426  | 客户端应当切换到TLS/1.0。（RFC 2817）               |
 | 449  | 由微软扩展，代表请求应当在执行完适当的操作后进行重试。              |
-
 ## 5XX
-
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2016/7/3/0F9F36D4-9A66-4972-85C0-F499B206F594.png)
-
-
 
 | 状态码  | 含义                                       |
 | ---- | ---------------------------------------- |
-
 | 500  | 服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。一般来说，这个问题都会在服务器的程序码出错时出现。 |
 | 501  | 服务器不支持当前请求所需要的某个功能。当服务器无法识别请求的方法，并且无法支持其对任何资源的请求。 |
 | 502  | 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。    |
@@ -153,3 +136,6 @@
 | 507  | 服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。WebDAV (RFC 4918) |
 | 509  | 服务器达到带宽限制。这不是一个官方的状态码，但是仍被广泛使用。          |
 | 510  | 获取资源所需要的策略并没有没满足。（RFC 2774）              |
+
+
+![](http://153.3.251.190:11900/HTTP-Response)
