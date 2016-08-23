@@ -56,6 +56,10 @@ My Handbook For Infrastructure
 - [HTTP 响应头与状态码](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/http-response.md)
 - [HTTP 缓存](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP/http-cache.md)
 
+#### WebSocket
+
+- [WebSocket 基础](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/WebSocket/WebSocket.md)
+
 #### HTTP/2
 
 - [HTTP/2 基础](https://github.com/wxyyxc1992/infrastructure-handbook/blob/master/Network/Protocol/HTTP2/HTTP2.md)
