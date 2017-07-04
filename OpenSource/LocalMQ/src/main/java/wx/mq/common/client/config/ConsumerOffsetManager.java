@@ -5,7 +5,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import wx.mq.MessageQueue;
 import wx.mq.local.consume.ConsumeQueue;
-import wx.mq.util.fs.serialization.ConfigManager;
+import wx.mq.util.fs.serialization.JSONPersister;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * Description 用于管理文件中
  */
-public class ConsumerOffsetManager extends ConfigManager {
+public class ConsumerOffsetManager extends JSONPersister {
 
     // 日志记录
     public final static Logger log = Logger.getLogger(ConsumeQueue.class.getName());
@@ -126,7 +126,7 @@ public class ConsumerOffsetManager extends ConfigManager {
     }
 
     @Override
-    public String configFilePath() {
+    public String getPersistFilePath() {
         return messageQueue.getMessageQueueConfig().getStorePathConsumerOffset();
     }
 

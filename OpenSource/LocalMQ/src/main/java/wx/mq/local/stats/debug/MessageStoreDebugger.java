@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
 import static wx.mq.local.message.serialization.LocalMessageDecoder.readMessageFromByteBuffer;
 import static wx.mq.local.LocalMessageQueueConfig.mapedFileSizeCommitLog;
 
-public class CommitLogDebugger {
+public class MessageStoreDebugger {
 
     public static void main(String args[]) throws IOException {
         getMsgNumsInCommitLog();

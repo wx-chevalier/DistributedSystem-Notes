@@ -26,6 +26,14 @@ public class EmbeddedMessageEncoder extends EmbeddedMessageSerializer {
     // 日志记录
     private final static Logger log = Logger.getLogger(EmbeddedMessageEncoder.class.getName());
 
+    /**
+     * Description 执行消息的编码操作
+     * @param message 消息对象
+     * @param msgStoreItemMemory 内部缓存句柄
+     * @param msgLen 计算的消息长度
+     * @param headersByteArray 消息头字节序列
+     * @param propertiesByteArray 消息属性字节序列
+     */
     public static final void encode(
             DefaultBytesMessage message,
             final ByteBuffer msgStoreItemMemory,

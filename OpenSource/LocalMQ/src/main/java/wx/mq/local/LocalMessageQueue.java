@@ -112,7 +112,7 @@ public class LocalMessageQueue extends MessageQueue {
     /**
      * Description 默认构造函数
      */
-    public LocalMessageQueue(LocalMessageQueueConfig messageQueueConfig) {
+    private LocalMessageQueue(LocalMessageQueueConfig messageQueueConfig) {
 
         // 初始化全局其他依赖
         this.messageQueueConfig = messageQueueConfig;

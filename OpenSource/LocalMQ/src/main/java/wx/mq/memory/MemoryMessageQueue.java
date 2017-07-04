@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Description 最简单的基于内存的 MessageQueue
+ */
 public class MemoryMessageQueue extends MessageQueue {
 
     private static final MessageQueue INSTANCE = new MemoryMessageQueue();
@@ -24,6 +27,13 @@ public class MemoryMessageQueue extends MessageQueue {
 
     private Map<String, HashMap<String, Integer>> queueOffsets = new HashMap<>();
 
+    /**
+     * Description 单条消息提交
+     *
+     * @param bucket
+     * @param message
+     * @return
+     */
     public synchronized PutMessageResult putMessage(String bucket, Message message) {
         if (!messageBuckets.containsKey(bucket)) {
             messageBuckets.put(bucket, new ArrayList<>(1024));
@@ -34,11 +44,34 @@ public class MemoryMessageQueue extends MessageQueue {
         return new PutMessageResult(PutMessageStatus.PUT_OK, null);
     }
 
+
+    /**
+     * Description 批量消息提交
+     *
+     * @param bucket
+     * @param messages
+     * @return
+     */
     @Override
-    public PutMessageResult putMessages(String topicOrQueueName, List<DefaultBytesMessage> messages) {
-        return null;
+    public PutMessageResult putMessages(String bucket, List<DefaultBytesMessage> messages) {
+
+        if (!messageBuckets.containsKey(bucket)) {
+            messageBuckets.put(bucket, new ArrayList<>(1024));
+        }
+        ArrayList<Message> bucketList = messageBuckets.get(bucket);
+        bucketList.addAll(messages);
+
+        return new PutMessageResult(PutMessageStatus.PUT_OK, null);
+
     }
 
+    /**
+     * Description 进行消息拉取操作
+     *
+     * @param queue
+     * @param bucket
+     * @return
+     */
     public synchronized Message pullMessage(String queue, String bucket) {
         ArrayList<Message> bucketList = messageBuckets.get(bucket);
         if (bucketList == null) {
@@ -67,6 +100,10 @@ public class MemoryMessageQueue extends MessageQueue {
 
     @Override
     public void shutdown() {
+
+        // 情况申请的空间
+        this.messageBuckets.clear();
+        this.queueOffsets.clear();
 
     }
 

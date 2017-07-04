@@ -73,7 +73,7 @@ public class EmbeddedMessageQueue extends MessageQueue {
      *
      * @param config
      */
-    public EmbeddedMessageQueue(EmbeddedMessageQueueConfig config) {
+    private EmbeddedMessageQueue(EmbeddedMessageQueueConfig config) {
 
         // 初始化全局其他依赖
         this.messageQueueConfig = config;

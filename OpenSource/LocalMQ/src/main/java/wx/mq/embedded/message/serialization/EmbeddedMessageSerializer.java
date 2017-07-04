@@ -29,6 +29,13 @@ public class EmbeddedMessageSerializer extends MessageSerializer {
     private static final int BODY_SIZE_POSITION = 4 // 1 TOTALSIZE
             + 4; // 2 MAGICCODE
 
+    /**
+     * Description 计算某个消息的长度，注意，headersByteArray 与 propertiesByteArray 在发送消息时完成转换
+     * @param message
+     * @param headersByteArray
+     * @param propertiesByteArray
+     * @return
+     */
     public static int calMsgLength(DefaultBytesMessage message, byte[] headersByteArray, byte[] propertiesByteArray) {
 
         // 消息体
