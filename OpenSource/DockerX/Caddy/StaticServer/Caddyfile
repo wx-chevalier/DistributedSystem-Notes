@@ -1,0 +1,7 @@
+:80 , :2015 {
+    # 指定根目录
+    root /opt/workspace
+
+    # 使用 Gzip 压缩
+    gzip
+}
