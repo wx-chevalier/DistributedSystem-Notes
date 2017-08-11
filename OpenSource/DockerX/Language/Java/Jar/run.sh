@@ -7,7 +7,7 @@ fi
 
 # 删除并且下载应用
 rm -rf app.tar.gz
-curl --user username:xxxxxxxxConfig1314 $APP -o app.tar.gz
+curl --user UserName:CustomPassword $APP -o app.tar.gz
 
 # 解压
 tar -xvzf app.tar.gz

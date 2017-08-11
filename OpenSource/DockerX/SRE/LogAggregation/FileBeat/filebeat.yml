@@ -180,7 +180,7 @@ output:
 
     # Optional protocol and basic auth credentials.
     #protocol: "https"
-    #username: "admin"
+    #UserName: "admin"
     #password: "s3cr3t"
 
     # Number of workers per Elasticsearch host.

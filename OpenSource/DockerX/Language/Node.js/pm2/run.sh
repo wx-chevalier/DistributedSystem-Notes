@@ -2,7 +2,7 @@
 
 # 删除并且下载应用，这里额外需要删除 package-lock.json
 rm -rf ./*
-curl --user username:xxxxxxxxConfig1314 $APP >> app.tar.gz
+curl --user UserName:CustomPassword $APP >> app.tar.gz
 
 # 解压
 tar -xvzf app.tar.gz

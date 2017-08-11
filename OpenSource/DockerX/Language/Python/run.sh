@@ -2,7 +2,7 @@
 
 # 下载应用数据
 rm -rf app.tar.gz
-curl --user username:xxxxxxxxConfig1314 $APP >> app.tar.gz
+curl --user UserName:CustomPassword $APP >> app.tar.gz
 
 # 解压
 tar -xvzf app.tar.gz

@@ -1,25 +1,25 @@
 [
   {
-    "url": "datamining.api.12345.xxxxxxxx.cn",
+    "url": "datamining.api.12345.hostname.cn",
     "ip": "10.196.108.176",
     "port": 8050,
     "comment": "12345 工单智能推荐、知识库推荐"
   },
   {
-    "url": "server.api.dragondc.xxxxxxxx.cn",
+    "url": "server.api.dragondc.hostname.cn",
     "ip": "10.196.108.176",
     "port": 9901,
     "comment": "数据管理中心接口"
   },
   {
-    "url": "app.dragondc.xxxxxxxx.cn",
+    "url": "app.dragondc.hostname.cn",
     "ip": "10.196.108.176",
     "port": 9902,
     "useHttps": false,
     "comment": "数据管理中心页面地址"
   },
   {
-    "url": "presto.dragondc.xxxxxxxx.cn",
+    "url": "presto.dragondc.hostname.cn",
     "ip": "10.196.108.176",
     "port": 7070,
     "useHttps": false,
@@ -34,7 +34,7 @@
     "comment": "投标方法统计页面（嵌入招标工具中的）"
   },
   {
-    "url": "app.api.ggzy.xxxxxxxx.cn",
+    "url": "app.api.ggzy.hostname.cn",
     "ip": "10.196.108.176",
     "port": 1399,
     "comment": "ggzy"
@@ -53,48 +53,48 @@
     "comment": "公共资源应用管理端"
   },
   {
-    "url": "server.api.ggzy.xxxxxxxx.cn",
+    "url": "server.api.ggzy.hostname.cn",
     "ip": "10.196.108.176",
     "port": 8081,
     "comment": "ggzy"
   },
   {
-    "url": "server.crawler.ggzy.xxxxxxxx.cn",
+    "url": "server.crawler.ggzy.hostname.cn",
     "ip": "10.196.108.176",
     "port": 8041,
     "useHttps": false,
     "comment": "ggzy"
   },
   {
-    "url": "ui.crawler.ggzy.xxxxxxxx.cn",
+    "url": "ui.crawler.ggzy.hostname.cn",
     "ip": "10.196.108.176",
     "port": 8042,
     "useHttps": false,
     "comment": "ggzy"
   },
   {
-    "url": "elasticsearch.xxxxxxxx.cn",
+    "url": "elasticsearch.hostname.cn",
     "ip": "10.196.108.180",
     "port": 9200,
     "useHttps": false,
     "comment": "infrastructure"
   },
   {
-    "url": "kibana.xxxxxxxx.cn",
+    "url": "kibana.hostname.cn",
     "ip": "10.196.108.180",
     "port": 5601,
     "useHttps": false,
     "comment": "infrastructure"
   },
   {
-    "url": "chrome.xxxxxxxx.cn",
+    "url": "chrome.hostname.cn",
     "ip": "10.196.108.180",
     "port": 9222,
     "useHttps": false,
     "comment": "infrastructure"
   },
   {
-    "url": "jenkins.xxxxxxxx.cn",
+    "url": "jenkins.hostname.cn",
     "ip": "10.196.108.176",
     "port": 1017,
     "useHttps": false,

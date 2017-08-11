@@ -20,13 +20,13 @@ docker push localhost:5000/username/node
 tar -czf ../app.tar.gz ./
 
 # 然后上传
-curl --user username:xxxxxxxxConfig1314 \
+curl --user UserName:CustomPassword \
   -T ./app.tar.gz \
-  http://deploy.xxxxxxxx.cn/upload/ggzy-appserver/
+  http://deploy.hostname.cn/upload/ggzy-appserver/
 
 # 远端运行，该步骤可以在 UI 界面控制
 docker run -d \
--e "APP=http://deploy.xxxxxxxx.cn/ggzy-appserver/app.tar.gz" \
+-e "APP=http://deploy.hostname.cn/ggzy-appserver/app.tar.gz" \
 -e "ENTRY=app.bundle.js" \
 -p 1399:1399 \
 username/node

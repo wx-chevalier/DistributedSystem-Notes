@@ -10,8 +10,8 @@ RUN apk add --update curl tar \
 RUN mkdir -p ${PRESTO_HOME}
 WORKDIR ${PRESTO_HOME}
 
-RUN curl --user username:xxxxxxxxConfig1314 \
-         http://deploy.xxxxxxxx.cn/dragondc/presto/server/presto-server-${PRESTO_VERSION}.tar.gz \
+RUN curl --user UserName:CustomPassword \
+         http://deploy.hostname.cn/dragondc/presto/server/presto-server-${PRESTO_VERSION}.tar.gz \
          -o presto-server-${PRESTO_VERSION}.tar.gz \
     && tar xfz presto-server-${PRESTO_VERSION}.tar.gz \
     && mv presto-server-${PRESTO_VERSION}/* ./ \

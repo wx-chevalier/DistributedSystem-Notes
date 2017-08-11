@@ -1,20 +1,20 @@
 # 透明代理配置（自动生成的文件，请勿编辑）
 
-http://datamining.api.12345.xxxxxxxx.cn https://datamining.api.12345.xxxxxxxx.cn {
+http://datamining.api.12345.hostname.cn https://datamining.api.12345.hostname.cn {
   # 12345 工单智能推荐、知识库推荐
   proxy / 10.196.108.176:8050 {
     transparent
   }
 }
 
-http://server.api.dragondc.xxxxxxxx.cn https://server.api.dragondc.xxxxxxxx.cn {
+http://server.api.dragondc.hostname.cn https://server.api.dragondc.hostname.cn {
   # 数据管理中心接口
   proxy / 10.196.108.176:9901 {
     transparent
   }
 }
 
-http://app.dragondc.xxxxxxxx.cn {
+http://app.dragondc.hostname.cn {
   # 数据管理中心页面地址
   proxy / 10.196.108.176:9902 {
     transparent
@@ -28,56 +28,56 @@ http://edata.tool.trading.truexun.com {
   }
 }
 
-http://app.api.ggzy.xxxxxxxx.cn https://app.api.ggzy.xxxxxxxx.cn {
+http://app.api.ggzy.hostname.cn https://app.api.ggzy.hostname.cn {
   # ggzy
   proxy / 10.196.108.176:1399 {
     transparent
   }
 }
 
-http://server.api.ggzy.xxxxxxxx.cn https://server.api.ggzy.xxxxxxxx.cn {
+http://server.api.ggzy.hostname.cn https://server.api.ggzy.hostname.cn {
   # ggzy
   proxy / 10.196.108.176:8081 {
     transparent
   }
 }
 
-http://server.crawler.ggzy.xxxxxxxx.cn {
+http://server.crawler.ggzy.hostname.cn {
   # ggzy
   proxy / 10.196.108.176:8041 {
     transparent
   }
 }
 
-http://ui.crawler.ggzy.xxxxxxxx.cn {
+http://ui.crawler.ggzy.hostname.cn {
   # ggzy
   proxy / 10.196.108.176:8042 {
     transparent
   }
 }
 
-http://elasticsearch.xxxxxxxx.cn {
+http://elasticsearch.hostname.cn {
   # infrastructure
   proxy / 10.196.108.180:9200 {
     transparent
   }
 }
 
-http://kibana.xxxxxxxx.cn {
+http://kibana.hostname.cn {
   # infrastructure
   proxy / 10.196.108.180:5601 {
     transparent
   }
 }
 
-http://chrome.xxxxxxxx.cn {
+http://chrome.hostname.cn {
   # infrastructure
   proxy / 10.196.108.180:9222 {
     transparent
   }
 }
 
-http://jenkins.xxxxxxxx.cn {
+http://jenkins.hostname.cn {
   # infrastructure
   proxy / 10.196.108.176:1017 {
     transparent

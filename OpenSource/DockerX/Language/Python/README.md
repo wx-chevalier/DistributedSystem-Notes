@@ -24,13 +24,13 @@ docker pull $HOST/username/python3
 tar -czf ../app.tar.gz ./
 
 # 然后上传
-curl --user username:xxxxxxxxConfig1314 \
+curl --user UserName:CustomPassword \
   -T ./app.tar.gz \
-  http://deploy.xxxxxxxx.cn/upload/12345/datamining/
+  http://deploy.hostname.cn/upload/12345/datamining/
 
 # 远端运行，该步骤可以在 UI 界面控制
 docker run -d \
--e "APP=http://deploy.xxxxxxxx.cn/12345/datamining/app.tar.gz" \
+-e "APP=http://deploy.hostname.cn/12345/datamining/app.tar.gz" \
 -e "ENTRY=api.python" \
 -p 8050:8050 \
 username/python3

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REPO_URL=https://coding.net/u/hoteam/p/Dragon-Docker/git
+REPO_URL=${CONFIG_REPO}
 DRAGON_DOCKER_REPO=/opt/workspace/caddy
 GATEWAY_CADDYFILE=$DRAGON_DOCKER_REPO/Caddy/Gateway/Caddyfile
 GATEWAY_VHOSTS=$DRAGON_DOCKER_REPO/Caddy/Gateway/vhosts
@@ -36,7 +36,7 @@ echo "Clearing configuration repo $DRAGON_DOCKER_REPO"
 rm -rf $DRAGON_DOCKER_REPO
 
 echo "Preparing for start..."
-echo "Creating /opt/workspace/uploaded for data uploaded from deploy.xxxxxxxx.cn"
+echo "Creating /opt/workspace/uploaded for data uploaded from deploy.hostname.cn"
 mkdir -p /opt/workspace/uploaded
 
 # 启动 Caddy

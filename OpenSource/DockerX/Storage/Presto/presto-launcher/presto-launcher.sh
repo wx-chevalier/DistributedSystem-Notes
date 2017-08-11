@@ -2,8 +2,8 @@
 # PRESTO_HOME, PLUGIN, CONFIG
 
 TMP_DIR=/presto/tmp
-BASE_URL=http://deploy.xxxxxxxx.cn/dragondc/presto
-CREDENTIAL=username:xxxxxxxxConfig1314
+BASE_URL=http://deploy.hostname.cn/dragondc/presto
+CREDENTIAL=UserName:CustomPassword
 
 NODE_ID=/presto/node_id
 if [ -z "$NODE_ENVIRONMENT" ]; then

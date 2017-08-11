@@ -35,13 +35,13 @@ $ tar czf app.tar.gz app
 
 ```
 # 然后上传
-curl --user username:xxxxxxxxConfig1314 \
+curl --user UserName:CustomPassword \
   -T ./app.tar.gz \
-  http://deploy.xxxxxxxx.cn/upload/ggzy/server/
+  http://deploy.hostname.cn/upload/ggzy/server/
 
 # 远端运行，该步骤可以在 UI 界面控制
 docker run -d \
--e "APP=http://deploy.xxxxxxxx.cn/ggzy/server/app.tar.gz" \
+-e "APP=http://deploy.hostname.cn/ggzy/server/app.tar.gz" \
 -e "ENTRY=app/dc.jar" \
 -p 8020:8020 \
 username/node

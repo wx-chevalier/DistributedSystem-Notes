@@ -3,10 +3,10 @@
 
 #################### infrastructure ####################
 
-http://deploy.xxxxxxxx.cn {
+http://deploy.hostname.cn {
   root /opt/workspace/uploaded
 
-  basicauth / "username" "xxxxxxxxConfig1314"
+  basicauth / "username" "CustomPassword"
   
   browse /
 
@@ -18,7 +18,7 @@ http://deploy.xxxxxxxx.cn {
   }
 }
 
-http://docker.xxxxxxxx.cn, https://docker.xxxxxxxx.cn {
+http://docker.hostname.cn, https://docker.hostname.cn {
     proxy / 172.17.0.1:9000 {
         transparent
         header_upstream Connection ""
@@ -32,7 +32,7 @@ http://docker.xxxxxxxx.cn, https://docker.xxxxxxxx.cn {
     }
 }
 
-http://ubuntu11.tty.dx.xxxxxxxx.cn, https://ubuntu11.tty.dx.xxxxxxxx.cn {
+http://ubuntu11.tty.dx.hostname.cn, https://ubuntu11.tty.dx.hostname.cn {
     proxy / 10.196.108.176:8099 {
         websocket
         transparent

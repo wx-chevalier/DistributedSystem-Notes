@@ -31,7 +31,7 @@ sh scripts/start.sh
 ```
 
 ## 上传文件
-curl --user username:xxxxxxxxConfig1314 \
+curl --user UserName:CustomPassword \
   -T ./NetpasHelper.log \
-  http://deploy.xxxxxxxx.cn/upload/test/test
+  http://deploy.hostname.cn/upload/test/test
 ```

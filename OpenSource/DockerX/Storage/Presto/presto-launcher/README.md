@@ -15,9 +15,9 @@
 ## 环境变量：
 
 ```
-CONFIG    必选    对应配置文件 http://deploy.xxxxxxxx.cn/dragondc/presto/config/$CONFIG.tar.gz
+CONFIG    必选    对应配置文件 http://deploy.hostname.cn/dragondc/presto/config/$CONFIG.tar.gz
                   解压后为目录 config
-PLUGIN    可选    对应插件包 http://deploy.xxxxxxxx.cn/dragondc/presto/plugin/$PLUGIN.tar.gz
+PLUGIN    可选    对应插件包 http://deploy.hostname.cn/dragondc/presto/plugin/$PLUGIN.tar.gz
                   解压后为目录 plugin
 
 NODE_ENVIRONMENT  可选  默认为 production
