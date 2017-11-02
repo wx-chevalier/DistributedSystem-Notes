@@ -2,6 +2,10 @@
 
 # 分布式系统基础
 
+![](https://www.confluent.io/wp-content/uploads/platform_chart_updated.png)
+
+![](https://www.confluent.io/wp-content/uploads/streaming_platform_rev.png)
+
 # 前言
 
 ## 参考

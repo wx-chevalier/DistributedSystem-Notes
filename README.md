@@ -1,3 +1,5 @@
+![](https://raw.githubusercontent.com/cncf/landscape/master/landscape/CloudNativeLandscape_latest.jpg)
+
 # 深入浅出分布式基础架构
 
 深入浅出分布式基础架构是笔者归档自己，在学习与实践软件分布式架构过程中的，笔记与代码的仓库；主要包含分布式计算、分布式系统、数据存储、虚拟化、网络、操作系统等几个部分。本部分详细的基础架构请参考笔者在[ 2016: 我的技术体系结构图](https://github.com/wxyyxc1992/Coder-Knowledge-Management/blob/master/Knowledge-Graph/2016-Knowledge-Graph.md)一文中的描述；本仓库目前包含的主要内容分为开源项目与各个技术领域的文章。
