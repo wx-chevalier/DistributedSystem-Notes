@@ -1,4 +1,4 @@
-[toc]
+ 
 
 # Paxos
 > Google Chubby的作者Mike Burrows说过这个世界上只有一种一致性算法，那就是Paxos，其它的算法都是残次品。
@@ -57,7 +57,7 @@ A、B、C选举主机名最大的服务器为master提供服务，所有的read�
 - [一致性算法Paxos详解](http://www.solinx.co/archives/403?utm_source=tuicool&utm_medium=referral)
 - [微信PaxosStore：深入浅出Paxos算法协议 ](https://www.sdk.cn/news/5826)
 - [微信PaxosStore内存云揭秘：十亿Paxos/分钟的挑战 ](http://mp.weixin.qq.com/s?__biz=MzI4NDMyNTU2Mw==&mid=2247483804&idx=1&sn=a6629ebdaefbc2470c2ecbf12577daff)
-- [图解 Paxos 一致性协议](http://blog.xiaohansong.com/2016/09/30/Paxos/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
+- [图解 Paxos 一致性协议](http://blog.xiaohansong.com/2016/09/30/Paxos/)
 - [Plain Paxos Implementations in Python & Java](https://github.com/cocagne/paxos)
 
 

@@ -71,7 +71,7 @@ Apache的用户常用DocumentRoot这个命令来设置这个文档根路径。�
 ### Tutorials & Docs
 
 - [全栈工程师眼中的HTTP](HTTP://www.epubit.com.cn/article/378)
-- [阮一峰——HTTP协议入门](HTTP://www.ruanyifeng.com/blog/2016/08/HTTP.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
+- [阮一峰——HTTP协议入门](HTTP://www.ruanyifeng.com/blog/2016/08/HTTP.html)
 
 ### Books & Tools
 
