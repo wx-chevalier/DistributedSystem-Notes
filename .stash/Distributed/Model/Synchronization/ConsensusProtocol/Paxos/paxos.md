@@ -30,9 +30,9 @@ A、B、C选举主机名最大的服务器为master提供服务，所有的read�
 
 - [维基百科上关于Paxos算法的讲解](https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95)
 
-- [Paxos算法简述](http://my.oschina.net/linlifeng/blog/78918?utm_source=tuicool&utm_medium=referral)
+- [Paxos算法简述](http://my.oschina.net/linlifeng/blog/78918)
 
-- [一致性算法Paxos详解](http://www.solinx.co/archives/403?utm_source=tuicool&utm_medium=referral)
+- [一致性算法Paxos详解](http://www.solinx.co/archives/403)
 
 # 算法原理
 

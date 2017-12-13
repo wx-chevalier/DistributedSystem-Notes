@@ -53,8 +53,8 @@ A、B、C选举主机名最大的服务器为master提供服务，所有的read�
 
 ## Reference
 - [维基百科上关于Paxos算法的讲解](https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95)
-- [Paxos算法简述](http://my.oschina.net/linlifeng/blog/78918?utm_source=tuicool&utm_medium=referral)
-- [一致性算法Paxos详解](http://www.solinx.co/archives/403?utm_source=tuicool&utm_medium=referral)
+- [Paxos算法简述](http://my.oschina.net/linlifeng/blog/78918)
+- [一致性算法Paxos详解](http://www.solinx.co/archives/403)
 - [微信PaxosStore：深入浅出Paxos算法协议 ](https://www.sdk.cn/news/5826)
 - [微信PaxosStore内存云揭秘：十亿Paxos/分钟的挑战 ](http://mp.weixin.qq.com/s?__biz=MzI4NDMyNTU2Mw==&mid=2247483804&idx=1&sn=a6629ebdaefbc2470c2ecbf12577daff)
 - [图解 Paxos 一致性协议](http://blog.xiaohansong.com/2016/09/30/Paxos/)
