@@ -229,7 +229,7 @@ Accept-Encoding: gzip, deflate
 
 # HTTP Lint
 
-> - [Lint for HTTP:HTTPolice](HTTP://www.tuicool.com/articles/yuaeyuj)
+- [Lint for HTTP:HTTPolice](HTTP://www.tuicool.com/articles/yuaeyuj)
 
 HTTPolice是一个简单的基于命令行的对于HTTP请求格式规范进行检测的工具，可以直接使用`pip`命令进行安装:
 ```

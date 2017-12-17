@@ -229,7 +229,7 @@ A1没有达到多数，A5达到了，于是A5将主持投票，决议的内容�
 
 # 算法实践
 ## 基于逻辑时钟的Paxos协议
-> - [使用逻辑时钟重述paxos协议](http://www.tuicool.com/articles/MbQjQnB)
+- [使用逻辑时钟重述paxos协议](http://www.tuicool.com/articles/MbQjQnB)
 
 为了让这套系统能正确运行，我们需要一个精确的时钟。由于操作系统的物理时钟经常是有偏差的，所以我们决定采用一个逻辑时钟。时钟的目的是给系统中 发生的每一个事件编排一个序号。假设我们有一台单独的机器提供了一个全局的计数器服务。它只支持一个方法：incrementAndGet()。这个方法 的作用是将计数器的值加一，并且返回增加后的值。我们将这个计数器称为globalClock。globalClock的初始值为0。然后，系统中的每个其它机器，都有一个自己的localClock,它的初始值来自globalClock。
 ```

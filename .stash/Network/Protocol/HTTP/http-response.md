@@ -53,7 +53,7 @@
 | WWW-Authenticate   | 表明客户端请求实体应该使用的授权方案                       | WWW-Authenticate: Basic                  |
 
 # StatusCode
-> - [how-to-choose-http-status-code](http://www.infoq.com/cn/news/2015/12/how-to-choose-http-status-code/)
+- [how-to-choose-http-status-code](http://www.infoq.com/cn/news/2015/12/how-to-choose-http-status-code/)
 
 众所周知，每一个HTTP响应都会带有一个状态码，不过对于很多开发者来说，平时使用最多的几个状态码无外乎就是200、400、404、500等。那其 他众多状态码该应用在何种场景中，什么时候应该使用哪些状态码就成为一个值得我们深入思考的问题了。即便在Facebook这样的公司中，那些聪明的开发者所构建的API也可能只返回200。对于目前的绝大部分服务端接口层设计都会遵循REST规范，而REST规范中推荐选用标准的HTTP 状态码作为返回值。在笔者的[来自微软的接口设计指南](https://segmentfault.com/a/1190000006037478)与[来自于PayPal的RESTful API标准 ](https://segmentfault.com/a/1190000005924733)这两篇来自于PayPal与Microsoft的REST设计规范中都建议了部分合适的返回值，而在本文这部分主要是对于通用的HTTP状态码选择进行一些讨论。目前HTTP状态码主要分为如下几类:
 - 1xx:信息响应类，表示接收到请求并且继续处理 
