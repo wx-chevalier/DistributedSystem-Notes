@@ -1,5 +1,5 @@
 
-[toc]
+
 
 > - [这可能是最全的 Redis 集群方案介绍了 ](http://mp.weixin.qq.com/s?__biz=MzA3MzYwNjQ3NA==&mid=2651296671&idx=1&sn=366de50a6787963517ff6e096c9d1643&scene=2&srcid=0601j5sEtcRyw9TtehhXW0Ix&from=timeline&isappinstalled=0#wechat_redirect)
 > - [如何实现高可用的redis集群 ](http://mp.weixin.qq.com/s?__biz=MzAwNTg2MDUyMw==&mid=2247483661&idx=1&sn=c924b3a2b098c4211b0044de180a1c0e)
@@ -12,7 +12,7 @@
 > 
 > [全面剖析Redis Cluster原理和应用](http://blog.csdn.net/dc_726/article/details/48552531)
 > 
-> [Redis 集群的合纵与连横](http://blog.csdn.net/mindfloating/article/details/50458768?utm_source=tuicool&utm_medium=referral)
+> [Redis 集群的合纵与连横](http://blog.csdn.net/mindfloating/article/details/50458768)
 
 ## Partitioning(分片)
 
