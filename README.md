@@ -6,7 +6,7 @@
 
 （1）技术文章
 
-- [MySQL 内部原理与性能优化【Book】](./MySQL-Foundation-And-Optimization)
+- [MySQL 内部原理与性能优化 #Book#](./MySQL-Foundation-And-Optimization)
 
 （2）开源项目
 
