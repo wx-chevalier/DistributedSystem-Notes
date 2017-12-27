@@ -1,6 +1,4 @@
-
 # 分布式容器架构与编排
-
 
 # 前言
 
@@ -12,25 +10,14 @@
 
 ![](https://github.com/wxyyxc1992/OSS/blob/master/2017/8/1/Buding.jpg?raw=true)
 
-
 # 目录
 
-
-
-- [Docker]()
-
-
+* [Docker]()
 
 - [Docker Swarm]()
 
-
-
-- [Docker Cloud]()
-
-
+* [Docker Cloud]()
 
 - [Kurbenates]()
 
-
-
-- [Focker]()
+* [Focker]()
