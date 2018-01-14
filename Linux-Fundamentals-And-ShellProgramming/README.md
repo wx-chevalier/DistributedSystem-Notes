@@ -1,3 +1,5 @@
+![](https://cdn-images-1.medium.com/max/2000/1*zhRUMe6Y5oKBpzULfUqzww.jpeg)
+
 # Linux 配置使用、内部原理与 Shell 编程
 
 # 前言
