@@ -1,0 +1,57 @@
+version: "3.3"
+
+services:
+
+  elasticsearch:
+    command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
+    environment:
+      ES_JAVA_OPTS: -Xms2g -Xmx2g
+    image: elasticsearch:5
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    volumes:
+      - /usr/share/elasticsearch/data
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+  kibana:
+    image: kibana:latest
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+    healthcheck:
+      test: wget -qO- http://localhost:5601 > /dev/null
+      interval: 30s
+      retries: 3
+  logstash:
+    hostname: logstash
+    command: sh -c "logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output { stdout { codec => rubydebug } elasticsearch { hosts => [ \"elasticsearch\" ] } }'"
+    image: logstash:alpine
+    ports:
+        - "10514:10514/tcp"
+        - "10514:10514/udp"
+        - "12201:12201/udp"
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 2
+
+networks:
+  elk:
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
