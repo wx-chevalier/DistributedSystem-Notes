@@ -1,3 +1,5 @@
+![](https://cdn-images-1.medium.com/max/1200/1*PSDdfqc5jaleNz418Fx2LA.png)
+
 # 分布式存储与 NoSQL 数据库基础
 
 `Copyright © 2017 王下邀月熊`
