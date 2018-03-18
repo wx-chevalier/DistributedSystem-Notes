@@ -8,15 +8,15 @@
 
 ✨ 技术文章
 
-* [Linux 配置使用、内部原理与 Shell 编程](./Linux-Fundamentals-And-ShellProgramming)
+* [Linux 篇](./Linux)
 
-* [MySQL 内部原理与性能优化](./MySQL-Foundation-And-Optimization)
+* [MySQL 篇](./MySQL)
 
-* [分布式存储与 NoSQL 数据库基础](./DistributedStorage-And-NoSQL-DataBase-Fundamentals)
+* [NoSQL 篇](./NoSQL)
 
-* [分布式容器架构与编排](./Distributed-Container-Infrastructure-And-Orchestration)
+* [虚拟化篇](./Virtualization)
 
-* [云计算系统与大数据应用](./Cloud-Computing-Systems-And-BigData-Applications)
+* [分布式系统篇](./DistributedSystem)
 
 ---
 
