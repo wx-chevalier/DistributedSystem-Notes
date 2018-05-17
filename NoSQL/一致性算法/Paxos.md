@@ -40,14 +40,14 @@
     25     reply accept_reject
 ```
 
-PAXOS 可以用来解决分布式环境下，选举（或设置）某一个值的问题（比如更新数据库中某个 user 的 age 是多少）。分布式系统中有多个节点就会存在节点间通信的问题，存在着两种节点通讯模型：共享内存（Shared memory）、消息传递（Messages passing），Paxos 是基于消息传递的通讯模型的。它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos 算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。
+PAXOS 可以用来解决分布式环境下，选举(或设置)某一个值的问题(比如更新数据库中某个 user 的 age 是多少)。分布式系统中有多个节点就会存在节点间通信的问题，存在着两种节点通讯模型：共享内存(Shared memory)、消息传递(Messages passing)，Paxos 是基于消息传递的通讯模型的。它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos 算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。
 
 > 注意，在 Paxos 算法中是不考虑拜占庭将军问题的
 
 ## Scenario:场景介绍
 
 比如下面的情况：有三个服务器进程 A,B,C 运行在三台主机上提供数据库服务，当一个 client 连接到任何一台服务器上的时候，都能通过该服务器进行 read 和 update 的操作。首先先看一个 A、B、C 不那么均等的方法：
-A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 read、update 操作都发生在它上面，其余的两台服务器只是 slave（后者，在这里类似 proxy），当 client 是连接在 master 的服务器的时候，其直接和 master 交互，就类似于单机的场景。当 client 时连接在 slave 的时候，所有的请求被转移到了 master 上进行操作，然后再结果返回给 client。如果 master 挂了，那么剩余两台主机在检测到 master 挂的情况后，再根据主机名最大的方法选举 master。上面的算法有一个问题，它让 A、B、C 不那么均等了，A、B、C 存在角色之分，且在某个时候 master 挂机后，需要立刻选举出新的 master 提供服务。同时，这个算法还要求各个服务器之间保持心跳。而 PAXOS 算法则不同，PAXOS 提供了一种将 A、B、C 等价的方式提供上面的操作，并保证数据的正确性。在某台主机宕机后，只要总数一半以上的服务器还存活，则整个集群依然能对外提供服务，甚至不需要心跳。
+A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 read、update 操作都发生在它上面，其余的两台服务器只是 slave(后者，在这里类似 proxy)，当 client 是连接在 master 的服务器的时候，其直接和 master 交互，就类似于单机的场景。当 client 时连接在 slave 的时候，所有的请求被转移到了 master 上进行操作，然后再结果返回给 client。如果 master 挂了，那么剩余两台主机在检测到 master 挂的情况后，再根据主机名最大的方法选举 master。上面的算法有一个问题，它让 A、B、C 不那么均等了，A、B、C 存在角色之分，且在某个时候 master 挂机后，需要立刻选举出新的 master 提供服务。同时，这个算法还要求各个服务器之间保持心跳。而 PAXOS 算法则不同，PAXOS 提供了一种将 A、B、C 等价的方式提供上面的操作，并保证数据的正确性。在某台主机宕机后，只要总数一半以上的服务器还存活，则整个集群依然能对外提供服务，甚至不需要心跳。
 
 ## Reference
 
@@ -63,18 +63,18 @@ A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 r
 
 ## Terminology:名词解释
 
-为描述 Paxos 算法，Lamport 虚拟了一个叫做 Paxos 的[希腊城邦](https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%87%98%E5%9F%8E%E9%82%A6)，这个岛按照议会民主制的政治模式制订法律，但是没有人愿意将自己的全部时间和精力放在这种事情上。所以无论是议员，议长或者传递纸条的服务员都不能承诺别人需要时一定会出现，也无法承诺批准决议或者传递消息的时间。但是这里假设没有[拜占庭将军问题](https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98)（Byzantine failure，即虽然有可能一个消息被传递了两次，但是绝对不会出现错误的消息）；只要等待足够的时间，消息就会被传到。另外，Paxos 岛上的议员是不会反对其他议员提出的决议的。首先将议员的角色分为 proposers，Acceptors，和 learners（允许身兼数职）。proposers 提出提案，提案信息包括提案编号和提议的 value；Acceptor 收到提案后可以接受（accept）提案，若提案获得多数 Acceptors 的接受，则称该提案被批准（chosen）；learners 只能“学习”被批准的提案。划分角色后，就可以更精确的定义问题：
+为描述 Paxos 算法，Lamport 虚拟了一个叫做 Paxos 的[希腊城邦](https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%87%98%E5%9F%8E%E9%82%A6)，这个岛按照议会民主制的政治模式制订法律，但是没有人愿意将自己的全部时间和精力放在这种事情上。所以无论是议员，议长或者传递纸条的服务员都不能承诺别人需要时一定会出现，也无法承诺批准决议或者传递消息的时间。但是这里假设没有[拜占庭将军问题](https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98)(Byzantine failure，即虽然有可能一个消息被传递了两次，但是绝对不会出现错误的消息)；只要等待足够的时间，消息就会被传到。另外，Paxos 岛上的议员是不会反对其他议员提出的决议的。首先将议员的角色分为 proposers，Acceptors，和 learners(允许身兼数职)。proposers 提出提案，提案信息包括提案编号和提议的 value；Acceptor 收到提案后可以接受(accept)提案，若提案获得多数 Acceptors 的接受，则称该提案被批准(chosen)；learners 只能“学习”被批准的提案。划分角色后，就可以更精确的定义问题：
 
-1. 决议（value）只有在被 proposers 提出后才能被批准（未经批准的决议称为“提案（proposal）”）；
-2. 在一次 Paxos 算法的执行实例中，只批准（chosen）一个 value；
-3. learners 只能获得被批准（chosen）的 value。
+1. 决议(value)只有在被 proposers 提出后才能被批准(未经批准的决议称为“提案(proposal)”)；
+2. 在一次 Paxos 算法的执行实例中，只批准(chosen)一个 value；
+3. learners 只能获得被批准(chosen)的 value。
    ## Process:处理流程
-   批准 value 的过程中，首先 proposers 将 value 发送给 Acceptors，之后 Acceptors 对 value 进行接受（accept）。为了满足只批准一个 value 的约束，要求经“多数派（majority）”接受的 value 成为正式的决议（称为“批准”决议）。这是因为无论是按照人数还是按照权重划分，两组“多数派”至少有一个公共的 Acceptor，如果每个 Acceptor 只能接受一个 value，约束 2 就能保证。整个过程（一个实例或称一个事务或一个 Round）分为两个阶段：
+   批准 value 的过程中，首先 proposers 将 value 发送给 Acceptors，之后 Acceptors 对 value 进行接受(accept)。为了满足只批准一个 value 的约束，要求经“多数派(majority)”接受的 value 成为正式的决议(称为“批准”决议)。这是因为无论是按照人数还是按照权重划分，两组“多数派”至少有一个公共的 Acceptor，如果每个 Acceptor 只能接受一个 value，约束 2 就能保证。整个过程(一个实例或称一个事务或一个 Round)分为两个阶段：
 
-* phase1（准备阶段）
-  * Proposer 向超过半数（n/2+1）Acceptor 发起 prepare 消息(发送编号)
+* phase1(准备阶段)
+  * Proposer 向超过半数(n/2+1)Acceptor 发起 prepare 消息(发送编号)
   * 如果 prepare 符合协议规则 Acceptor 回复 promise 消息，否则拒绝
-* phase2（决议阶段或投票阶段）
+* phase2(决议阶段或投票阶段)
   * 如果超过半数 Acceptor 回复 promise，Proposer 向 Acceptor 发送 accept 消息(此时包含真实的值)
   * Acceptor 检查 accept 消息是否符合规则，消息符合则批准 accept 请求
 
@@ -86,9 +86,9 @@ A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 r
 
 注意 P1 是不完备的。如果恰好一半 Acceptor 接受的提案具有 value A，另一半接受的提案具有 value B，那么就无法形成多数派，无法批准任何一个 value。
 
-##### P2：当且仅当 Acceptor 没有回应过编号大于 n 的 prepare 请求时，Acceptor 接受（accept）编号为 n 的提案。
+##### P2：当且仅当 Acceptor 没有回应过编号大于 n 的 prepare 请求时，Acceptor 接受(accept)编号为 n 的提案。
 
-如果一个没有 chosen 过任何 proposer 提案的 Acceptor 在 prepare 过程中回答了一个 proposer 针对提案 n 的问题，但是在开始对 n 进行投票前，又接受（accept）了编号小于 n 的另一个提案（例如 n-1），如果 n-1 和 n 具有不同的 value，这个投票就会违背 P2c。因此在 prepare 过程中，Acceptor 进行的回答同时也应包含承诺：不会再接受（accept）编号小于 n 的提案。
+如果一个没有 chosen 过任何 proposer 提案的 Acceptor 在 prepare 过程中回答了一个 proposer 针对提案 n 的问题，但是在开始对 n 进行投票前，又接受(accept)了编号小于 n 的另一个提案(例如 n-1)，如果 n-1 和 n 具有不同的 value，这个投票就会违背 P2c。因此在 prepare 过程中，Acceptor 进行的回答同时也应包含承诺：不会再接受(accept)编号小于 n 的提案。
 
 ##### P3：只有 Acceptor 没有接受过提案 Proposer 才能采用自己的 Value，否者 Proposer 的 Value 提案为 Acceptor 中编号最大的 Proposer Value；
 
@@ -96,14 +96,14 @@ A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 r
 
 假设 A 为整个 Acceptor 集合，B 为一个超过 A 一半的 Acceptor 集合，B 为 A 的子集，C 也是一个超过 A 一半的 Acceptor 集合，C 也是 A 的子集，有此可知任意两个过半集合中必定有一个共同的成员 Acceptor；此说明了一个 Acceptor 可以接受不止一个提案，此时需要一个编号来标识每一个提案，提案的格式为：[编号，Value]，编号为不可重复全序的，因为存在着一个一个 Paxos 过程只能批准一个 value 这时又推出了一个约束 P3；
 
-##### P5：当编号 K0、Value 为 V0 的提案(即[K0,V0])被过半的 Acceptor 接受后，今后（同一个 Paxos 或称一个 Round 中）所有比 K0 更高编号且被 Acceptor 接受的提案，其 Value 值也必须为 V0。
+##### P5：当编号 K0、Value 为 V0 的提案(即[K0,V0])被过半的 Acceptor 接受后，今后(同一个 Paxos 或称一个 Round 中)所有比 K0 更高编号且被 Acceptor 接受的提案，其 Value 值也必须为 V0。
 
 该约束还可以表述为：
 
-* 一旦一个具有 value v 的提案被批准（chosen），那么之后任何 Acceptor 再次接受（accept）的提案必须具有 value v。
-* 一旦一个具有 value v 的提案被批准（chosen），那么以后任何 proposer 提出的提案必须具有 value v。
-* 如果一个编号为 n 的提案具有 value v，那么存在一个多数派，要么他们中所有人都没有接受（accept）编号小于 n
-  的任何提案，要么他们已经接受（accept）的所有编号小于 n 的提案中编号最大的那个提案具有 value v。
+* 一旦一个具有 value v 的提案被批准(chosen)，那么之后任何 Acceptor 再次接受(accept)的提案必须具有 value v。
+* 一旦一个具有 value v 的提案被批准(chosen)，那么以后任何 proposer 提出的提案必须具有 value v。
+* 如果一个编号为 n 的提案具有 value v，那么存在一个多数派，要么他们中所有人都没有接受(accept)编号小于 n
+  的任何提案，要么他们已经接受(accept)的所有编号小于 n 的提案中编号最大的那个提案具有 value v。
 
 因为每个 Proposer 都可提出多个议案，每个议案最初都有一个不同的 Value 所以要满足 P3 就又要推出一个新的约束 P4；
 
@@ -179,7 +179,7 @@ A3 在很久以后收到了来自 A5 的提案。由于税率问题已经讨论�
 
 依然假设 A1 的提案先送到 A3 处，但是这次 A5 的侍从不是放假了，只是中途耽搁了一会。这次, A3 依然会将"接受"回复给 A1.但是在决议成型之前它又收到了 A5 的提案。这时协议有两种处理方式：
 
-1.如果 A5 的提案更早，按照传统应该由较早的提案者主持投票。现在看来两份提案的时间一样（本届议会第 3 年 3 月 15 日）。但是 A5 是个惹不起的大人物。于是 A3 回复：
+1.如果 A5 的提案更早，按照传统应该由较早的提案者主持投票。现在看来两份提案的时间一样(本届议会第 3 年 3 月 15 日)。但是 A5 是个惹不起的大人物。于是 A3 回复：
 
 ```
 我已收到您的提案，等待最终批准，但是您之前有人提出将税率定为10%,请明察。
@@ -219,13 +219,13 @@ A1 没有达到多数，A5 达到了，于是 A5 将主持投票，决议的内�
 有更大的人物关注此事，请等待他做出决定。
 ```
 
-另外，在这种情况下, A4 与外界失去了联系。等到他恢复联系，并需要得知税率情况时，他（在最简单的协议中）将提出一个提案：
+另外，在这种情况下, A4 与外界失去了联系。等到他恢复联系，并需要得知税率情况时，他(在最简单的协议中)将提出一个提案：
 
 ```
 现有的税率是什么?如果没有决定，则建议将其定为15%.时间：本届议会第3年4月1日;提案者：A4
 ```
 
-这时，（在最简单的协议中）其他议员将会回复：
+这时，(在最简单的协议中)其他议员将会回复：
 
 ```
 税率已在之前的投票中定为20%,你不要再来烦我!
@@ -270,7 +270,7 @@ Paxos 协议分为两个阶段。
 
 ![enter image description here](http://www.solinx.co/wp-content/uploads/2015/10/Paxos.png)
 
-### **Phase1（准备阶段）**
+### **Phase1(准备阶段)**
 
 1. 每个 Server 都向 Proposer 发消息称自己要成为 leader，Server1 往 Proposer1 发、Server2 往 Proposer2 发、Server3 往 Proposer3 发；
 2. 现在每个 Proposer 都接收到了 Server1 发来的消息但时间不一样，Proposer2 先接收到了，然后是 Proposer1，接着才是 Proposer3；
@@ -280,9 +280,9 @@ Paxos 协议分为两个阶段。
 6. 最后 Proposer3 发送的消息到达 Acceptor2 和 Acceptor3，Acceptor2 接受过提议，但此时编号为 3 大于 Acceptor2 的承诺 2 与 Accetpor3 的承诺 1，所以接受提议返回[3,null];
 7. Proposer2 没收到过半的回复所以重新取得编号 4，并发送给 Acceptor2 和 Acceptor3，然后 Acceptor2 和 Acceptor3
 
-### **Phase2（决议阶段）**
+### **Phase2(决议阶段)**
 
-1. Proposer3 收到过半（三个 Server 中两个）的返回，并且返回的 Value 为 null，所以 Proposer3 提交了[3,server3]的议案；
+1. Proposer3 收到过半(三个 Server 中两个)的返回，并且返回的 Value 为 null，所以 Proposer3 提交了[3,server3]的议案；
 2. Proposer1 收到过半返回，返回的 Value 为 null，所以 Proposer1 提交了[2,server1]的议案；
 3. Proposer2 收到过半返回，返回的 Value 为 null，所以 Proposer2 提交了[4,server2]的议案；
 4. Acceptor1、Acceptor2 接收到 Proposer1 的提案[2,server1]请求，Acceptor2 承诺编号大于 4 所以拒绝了通过，Acceptor1 通过了请求；

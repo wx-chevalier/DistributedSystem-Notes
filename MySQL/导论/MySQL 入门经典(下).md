@@ -78,7 +78,7 @@ FROM TABLE1[,TABLE2]
 [WHERE]
 ```
 
-可以用MINUS代替（MySQL也没有）
+可以用MINUS代替(MySQL也没有)
 
 ## 15.2 组合查询里使用ORDER BY
 

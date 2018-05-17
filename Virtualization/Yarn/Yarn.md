@@ -15,7 +15,7 @@ MRv1采用了基于槽位的资源分配模型，槽位是一种粗粒度的资�
 YARN的编程模型
 1：保证编程模型的向下兼容性，MRv2重用了MRv1的编程模型和数据处理引擎，但运行环境被重写。
 2：编程模型与数据处理引擎
-mapreduce应用程序编程接口有两套：新的API（mapred)和旧的API（mapreduce）
+mapreduce应用程序编程接口有两套：新的API(mapred)和旧的API(mapreduce)
 采用MRv1旧的API编写的程序可直接运行在MRv2上
 采用MRv1新的API编写的程序需要使用MRv2编程库重新编译并修改不兼容的参数 和返回值 
 3：运行时环境
@@ -24,9 +24,9 @@ MRv2:YARN和ApplicationMaster
  
 YARN的组成
 yarn主要由ResourceManager，NodeManager，ApplicationMaster和Container等几个组件组成。
-ResourceManager（RM）
+ResourceManager(RM)
 RM是全局资源管理器，负责整个系统的资源管理和分配。
-主要由两个组件组成：调度器和应用 程序管理器（ASM）
+主要由两个组件组成：调度器和应用 程序管理器(ASM)
 调度器
 调度器根据容量，队列等限制条件，将系统中的资源分配给各个正在运行的应用程序
 不负责具体应用程序的相关工作，比如监控或跟踪状态
@@ -40,7 +40,7 @@ YARN提供了多种直接可用的调度器，比如fair Scheduler和Capacity Sc
 ApplicationMaster(AM)
 用户提交的每个应用程序均包含一个AM
 AM的主要功能
-与RM调度器协商以获取资源（用Container表示）
+与RM调度器协商以获取资源(用Container表示)
 将得到的任务进一步分配给内部的任务
 与NM通信以自动/停止任务
 监控所有任务运行状态，并在任务运行失败时重新为任务申请资源以重启任务
@@ -48,7 +48,7 @@ AM的主要功能
 一个用于演示AM编写方法的实例程序distributedshell
 一个用于Mapreduce程序---MRAppMaster
 其他的计算框架对应的AM正在开发中，比如spark等。
-Nodemanager（NM）和Container
+Nodemanager(NM)和Container
 NM是每个节点上的资源和任务管理器
 定时向RM汇报本节点上的资源使用情况和各个Container的运行状态
 接收并处理来自AM的Container启动/停止等各种要求
@@ -79,7 +79,7 @@ c:本身应用程序的内容
 Nodemanager就启用Applicationmaster，并分配Container
  
 接下来我们就要执行这个任务了，
-3:但是执行任务需要资源，所以我们得向RM的ASM申请执行任务的资源（它会在ＲＭ这儿注册一下，说我已经启动了，注册了以后就可以通过RM的来管理，我们用户也可以通过ＲＭ的ｗｅｂ客户端来监控任务的状态）ＡＳＭ只是负责APplicationMaster的启用
+3:但是执行任务需要资源，所以我们得向RM的ASM申请执行任务的资源(它会在ＲＭ这儿注册一下，说我已经启动了，注册了以后就可以通过RM的来管理，我们用户也可以通过ＲＭ的ｗｅｂ客户端来监控任务的状态)ＡＳＭ只是负责APplicationMaster的启用
 4::我们注册好了后，得申请资源，申请资源是通过第四步，向ResourceScheduler申请的
 5:申请并领取资源后，它会找Nodemanager，告诉他我应经申请到了，然后Nodemanager判断一下，
 6:知道他申请到了以后就会启动任务，当前启动之前会准备好环境，

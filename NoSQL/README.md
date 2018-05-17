@@ -24,13 +24,13 @@ Mysql Group Replication 帮助传统单机关系数据库解决了问题 4
 
 目前看来 OceanBase、TiDB 、 Spanner／F1 这些系统是能够解决上述问题最多的系统。 1. 支持 SQL 2. 数据被拆分成一个个 range，分散在不同的服务器中，通过增加服务器就可以一定程度上的线性扩容 4. 多副本，并且通过 paxos 或 raft 保证多副本之间的一致性 5. 通过 2PC，MVCC 支持不同隔离级别的事物
 
-但是相比高端服务器上的单机数据库，性能会有些问题查询的延迟 (latency) 会比较高，网络是一个问题，比如分布式 join 就要用到网络，有人做过实验，在不改变现有查询引擎的情况下，单条查询随着服务器数量增多，性能不增反降，把网络换成 InfiniBand 效果也不好，后来重新设计了查询引擎，性能做到了递增。可以参考 High-Speed Query Processing over High-Speed Networks（http://www.vldb.org/pvldb/vol9/p228-roediger.pdf） 所以需要改变很多传统的做法，针对新硬件进行新的设计、优化，是可以大幅度提高性能的。
+但是相比高端服务器上的单机数据库，性能会有些问题查询的延迟 (latency) 会比较高，网络是一个问题，比如分布式 join 就要用到网络，有人做过实验，在不改变现有查询引擎的情况下，单条查询随着服务器数量增多，性能不增反降，把网络换成 InfiniBand 效果也不好，后来重新设计了查询引擎，性能做到了递增。可以参考 High-Speed Query Processing over High-Speed Networks(http://www.vldb.org/pvldb/vol9/p228-roediger.pdf) 所以需要改变很多传统的做法，针对新硬件进行新的设计、优化，是可以大幅度提高性能的。
 
 未来不敢说，单机数据库在很多场景下还是会有广泛应用的，NewSQL 最起码接下来的几年里都还有很大的发展潜力，而 NoSQL，分布式中间件等方案基本上就是明日黄花了。
 
 NoSQL 数据库的英文定义为：Next Generation Databases mostly addressing some of the points: being non-relational, distributed, open-source and horizontally scalable.
 
-* 硬件系统资源的自动化调度（CloudOS ）；
+* 硬件系统资源的自动化调度(CloudOS )；
 
 * 应用的并行化和分布化实现业务的自动扩展；
 
@@ -46,7 +46,7 @@ NoSQL 数据库的英文定义为：Next Generation Databases mostly addressing 
 
 ![](https://parg.co/bDY) ![](https://parg.co/bDm)
 
-笔者所有文章遵循 [知识共享 署名 - 非商业性使用 - 禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)，欢迎转载，尊重版权。如果觉得本系列对你有所帮助，欢迎给我家布丁买点狗粮（支付宝扫码）~
+笔者所有文章遵循 [知识共享 署名 - 非商业性使用 - 禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)，欢迎转载，尊重版权。如果觉得本系列对你有所帮助，欢迎给我家布丁买点狗粮(支付宝扫码)~
 
 ![](https://github.com/wxyyxc1992/OSS/blob/master/2017/8/1/Buding.jpg?raw=true)
 

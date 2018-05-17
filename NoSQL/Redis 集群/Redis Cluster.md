@@ -4,7 +4,7 @@
 ## Reference
 - [深入浅出Redis Cluster原理](http://mp.weixin.qq.com/s?__biz=MzA3MzYwNjQ3NA==&mid=2651296996&idx=2&sn=5f4811d73e74e2a63b1cb0d3d532862a)
 
-Redis 3.0集群采用了P2P的模式，完全去中心化。Redis把所有的Key分成了16384个slot，每个Redis实例负责其中一部分slot。集群中的所有信息（节点、端口、slot等），都通过节点之间定期的数据交换而更新。
+Redis 3.0集群采用了P2P的模式，完全去中心化。Redis把所有的Key分成了16384个slot，每个Redis实例负责其中一部分slot。集群中的所有信息(节点、端口、slot等)，都通过节点之间定期的数据交换而更新。
 
 Redis客户端在任意一个Redis实例发出请求，如果所需数据不在该实例中，通过重定向命令引导客户端访问所需的实例。
 
@@ -16,11 +16,11 @@ Redis 3.0集群的工作流程如图4所示。
 
 如图4所示Redis集群内的机器定期交换数据，工作流程如下。
 
-（1）      Redis客户端在Redis2实例上访问某个数据。
+(1)      Redis客户端在Redis2实例上访问某个数据。
 
-（2）      在Redis2内发现这个数据是在Redis3这个实例中，给Redis客户端发送一个重定向的命令。
+(2)      在Redis2内发现这个数据是在Redis3这个实例中，给Redis客户端发送一个重定向的命令。
 
-（3）      Redis客户端收到重定向命令后，访问Redis3实例获取所需的数据。
+(3)      Redis客户端收到重定向命令后，访问Redis3实例获取所需的数据。
 
 Redis 3.0的集群方案有以下两个问题。
 

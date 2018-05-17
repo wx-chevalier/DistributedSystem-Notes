@@ -86,7 +86,7 @@ select * from Products inner join Categories on Products.categoryID=Categories.C
 ``` sql
 select * from Products, Categories where Products.CategoryID=Categories.CategoryID
 ```
-Inner Join是在做排除操作，任一行在两个表中不匹配，注定将从结果集中除掉。（我想，相当于两个集合中取其两者的交集，这个交集的条件就是on后面的限定）还要注意的是，不仅能对两个表作联结，可以把一个表与其自身进行联结。
+Inner Join是在做排除操作，任一行在两个表中不匹配，注定将从结果集中除掉。(我想，相当于两个集合中取其两者的交集，这个交集的条件就是on后面的限定)还要注意的是，不仅能对两个表作联结，可以把一个表与其自身进行联结。
 
 ### Outer Join
 
@@ -116,7 +116,7 @@ Full Join 相当于把Left和Right联结到一起，告诉SQL Server要全部包
 ## Group By
 ### Case条件分组
 有如下数据:(为了看得更清楚，我并没有使用国家代码，而是直接用国家名作为Primary Key)
-| 国家（country） | 人口（population） |
+| 国家(country) | 人口(population) |
 | --------------- | ------------------ |
 | 中国            | 600                |
 | 美国            | 100                |
@@ -176,7 +176,7 @@ ELSE NULL END;
 还可以用一个SQL语句完成不同条件的分组合并：
 有如下数据 
 
-| 国家（country） | 性别（sex） | 人口（population） |
+| 国家(country) | 性别(sex) | 人口(population) |
 | --------------- | ----------- | ------------------ |
 | 中国            | 1           | 340                |
 | 中国            | 2           | 260                |

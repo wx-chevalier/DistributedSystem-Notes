@@ -4,9 +4,9 @@
 
 ![](http://www.2cto.com/uploadfile/2013/1022/20131022025345890.png)
 
-上图中有几个字段需要重点介绍下：（1）序号：Seq 序号，占 32 位，用来标识从 TCP 源端向目的端发送的字节流，发起方发送数据时对此进行标记。（2）确认序号：Ack 序号，占 32 位，只有 ACK 标志位为 1 时，确认序号字段才有效，Ack=Seq+1。（3）标志位：共 6 个，即 URG、ACK、PSH、RST、SYN、FIN 等，具体含义如下：（A）URG：紧急指针（urgent pointer）有效。（B）ACK：确认序号有效。（C）PSH：接收方应该尽快将这个报文交给应用层。（D）RST：重置连接。（E）SYN：发起一个新连接。（F）FIN：释放一个连接。
+上图中有几个字段需要重点介绍下：(1)序号：Seq 序号，占 32 位，用来标识从 TCP 源端向目的端发送的字节流，发起方发送数据时对此进行标记。(2)确认序号：Ack 序号，占 32 位，只有 ACK 标志位为 1 时，确认序号字段才有效，Ack=Seq+1。(3)标志位：共 6 个，即 URG、ACK、PSH、RST、SYN、FIN 等，具体含义如下：(A)URG：紧急指针(urgent pointer)有效。(B)ACK：确认序号有效。(C)PSH：接收方应该尽快将这个报文交给应用层。(D)RST：重置连接。(E)SYN：发起一个新连接。(F)FIN：释放一个连接。
 
-需要注意的是：（A）不要将确认序号 Ack 与标志位中的 ACK 搞混了。（B）确认方 Ack=发起方 Req+1，两端配对。
+需要注意的是：(A)不要将确认序号 Ack 与标志位中的 ACK 搞混了。(B)确认方 Ack=发起方 Req+1，两端配对。
 
 建立 TCP 需要三次握手才能建立，而断开连接则需要四次握手。整个过程如下图所示：
 ![](http://hi.csdn.net/attachment/201108/7/0_131271823564Rx.gif)
@@ -33,7 +33,7 @@ TCP 建立连接的过程简单来说，首先 Client 端发送连接请求报�
 
 * 第一次挥手：Client 发送一个 FIN，用来关闭 Client 到 Server 的数据传送，Client 进入 FIN_WAIT_1 状态。
 
-* 第二次挥手：Server 收到 FIN 后，发送一个 ACK 给 Client，确认序号为收到序号+1（与 SYN 相同，一个 FIN 占用一个序号），Server 进入 CLOSE_WAIT 状态。
+* 第二次挥手：Server 收到 FIN 后，发送一个 ACK 给 Client，确认序号为收到序号+1(与 SYN 相同，一个 FIN 占用一个序号)，Server 进入 CLOSE_WAIT 状态。
 
 * 第三次挥手：Server 发送一个 FIN，用来关闭 Server 到 Client 的数据传送，Server 进入 LAST_ACK 状态。
 
@@ -53,7 +53,7 @@ Pv4 的网络标准把 从 127.0.0.1 到 127.255.255.254 IP 地址块都用作 l
 
 IP 层收到数据包，交付给 TCP 层， TCP 层发现目的端口是 8080， 就会把 GET 请求取出来，交付给绑定 8080 端口的 Web 服务器。
 
-在 Unix 和 Linux 系统中， 通过把 loopback 接口命名为 lo 或者 lo0 （注意第一个字母是 L 的小写字母，不是数字一）
+在 Unix 和 Linux 系统中， 通过把 loopback 接口命名为 lo 或者 lo0 (注意第一个字母是 L 的小写字母，不是数字一)
 
 至于 localhost , 这就是个本机的主机名， 在大多数机器上， 这个主机名都会被计算机操作系统映射到 127.0.0.1 (ipv4)或者::1 (ipv6) , 那使用 localhost 和 ip 实际上一样了。
 
