@@ -62,7 +62,7 @@ hadoop fs -help ls ( 查看 ls 命令的帮助文档 )
 
 ## 行存储
 
-HDFS 块内行存储的例子： ![](http://dl.iteye.com/upload/attachment/0083/5102/c5adc6f6-4a57-3994-b44c-2a943152bc58.png)
+HDFS 块内行存储的例子: ![](http://dl.iteye.com/upload/attachment/0083/5102/c5adc6f6-4a57-3994-b44c-2a943152bc58.png)
 
 基于 Hadoop 系统行存储结构的优点在于快速数据加载和动态负载的高适应能力，这是因为行存储保证了相同记录的所有域都在同一个集群节点，即同一个 HDFS 块。不过，行存储的缺点也是显而易见的，例如它不能支持快速查询处理，因为当查询仅仅针对多列表中的少数几列时，它不能跳过不必要的列读取；此 外，由于混合着不同数据值的列，行存储不易获得一个极高的压缩比，即空间利用率不易大幅提高。
 
@@ -72,17 +72,17 @@ HDFS 块内行存储的例子： ![](http://dl.iteye.com/upload/attachment/0083/
 
 # 数据读取
 
-hdfs 读取数据流程图： ![](http://img.blog.csdn.net/20160525114335782) 1 、首先调用 FileSystem 对象的 open 方法，其实获取的是一个 DistributedFileSystem 的实例。 2 、 DistributedFileSystem 通过 RPC( 远程过程调用 ) 获得文件的第一批 block 的 locations，同一 block 按照重复数会返回多个 locations，这些 locations 按照 hadoop 拓扑结构排序，距离客户端近的排在前面。 3 、前两步会返回一个 FSDataInputStream 对象，该对象会被封装成 DFSInputStream 对象，DFSInputStream 可以方便的管理 datanode 和 namenode 数据流。客户端调用 read 方 法，DFSInputStream 就会找出离客户端最近的 datanode 并连接 datanode。 4 、数据从 datanode 源源不断的流向客户端。 5 、如果第一个 block 块的数据读完了，就会关闭指向第一个 block 块的 datanode 连接，接着读取下一个 block 块。这些操作对客户端来说是透明的，从客户端的角度来看只是读一个持续不断的流。 6 、如果第一批 block 都读完了，DFSInputStream 就会去 namenode 拿下一批 blocks 的 location，然后继续读，如果所有的 block 块都读完，这时就会关闭掉所有的流。
+hdfs 读取数据流程图: ![](http://img.blog.csdn.net/20160525114335782) 1 、首先调用 FileSystem 对象的 open 方法，其实获取的是一个 DistributedFileSystem 的实例。 2 、 DistributedFileSystem 通过 RPC( 远程过程调用 ) 获得文件的第一批 block 的 locations，同一 block 按照重复数会返回多个 locations，这些 locations 按照 hadoop 拓扑结构排序，距离客户端近的排在前面。 3 、前两步会返回一个 FSDataInputStream 对象，该对象会被封装成 DFSInputStream 对象，DFSInputStream 可以方便的管理 datanode 和 namenode 数据流。客户端调用 read 方 法，DFSInputStream 就会找出离客户端最近的 datanode 并连接 datanode。 4 、数据从 datanode 源源不断的流向客户端。 5 、如果第一个 block 块的数据读完了，就会关闭指向第一个 block 块的 datanode 连接，接着读取下一个 block 块。这些操作对客户端来说是透明的，从客户端的角度来看只是读一个持续不断的流。 6 、如果第一批 block 都读完了，DFSInputStream 就会去 namenode 拿下一批 blocks 的 location，然后继续读，如果所有的 block 块都读完，这时就会关闭掉所有的流。
 
 # 数据写入
 
-hdfs 写数据流程： ![](http://img.blog.csdn.net/20160525131839917) 1. 客户端通过调用 DistributedFileSystem 的 create 方法，创建一个新的文件。 2.DistributedFileSystem 通过 RPC(远程过程调用)调用 NameNode，去创建一个没有 blocks 关联的新文件。创建前，NameNode 会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过，NameNode 就会记录下新文件，否则就会抛出 IO 异常。 3. 前两步结束后会返回 FSDataOutputStream 的对象，和读文件的时候相似，FSDataOutputStream 被封装成 DFSOutputStream，DFSOutputStream 可以协调 NameNode 和 DataNode。客户端开始写数据到 DFSOutputStream,DFSOutputStream 会把数据切成一个个小 packet，然后排成队列 data queue。 4.DataStreamer 会去处理接受 data queue，它先问询 NameNode 这个新的 block 最适合存储的在哪几个 DataNode 里，比如重复数是 3，那么就找到 3 个最适合的 DataNode，把它们排成一个 pipeline。DataStreamer 把 packet 按队列输出到管道的第一个 DataNode 中，第一个 DataNode 又把 packet 输出到第二个 DataNode 中，以此类推。 5.DFSOutputStream 还有一个队列叫 ack queue，也是由 packet 组成，等待 DataNode 的收到响应，当 pipeline 中的所有 DataNode 都表示已经收到的时候，这时 akc queue 才会把对应的 packet 包移除掉。 6. 客户端完成写数据后，调用 close 方法关闭写入流。 7.DataStreamer 把剩余的包都刷到 pipeline 里，然后等待 ack 信息，收到最后一个 ack 后，通知 DataNode 把文件标示为已完成。
+hdfs 写数据流程: ![](http://img.blog.csdn.net/20160525131839917) 1. 客户端通过调用 DistributedFileSystem 的 create 方法，创建一个新的文件。 2.DistributedFileSystem 通过 RPC(远程过程调用)调用 NameNode，去创建一个没有 blocks 关联的新文件。创建前，NameNode 会做各种校验，比如文件是否存在，客户端有无权限去创建等。如果校验通过，NameNode 就会记录下新文件，否则就会抛出 IO 异常。 3. 前两步结束后会返回 FSDataOutputStream 的对象，和读文件的时候相似，FSDataOutputStream 被封装成 DFSOutputStream，DFSOutputStream 可以协调 NameNode 和 DataNode。客户端开始写数据到 DFSOutputStream,DFSOutputStream 会把数据切成一个个小 packet，然后排成队列 data queue。 4.DataStreamer 会去处理接受 data queue，它先问询 NameNode 这个新的 block 最适合存储的在哪几个 DataNode 里，比如重复数是 3，那么就找到 3 个最适合的 DataNode，把它们排成一个 pipeline。DataStreamer 把 packet 按队列输出到管道的第一个 DataNode 中，第一个 DataNode 又把 packet 输出到第二个 DataNode 中，以此类推。 5.DFSOutputStream 还有一个队列叫 ack queue，也是由 packet 组成，等待 DataNode 的收到响应，当 pipeline 中的所有 DataNode 都表示已经收到的时候，这时 akc queue 才会把对应的 packet 包移除掉。 6. 客户端完成写数据后，调用 close 方法关闭写入流。 7.DataStreamer 把剩余的包都刷到 pipeline 里，然后等待 ack 信息，收到最后一个 ack 后，通知 DataNode 把文件标示为已完成。
 
 ![](http://img.blog.csdn.net/20160525133509937)
 
 # NameNode HA
 
-NameNode HA 架构如下： ![](http://img.blog.csdn.net/20160525134854724)
+NameNode HA 架构如下: ![](http://img.blog.csdn.net/20160525134854724)
 
 * Active NameNode 和 Standby NameNode：
 

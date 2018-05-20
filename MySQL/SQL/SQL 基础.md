@@ -82,7 +82,7 @@ select * from Products inner join Categories on Products.categoryID=Categories.C
 ```
 
 
-以上语句，只返回物品表中的种类ID与种类表中的ID相匹配的记录数。这样的语句就相当于： 
+以上语句，只返回物品表中的种类ID与种类表中的ID相匹配的记录数。这样的语句就相当于: 
 ``` sql
 select * from Products, Categories where Products.CategoryID=Categories.CategoryID
 ```

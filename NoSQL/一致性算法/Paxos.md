@@ -82,7 +82,7 @@ A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 r
 
 ### 约束条件
 
-##### P1： Acceptor 必须接受他接收到的第一个提案，
+##### P1: Acceptor 必须接受他接收到的第一个提案，
 
 注意 P1 是不完备的。如果恰好一半 Acceptor 接受的提案具有 value A，另一半接受的提案具有 value B，那么就无法形成多数派，无法批准任何一个 value。
 
@@ -266,7 +266,7 @@ Paxos 协议分为两个阶段。
 
 ## Leader 选举实例
 
-这里具体例子来说明 Paxos 的整个具体流程： 假如有 Server1、Server2、Server3 这样三台服务器，我们要从中选出 leader，这时候 Paxos 派上用场了。整个选举的结构图如下：
+这里具体例子来说明 Paxos 的整个具体流程: 假如有 Server1、Server2、Server3 这样三台服务器，我们要从中选出 leader，这时候 Paxos 派上用场了。整个选举的结构图如下：
 
 ![enter image description here](http://www.solinx.co/wp-content/uploads/2015/10/Paxos.png)
 
