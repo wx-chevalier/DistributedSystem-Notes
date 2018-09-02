@@ -1,16 +1,44 @@
 # Linux IO 多路复用
 
-select，poll，epoll 都是 IO 多路复用的机制。IO 多路复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪(一般是读就绪或者写就绪)，能够通知程序进行相应的读写操作。但 select，poll，epoll 本质上都是同步 IO，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步 IO 则无需自己负责进行读写，异步 IO 的实现会负责把数据从内核拷贝到用户空间。不同于 select, epoll 维护的描述符数目不受到限制，而且性能不会随着描述符数目的增加而下降；其核心原因在于，select 采用轮询方式处理连接，epoll 则是触发式处理连接。
+select，poll，epoll 都是 IO 多路复用的机制。IO 多路复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪(一般是读就绪或者写就绪)，能够通知程序进行相应的读写操作。但 select，poll，epoll 本质上都是同步 IO，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步 IO 则无需自己负责进行读写，异步 IO 的实现会负责把数据从内核拷贝到用户空间。
 
-| 方法   | 数量限制                                                                                            | 连接处理                                                                                                                     | 内存操作                                                                                                                    |
-| ------ | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| select | 描述符个数由内核中的 FD_SETSIZE 限制，仅为 1024；重新编译内核改变 FD_SETSIZE 的值，但是无法优化性能 | 每次调用 select 都会线性扫描所有描述符的状态，在 select 结束后，用户也要线性扫描 fd_set 数组才知道哪些描述符准备就绪(O(n)) | 每次调用 select 都要在用户空间和内核空间里进行内存复制 fd 描述符等信息                                                      |
-| poll   | 使用 pollfd 结构来存储 fd，突破了 select 中描述符数目的限制                                         | 类似于 select 扫描方式                                                                                                       | 需要将 pollfd 数组拷贝到内核空间，之后依次扫描 fd 的状态，整体复杂度依然是 O(n)的，在并发量大的情况下服务器性能会快速下降 |
-| epoll  | 该模式下的 Socket 对应的 fd 列表由一个数组来保存，大小不限制(默认 4k)                             | 基于内核提供的反射模式，有活跃 Socket 时，内核访问该 Socket 的 callback，不需要遍历轮询                                      | epoll 在传递内核与用户空间的消息时使用了内存共享，而不是内存拷贝，这也使得 epoll 的效率比 poll 和 select 更高               |
+select 本身是轮询式、无状态的，每次调用都需要把 fd 集合从用户态拷贝到内核态，这个开销在 fd 很多时会很大。epoll 则是触发式处理连接，维护的描述符数目不受到限制，而且性能不会随着描述符数目的增加而下降。
+
+| 方法   | 数量限制                                                                                            | 连接处理                                                                                                                   | 内存操作                                                                                                                  |
+| ------ | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| select | 描述符个数由内核中的 FD_SETSIZE 限制，仅为 1024；重新编译内核改变 FD_SETSIZE 的值，但是无法优化性能 | 每次调用 select 都会线性扫描所有描述符的状态，在 select 结束后，用户也要线性扫描 fd_set 数组才知道哪些描述符准备就绪(O(n)) | 每次调用 select 都要在用户空间和内核空间里进行内存复制 fd 描述符等信息                                                    |
+| poll   | 使用 pollfd 结构来存储 fd，突破了 select 中描述符数目的限制                                         | 类似于 select 扫描方式                                                                                                     | 需要将 pollfd 数组拷贝到内核空间，之后依次扫描 fd 的状态，整体复杂度依然是 O(n)的，在并发量大的情况下服务器性能会快速下降 |
+| epoll  | 该模式下的 Socket 对应的 fd 列表由一个数组来保存，大小不限制(默认 4k)                               | 基于内核提供的反射模式，有活跃 Socket 时，内核访问该 Socket 的 callback，不需要遍历轮询                                    | epoll 在传递内核与用户空间的消息时使用了内存共享，而不是内存拷贝，这也使得 epoll 的效率比 poll 和 select 更高             |
 
 # select/poll
 
 ![](http://images.cnitblog.com/blog/305504/201308/17201205-8ac47f1f1fcd4773bd4edd947c0bb1f4.png)
+
+```c
+// 绑定监听符
+bind(lfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+
+// 执行循环阻塞式监听与读取
+while (1)
+{
+    clin_len = sizeof(clin_addr);
+    cfd = accept(lfd, (struct sockaddr *)&clin_addr, &clin_len);
+    while (len = read(cfd, recvbuf, BUFSIZE))
+    {
+        write(STDOUT_FILENO, recvbuf, len); //把客户端输入的内容输出在终端
+        // 只有当客户端输入 stop 就停止当前客户端的连接
+        if (strncasecmp(recvbuf, "stop", 4) == 0)
+        {
+            close(cfd);
+            break;
+        }
+    }
+}
+```
+
+编译运行之后，开启两个终端使用命令 `nc 10.211.55.4 8031` (假如服务器的 ip 为 10.211.55.4)。如果首先连上的客户端一直不输入`stop`加回车，那么第二个客户端输入任何内容都不会被客户端接收。
+
+输入`abc`的是先连接上的，在其输入`stop`之前，后面连接上的客户端输入`123`并不会被服务端收到。也就是说一直阻塞在第一个客户端那里。当第一个客户端输入`stop`之后，服务端才收到第二个客户端的发送过来的数据。
 
 ## 函数分析
 
@@ -18,11 +46,11 @@ select，poll，epoll 都是 IO 多路复用的机制。IO 多路复用就通过
 select(int nfds, fd_set *r, fd_set *w, fd_set *e, struct timeval *timeout)
 ```
 
-* `maxfdp1`表示该进程中描述符的总数。
+- `maxfdp1`表示该进程中描述符的总数。
 
-* `fd_set`则是配合`select`模型的重点数据结构，用来存放描述符的集合。
+- `fd_set`则是配合`select`模型的重点数据结构，用来存放描述符的集合。
 
-* `timeout`表示`select`返回需要等待的时间。
+- `timeout`表示`select`返回需要等待的时间。
 
 对于 select()，我们需要传 3 个集合，r，w 和 e。其中，r 表示我们对哪些 fd 的可读事件感兴趣，w 表示我们对哪些 fd 的可写事件感兴趣。每个集合其实是一个 bitmap，通过 0/1 表示我们感兴趣的 fd。例如，我们对于 fd 为 6 的可读事件感兴趣，那么 r 集合的第 6 个 bit 需要被 设置为 1。这个系统调用会阻塞，直到我们感兴趣的事件(至少一个)发生。调用返回时，内核同样使用这 3 个集合来存放 fd 实际发生的事件信息。也就是说，调 用前这 3 个集合表示我们感兴趣的事件，调用后这 3 个集合表示实际发生的事件。
 
@@ -60,6 +88,55 @@ poll 调用需要传递的是一个 pollfd 结构的数组，调用返回时结�
 
 (6)如果此时已经连接上的某个客户端描述符有数据可读，则进行数据读取。
 
+>
+
+```c
+while (1)
+{
+    // 每次循环开始时，都初始化 read_set
+    read_set = read_set_init;
+
+    // 因为上一步 read_set 已经重置，所以需要已连接上的客户端 fd (由上次循环后产生)重新添加进 read_set
+    for (i = 0; i < FD_SET_SIZE; ++i)
+    {
+        if (client[i] > 0)
+        {
+            FD_SET(client[i], &read_set);
+        }
+    }
+
+    ...
+
+    // 这里会阻塞，直到 read_set 中某一个 fd 有数据可读才返回，注意 read_set 中除了客户端 fd 还有服务端监听的 fd
+    retval = select(maxfd + 1, &read_set, NULL, NULL, NULL);
+
+    ...
+
+    // 用 FD_ISSET 来判断 lfd (服务端监听的fd)是否可读。只有当新的客户端连接时，lfd 才可读
+    if (FD_ISSET(lfd, &read_set))
+    {
+        ...
+    }
+
+    for (i = 0; i < maxi; ++i)
+    {
+        if (client[i] < 0)
+        {
+            continue;
+        }
+
+        // 如果客户端 fd 中有数据可读，则进行读取
+        if (FD_ISSET(client[i], &read_set))
+        {
+            // 注意：这里没有使用 while 循环读取，如果使用 while 循环读取，则有阻塞在一个客户端了。
+            // 可能你会想到如果一次读取不完怎么办？
+            // 读取不完时，在循环到 select 时 由于未读完的 fd 还有数据可读，那么立即返回，然后到这里继续读取，原来的 while 循环读取直接提到最外层的 while(1) + select 来判断是否有数据继续可读
+            ...
+        }
+    }
+}
+```
+
 # epoll/kqueue
 
 服务器的特点是经常维护着大量连接，但其中某一时刻读写的操作符数量却不多。epoll 先通过 epoll_ctl 注册一个描述符到内核中，并一直维护着而不像 poll 每次操作都将所有要监控的描述符传递给内核；在描述符读写就绪时，通过回掉函数将自己加入就绪队列中，之后 epoll_wait 返回该就绪队列。也就是说，epoll 基本不做无用的操作，时间复杂度仅与活跃的客户端数有关，而不会随着描述符数目的增加而下降。
@@ -80,9 +157,9 @@ select 与 poll 问题的关键在于无状态。对于每一次系统调用，�
 
 epoll 的事件注册函数，它不同与 select()是在监听事件时告诉内核要监听什么类型的事件，而是在这里先注册要监听的事件类型。第一个参数是 epoll_create()的返回值，第二个参数表示动作，用三个宏来表示：
 
-* EPOLL_CTL_ADD：注册新的 fd 到 epfd 中；
-* EPOLL_CTL_MOD：修改已经注册的 fd 的监听事件；
-* EPOLL_CTL_DEL：从 epfd 中删除一个 fd；
+- EPOLL_CTL_ADD：注册新的 fd 到 epfd 中；
+- EPOLL_CTL_MOD：修改已经注册的 fd 的监听事件；
+- EPOLL_CTL_DEL：从 epfd 中删除一个 fd；
 
 第三个参数是需要监听的 fd，第四个参数是告诉内核需要监听什么事，struct epoll_event 结构如下：
 
@@ -102,13 +179,13 @@ struct epoll_event {
 
 events 可以是以下几个宏的集合：
 
-* EPOLLIN ：表示对应的文件描述符可以读(包括对端 SOCKET 正常关闭)；
-* EPOLLOUT：表示对应的文件描述符可以写；
-* EPOLLPRI：表示对应的文件描述符有紧急的数据可读(这里应该表示有带外数据到来)；
-* EPOLLERR：表示对应的文件描述符发生错误；
-* EPOLLHUP：表示对应的文件描述符被挂断；
-* EPOLLET: 将 EPOLL 设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
-* EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个 socket 的话，需要再次把这个 socket 加入到 EPOLL 队列里
+- EPOLLIN ：表示对应的文件描述符可以读(包括对端 SOCKET 正常关闭)；
+- EPOLLOUT：表示对应的文件描述符可以写；
+- EPOLLPRI：表示对应的文件描述符有紧急的数据可读(这里应该表示有带外数据到来)；
+- EPOLLERR：表示对应的文件描述符发生错误；
+- EPOLLHUP：表示对应的文件描述符被挂断；
+- EPOLLET: 将 EPOLL 设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
+- EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个 socket 的话，需要再次把这个 socket 加入到 EPOLL 队列里
 
 ### int epoll_wait(int epfd, struct epoll_event \* events, int maxevents, int timeout);
 
@@ -120,367 +197,40 @@ events 可以是以下几个宏的集合：
 
 几乎所有的 epoll 模型编码都是基于以下模板：
 
-```
-    for( ; ; )
+```c
+for( ; ; )
+{
+    // 阻塞式等待事件
+    nfds = epoll_wait(epfd,events,20,500);
+    for(i=0;i<nfds;++i)
     {
-        nfds = epoll_wait(epfd,events,20,500);
-        for(i=0;i<nfds;++i)
+        if(events[i].data.fd==listenfd) //有新的连接
         {
-            if(events[i].data.fd==listenfd) //有新的连接
-            {
-                connfd = accept(listenfd,(sockaddr *)&clientaddr, &clilen); //accept这个连接
-                ev.data.fd=connfd;
-                ev.events=EPOLLIN|EPOLLET;
-                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev); //将新的fd添加到epoll的监听队列中
-            }
-            else if( events[i].events&EPOLLIN ) //接收到数据，读socket
-            {
-                n = read(sockfd, line, MAXLINE)) < 0    //读
-                ev.data.ptr = md;     //md为自定义类型，添加数据
-                ev.events=EPOLLOUT|EPOLLET;
-                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);//修改标识符，等待下一个循环时发送数据，异步处理的精髓
-            }
-            else if(events[i].events&EPOLLOUT) //有数据待发送，写socket
-            {
-                struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;    //取数据
-                sockfd = md->fd;
-                send( sockfd, md->ptr, strlen((char*)md->ptr), 0 );        //发送数据
-                ev.data.fd=sockfd;
-                ev.events=EPOLLIN|EPOLLET;
-                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev); //修改标识符，等待下一个循环时接收数据
-            }
-            else
-            {
-                //其他的处理
-            }
+            connfd = accept(listenfd,(sockaddr *)&clientaddr, &clilen); //accept这个连接
+            ev.data.fd=connfd;
+            ev.events=EPOLLIN|EPOLLET;
+            epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev); //将新的fd添加到epoll的监听队列中
+        }
+        else if(events[i].events&EPOLLIN ) //接收到数据，读socket
+        {
+            n = read(sockfd, line, MAXLINE)) < 0    //读
+            ev.data.ptr = md;     //md为自定义类型，添加数据
+            ev.events=EPOLLOUT|EPOLLET;
+            epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev);//修改标识符，等待下一个循环时发送数据，异步处理的精髓
+        }
+        else if(events[i].events&EPOLLOUT) //有数据待发送，写socket
+        {
+            struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;    //取数据
+            sockfd = md->fd;
+            send( sockfd, md->ptr, strlen((char*)md->ptr), 0 );        //发送数据
+            ev.data.fd=sockfd;
+            ev.events=EPOLLIN|EPOLLET;
+            epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&ev); //修改标识符，等待下一个循环时接收数据
+        }
+        else
+        {
+            //其他的处理
         }
     }
-```
-
-## Demo
-
-> 本部分代码实现参考[可能是最接地气的 IO 多路复用小结](https://mengkang.net/726.html)
-
-### 阻塞式网络编程接口
-
-```
-    #include <stdio.h>
-    #include <unistd.h>
-    #include <sys/types.h>
-    #include <sys/socket.h>
-    #include <arpa/inet.h>
-    #include <netinet/in.h>
-    #include <string.h>
-
-    #define SERV_PORT 8031
-    #define BUFSIZE 1024
-
-    int main(void)
-    {
-        int lfd, cfd;
-        struct sockaddr_in serv_addr,clin_addr;
-        socklen_t clin_len;
-        char recvbuf[BUFSIZE];
-        int len;
-
-        lfd = socket(AF_INET,SOCK_STREAM,0);
-
-        serv_addr.sin_family = AF_INET;
-        serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-        serv_addr.sin_port = htons(SERV_PORT);
-
-        bind(lfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-
-        listen(lfd, 128);
-
-        while(1){
-            clin_len = sizeof(clin_addr);
-            cfd = accept(lfd, (struct sockaddr *)&clin_addr, &clin_len);
-            while(len = read(cfd,recvbuf,BUFSIZE)){
-                write(STDOUT_FILENO,recvbuf,len);//把客户端输入的内容输出在终端
-                // 只有当客户端输入 stop 就停止当前客户端的连接
-                if (strncasecmp(recvbuf,"stop",4) == 0){
-                    close(cfd);
-                    break;
-                }
-            }
-        }
-        close(lfd);
-        return 0;
-    }
-```
-
-编译运行之后，开启两个终端使用命令`nc 10.211.55.4 8031`(假如服务器的 ip 为 10.211.55.4)。如果首先连上的客户端一直不输入`stop`加回车，那么第二个客户端输入任何内容都不会被客户端接收。如下图所示
-
-![](https://mengkang.net/upload/image/2016/0405/1459863994163365.png)
-
-输入`abc`的是先连接上的，在其输入`stop`之前，后面连接上的客户端输入`123`并不会被服务端收到。也就是说一直阻塞在第一个客户端那里。当第一个客户端输入`stop`之后，服务端才收到第二个客户端的发送过来的数据。
-
-![](https://mengkang.net/upload/image/2016/0405/1459864077691859.png)
-
-### select
-
-```c
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <unistd.h>
-    #include <errno.h>
-    #include <sys/types.h>
-    #include <sys/socket.h>
-    #include <arpa/inet.h>
-    #include <netinet/in.h>
-    #include <fcntl.h>
-    #include <sys/select.h>
-    #include <sys/time.h>
-    #include <string.h>
-
-    #define SERV_PORT     8031
-    #define BUFSIZE       1024
-    #define FD_SET_SIZE   128
-
-    int main(void) {
-        int lfd, cfd, maxfd, scokfd, retval;
-        struct sockaddr_in serv_addr, clin_addr;
-
-        socklen_t clin_len; // 地址信息结构体大小
-
-        char recvbuf[BUFSIZE];
-        int len;
-
-        fd_set read_set, read_set_init;
-
-        int client[FD_SET_SIZE];
-        int i;
-        int maxi = -1;
-
-
-        if ((lfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-            perror("套接字描述符创建失败");
-            exit(1);
-        }
-
-        int opt = 1;
-        setsockopt(lfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
-
-        memset(&serv_addr, 0, sizeof(serv_addr));
-        serv_addr.sin_family = AF_INET;
-        serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-        serv_addr.sin_port = htons(SERV_PORT);
-
-        if (bind(lfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) == -1) {
-            perror("绑定失败");
-            exit(1);
-        }
-
-        if (listen(lfd, FD_SET_SIZE) == -1) {
-            perror("监听失败");
-            exit(1);
-        }
-
-        maxfd = lfd;
-
-        for (i = 0; i < FD_SET_SIZE; ++i) {
-            client[i] = -1;
-        }
-
-        FD_ZERO(&read_set_init);
-        FD_SET(lfd, &read_set_init);
-
-        while (1) {
-            // 每次循环开始时，都初始化 read_set
-            read_set = read_set_init;
-
-            // 因为上一步 read_set 已经重置，所以需要已连接上的客户端 fd (由上次循环后产生)重新添加进 read_set
-            for (i = 0; i < FD_SET_SIZE; ++i) {
-                if (client[i] > 0) {
-                    FD_SET(client[i], &read_set);
-                }
-            }
-
-            printf("select 等待\n");
-            // 这里会阻塞，直到 read_set 中某一个 fd 有数据可读才返回，注意 read_set 中除了客户端 fd 还有服务端监听的 fd
-            retval = select(maxfd + 1, &read_set, NULL, NULL, NULL);
-            if (retval == -1) {
-                perror("select 错误\n");
-            } else if (retval == 0) {
-                printf("超时\n");
-                continue;
-            }
-            printf("select 返回\n");
-
-            //------------------------------------------------------------------------------------------------
-            // 用 FD_ISSET 来判断 lfd (服务端监听的fd)是否可读。只有当新的客户端连接时，lfd 才可读
-            if (FD_ISSET(lfd, &read_set)) {
-                clin_len = sizeof(clin_addr);
-                if ((cfd = accept(lfd, (struct sockaddr *) &clin_addr, &clin_len)) == -1) {
-                    perror("接收错误\n");
-                    continue;
-                }
-
-                for (i = 0; i < FD_SET_SIZE; ++i) {
-                    if (client[i] < 0) {
-                        // 把客户端 fd 放入 client 数组
-                        client[i] = cfd;
-                        printf("接收client[%d]一个请求来自于: %s:%d\n", i, inet_ntoa(clin_addr.sin_addr), ntohs(clin_addr.sin_port));
-                        break;
-                    }
-                }
-
-                // 最大的描述符值也要重新计算
-                maxfd = (cfd > maxfd) ? cfd : maxfd;
-                // maxi 用于下面遍历所有有效客户端 fd 使用，以免遍历整个 client 数组
-                maxi = (i >= maxi) ? ++i : maxi;
-            }
-            //------------------------------------------------------------------------------------------------
-
-            for (i = 0; i < maxi; ++i) {
-                if (client[i] < 0) {
-                    continue;
-                }
-
-                // 如果客户端 fd 中有数据可读，则进行读取
-                if (FD_ISSET(client[i], &read_set)) {
-                    // 注意：这里没有使用 while 循环读取，如果使用 while 循环读取，则有阻塞在一个客户端了。
-                    // 可能你会想到如果一次读取不完怎么办？
-                    // 读取不完时，在循环到 select 时 由于未读完的 fd 还有数据可读，那么立即返回，然后到这里继续读取，原来的 while 循环读取直接提到最外层的 while(1) + select 来判断是否有数据继续可读
-                    len = read(client[i], recvbuf, BUFSIZE);
-                    if (len > 0) {
-                        write(STDOUT_FILENO, recvbuf, len);
-                    }else if (len == 0){
-                        // 如果在客户端 ctrl+z
-                        close(client[i]);
-                        printf("clinet[%d] 连接关闭\n", i);
-                        FD_CLR(client[i], &read_set);
-                        client[i] = -1;
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        close(lfd);
-
-        return 0;
-    }
-```
-
-![](https://mengkang.net/upload/image/2016/0407/1459997845662935.png)
-
-### epoll
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <fcntl.h>
-#include <sys/epoll.h>
-#include <sys/time.h>
-#include <string.h>
-
-#define SERV_PORT           8031
-#define MAX_EVENT_NUMBER    1024
-#define BUFFER_SIZE         10
-
-
-/* 将文件描述符 fd 上的 EPOLLIN 注册到 epollfd 指示的 epoll 内核事件表中 */
-void addfd(int epollfd, int fd) {
-    struct epoll_event event;
-    event.data.fd = fd;
-    event.events = EPOLLIN | EPOLLET;
-    epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
-    int old_option = fcntl(fd, F_GETFL);
-    int new_option = old_option | O_NONBLOCK;
-    fcntl(fd, F_SETFL, new_option);
-}
-
-void et(struct epoll_event *events, int number, int epollfd, int listenfd) {
-    char buf[BUFFER_SIZE];
-    for (int i = 0; i < number; ++i) {
-        int sockfd = events[i].data.fd;
-        if (sockfd == listenfd) {
-            struct sockaddr_in client_address;
-            socklen_t length = sizeof(client_address);
-            int connfd = accept(listenfd, (struct sockaddr *) &client_address, &length);
-            printf("接收一个请求来自于: %s:%d\n", inet_ntoa(client_address.sin_addr), ntohs(client_address.sin_port));
-
-            addfd(epollfd, connfd);
-        } else if (events[i].events & EPOLLIN) {
-            /* 这段代码不会被重复触发，所以我们循环读取数据，以确保把 socket 缓存中的所有数据读取*/
-            while (1) {
-                memset(buf, '\0', BUFFER_SIZE);
-                int ret = recv(sockfd, buf, BUFFER_SIZE - 1, 0);
-                if (ret < 0) {
-                    /* 对非阻塞 IO ，下面的条件成立表示数据已经全部读取完毕。此后 epoll 就能再次触发 sockfd 上的 EPOLLIN 事件，以驱动下一次读操作 */
-                    if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
-                        printf("read later\n");
-                        break;
-                    }
-                    close(sockfd);
-                    break;
-                } else if (ret == 0) {
-                    printf("断开一个连接\n");
-                    close(sockfd);
-                } else {
-                    printf("get %d bytes of content: %s\n", ret, buf);
-                }
-            }
-        }
-    }
-}
-
-
-int main(void) {
-    int lfd, epollfd,ret;
-    struct sockaddr_in serv_addr;
-
-    if ((lfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-        perror("套接字描述符创建失败");
-        exit(1);
-    }
-
-    int opt = 1;
-    setsockopt(lfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
-
-    memset(&serv_addr, 0, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serv_addr.sin_port = htons(SERV_PORT);
-
-    if (bind(lfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) == -1) {
-        perror("绑定失败");
-        exit(1);
-    }
-
-    if (listen(lfd, 5) == -1) {
-        perror("监听失败");
-        exit(1);
-    }
-
-    struct epoll_event events[MAX_EVENT_NUMBER];
-    if ((epollfd = epoll_create(5)) == -1) {
-        perror("创建失败");
-        exit(1);
-    }
-
-    // 把服务器端 lfd 添加到 epollfd 指定的 epoll 内核事件表中，添加一个 lfd 可读的事件
-    addfd(epollfd, lfd);
-    while (1) {
-        // 阻塞等待新客户端的连接或者客户端的数据写入，返回需要处理的事件数目
-        if ((ret = epoll_wait(epollfd, events, MAX_EVENT_NUMBER, -1)) < 0) {
-            perror("epoll_wait失败");
-            exit(1);
-        }
-
-        et(events, ret, epollfd, lfd);
-    }
-
-    close(lfd);
-    return 0;
 }
 ```
