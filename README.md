@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/cncf/landscape/master/landscape/CloudNativeLandscape_latest.jpg)
+![default](https://user-images.githubusercontent.com/5803001/45228847-daf52d00-b2f6-11e8-9367-a48c196da018.png)
 
 # 深入浅出分布式基础架构
 
@@ -10,13 +10,15 @@
 
 - [Linux 篇](./Linux)
 
-- [MySQL 篇](./MySQL)
+* [分布式计算篇](./DistributedComputing)
 
-- [NoSQL 篇](./NoSQL)
+- [虚拟化与容器调度篇](./Virtualization)
 
-- [虚拟化篇](./Virtualization)
+* [分布式存储篇](./DistributedStorage)
 
-- [分布式系统篇](./DistributedSystem)
+* [MySQL 篇](./MySQL)
+
+* [Redis 篇](./NoSQL)
 
 ---
 
@@ -28,7 +30,23 @@
 
 * [Focker #Project#](https://github.com/wxyyxc1992/InfraS-Lab/tree/master/Focker): 从零开始构建类 Docker 容器。
 
+# 前言
+
+按照 NIST(National Institute of Standards and Technology，美国国家标准与技术研究院)的定义的云的标准，云计算并不是在讨论某种特定的云的技术，或者某个厂商提供的产品服务。云的定义更接近于把计算、服务等各种资源变成按需提供的服务，同时提供广泛的网络访问，以及可共享、可度量的后台资源。云更多的是一种服务，虚拟化和容器化只是云底层的技术设施，而本身并没有把它变成一种服务来提供。
+
+- 硬件系统资源的自动化调度(CloudOS)；
+
+- 应用的并行化和分布化实现业务的自动扩展；
+
+- 基于初始配置的自动化业务开通和业务部署；
+
+- 基于前述能力，实现基于 SLA、QoS 等策略的自动化质量保障、故障隔离和故障自愈；
+
+- 基于大数据智能驱动的系统自动化和自动调优。
+
 # 关于
+
+![default](https://user-images.githubusercontent.com/5803001/45228854-de88b400-b2f6-11e8-9ab0-d393ed19f21f.png)
 
 ## 规划
 
