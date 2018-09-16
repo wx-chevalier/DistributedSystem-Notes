@@ -4,7 +4,7 @@
 
 # Meltdown 简述
 
-近日现代 CPU 的 Meltdown & Spectre 漏洞沸沸扬扬，最早是 Google 研究员发现[可以通过内存侧信道时序攻击来获取隐私数据](https://googleprojectzero.blogspot.de/2018/01/reading-privileged-memory-with-side.html)，后续 [Chromium](https://www.chromium.org/Home/chromium-security/ssca), [Apple](https://support.apple.com/en-us/HT208394) 以及 [Mozilla](https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/) 都发文讨论了其对各个平台的影响与应对方案。 网上讨论该漏洞的文章也很多，笔者个人感觉 [This is how Meltdown works](https://dev.to/isaacandsuch/how-meltdown-works-28j2), [Why Raspberry Pi Isn't Vulnerable to Spectre or Meltdown](http://t.cn/RH3DVKj) 讲解的不错，而本文则翻译自 [Meltdown in a nutshell](https://hackernoon.com/meltdown-in-a-nutshell-bda0b79f84a2) 这个简述；本文归纳于 [Linux 配置使用、内部原理与 Shell 编程](https://parg.co/UMI)系列。
+近日现代 CPU 的 Meltdown & Spectre 漏洞沸沸扬扬，最早是 Google 研究员发现[可以通过内存侧信道时序攻击来获取隐私数据](https://googleprojectzero.blogspot.de/2018/01/reading-privileged-memory-with-side.html)，后续 [Chromium](https://www.chromium.org/Home/chromium-security/ssca), [Apple](https://support.apple.com/en-us/HT208394) 以及 [Mozilla](https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/) 都发文讨论了其对各个平台的影响与应对方案。网上讨论该漏洞的文章也很多，笔者个人感觉 [This is how Meltdown works](https://dev.to/isaacandsuch/how-meltdown-works-28j2), [Why Raspberry Pi Isn't Vulnerable to Spectre or Meltdown](http://t.cn/RH3DVKj) 讲解的不错，而本文则翻译自 [Meltdown in a nutshell](https://hackernoon.com/meltdown-in-a-nutshell-bda0b79f84a2) 这个简述；本文归纳于 [Linux 配置使用、内部原理与 Shell 编程](https://parg.co/UMI)系列。
 
 对于如下伪代码：
 
