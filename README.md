@@ -4,6 +4,8 @@
 
 深入浅出分布式基础架构是笔者归档自己，在学习与实践软件分布式架构过程中的，笔记与代码的仓库；主要包含分布式计算、分布式系统、数据存储、虚拟化、网络、操作系统等几个部分。本部分详细的基础架构请参考笔者在 [2016: 我的技术体系结构图](https://github.com/wxyyxc1992/Awesome-Coder/blob/master/Knowledge-Graph/2016-Knowledge-Graph.md)一文中的描述；本仓库目前包含的主要内容分为开源项目与各个技术领域的文章。
 
+![default](https://user-images.githubusercontent.com/5803001/47262684-025c2e00-d522-11e8-8c82-4a5afcf428d1.png)
+
 **建议前往 [xCompass](https://wxyyxc1992.github.io/home/#/search) 交互式地检索、查找需要的文章/链接/书籍/课程，或者直接浏览本仓库的目录以了解更多内容。**
 
 ---
