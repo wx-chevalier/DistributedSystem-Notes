@@ -8,32 +8,6 @@
 
 **建议前往 [xCompass](https://wxyyxc1992.github.io/home/#/search) 交互式地检索、查找需要的文章/链接/书籍/课程，或者直接浏览本仓库的目录以了解更多内容。**
 
----
-
-✨ 技术文章
-
-- [Linux 篇](./Linux)
-
-* [分布式计算篇](./DistributedComputing)
-
-- [虚拟化与容器调度篇](./Virtualization)
-
-* [分布式存储篇](./DistributedStorage)
-
-* [MySQL 篇](./MySQL)
-
-* [Redis 篇](./NoSQL)
-
----
-
-✨ 关联项目
-
-- [LocalMQ #Project#](https://github.com/wxyyxc1992/InfraS-Lab/tree/master/LocalMQ):LocalMQ 是笔者模仿 RocketMQ 的设计理念实现的简化版本地高性能消息队列，可以用来了解如何从零开始构建消息队列。
-
-- [ServicesD #Project#](https://github.com/wxyyxc1992/T-Arsenal/tree/master/ServicesD): ServicesD 是笔者在日常工作中使用到的一系列 Docker 镜像集锦，涉及到应用部署、集群架构、站点质量保障、微服务治理等多个方面。
-
-* [Focker #Project#](https://github.com/wxyyxc1992/InfraS-Lab/tree/master/Focker): 从零开始构建类 Docker 容器。
-
 # 前言
 
 按照 NIST(National Institute of Standards and Technology，美国国家标准与技术研究院)的定义的云的标准，云计算并不是在讨论某种特定的云的技术，或者某个厂商提供的产品服务。云的定义更接近于把计算、服务等各种资源变成按需提供的服务，同时提供广泛的网络访问，以及可共享、可度量的后台资源。云更多的是一种服务，虚拟化和容器化只是云底层的技术设施，而本身并没有把它变成一种服务来提供。
@@ -47,6 +21,30 @@
 - 基于前述能力，实现基于 SLA、QoS 等策略的自动化质量保障、故障隔离和故障自愈；
 
 - 基于大数据智能驱动的系统自动化和自动调优。
+
+# Index | 索引
+
+## 模块
+
+- [Linux 篇](./Linux)
+
+- [分布式计算篇](./DistributedComputing)
+
+- [虚拟化与容器调度篇](./Virtualization)
+
+- [分布式存储篇](./DistributedStorage)
+
+- [MySQL 篇](./MySQL)
+
+- [Redis 篇](./NoSQL)
+
+## 项目
+
+- [LocalMQ #Project#](https://github.com/wxyyxc1992/InfraS-Lab/tree/master/LocalMQ):LocalMQ 是笔者模仿 RocketMQ 的设计理念实现的简化版本地高性能消息队列，可以用来了解如何从零开始构建消息队列。
+
+- [ServicesD #Project#](https://github.com/wxyyxc1992/T-Arsenal/tree/master/ServicesD): ServicesD 是笔者在日常工作中使用到的一系列 Docker 镜像集锦，涉及到应用部署、集群架构、站点质量保障、微服务治理等多个方面。
+
+* [Focker #Project#](https://github.com/wxyyxc1992/InfraS-Lab/tree/master/Focker): 从零开始构建类 Docker 容器。
 
 # 关于
 
