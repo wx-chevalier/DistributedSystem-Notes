@@ -5,7 +5,7 @@
 
 在 [0.9.0-milestone1](http://flink.apache.org/news/2015/04/13/release-0.9.0-milestone1.html) 发布之后，Apache Flink 添加了所谓的 Table API 来提供类似于 SQL 的表达式用于对关系型数据进行处理。这系列 API 的操作对象就是抽象而言的能够进行关系型操作的结构化数据或者流。Table API 一般与 DataSet 或者 DataStream 紧密关联，可以从 DataSet 或者 DataStream 来方便地创建一个 Table 对象，也可以用如下的操作将一个 Table 转化回一个 DataSet 或者 DataStream 对象：
 
-```
+```scala
 val execEnv = ExecutionEnvironment.getExecutionEnvironment
 val tableEnv = TableEnvironment.getTableEnvironment(execEnv)
 
