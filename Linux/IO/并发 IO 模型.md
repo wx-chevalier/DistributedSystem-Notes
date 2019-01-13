@@ -2,11 +2,11 @@
 
 在传统的网络服务器的构建中，IO 模式会按照 Blocking/Non-Blocking、Synchronous/Asynchronous 这两个标准进行分类，其中 Blocking 与 Synchronous 基本上一个意思，而 NIO 与 Async 的区别在于 NIO 强调的是 Polling(轮询)，而 Async 强调的是 Notification(通知)。譬如在一个典型的单进程单线程 Socket 接口中，阻塞型的接口必须在上一个 Socket 连接关闭之后才能接入下一个 Socket 连接。而对于 NIO 的 Socket 而言，Server Application 会从内核获取到一个特殊的"Would Block"错误信息，但是并不会阻塞到等待发起请求的 Socket Client 停止。一般来说，在 Linux 系统中可以通过调用独立的`select`或者`poll`方法来遍历所有读取好的数据，并且进行写操作。而对于异步 Socket 而言(譬如 Windows 中的 Sockets 或者.Net 中实现的 Sockets 模型)，Server Application 会告诉 IO Framework 去读取某个 Socket 数据，在数据读取完毕之后 IO Framework 会自动地调用你的回调(也就是通知应用程序本身数据已经准备好了)。以 IO 多路复用中的 Reactor 与 Proactor 模型为例，非阻塞的模型是需要应用程序本身处理 IO 的，而异步模型则是由 Kernel 或者 Framework 将数据准备好读入缓冲区中，应用程序直接从缓冲区读取数据。总结一下：
 
-* 同步阻塞：在此种方式下，用户进程在发起一个 IO 操作以后，必须等待 IO 操作的完成，只有当真正完成了 IO 操作以后，用户进程才能运行。
+- 同步阻塞：在此种方式下，用户进程在发起一个 IO 操作以后，必须等待 IO 操作的完成，只有当真正完成了 IO 操作以后，用户进程才能运行。
 
-* 同步非阻塞：在此种方式下，用户进程发起一个 IO 操作以后边可返回做其它事情，但是用户进程需要时不时的询问 IO 操作是否就绪，这就要求用户进程不停的去询问，从而引入不必要的 CPU 资源浪费。
+- 同步非阻塞：在此种方式下，用户进程发起一个 IO 操作以后边可返回做其它事情，但是用户进程需要时不时的询问 IO 操作是否就绪，这就要求用户进程不停的去询问，从而引入不必要的 CPU 资源浪费。
 
-* 异步非阻塞：在此种模式下，用户进程只需要发起一个 IO 操作然后立即返回，等 IO 操作真正的完成以后，应用程序会得到 IO 操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的 IO 读写操作，因为真正的 IO 读取或者写入操作已经由内核完成了。
+- 异步非阻塞：在此种模式下，用户进程只需要发起一个 IO 操作然后立即返回，等 IO 操作真正的完成以后，应用程序会得到 IO 操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的 IO 读写操作，因为真正的 IO 读取或者写入操作已经由内核完成了。
 
 而在并发 IO 的问题中，较常见的就是所谓的 C10K 问题，即有 10000 个客户端需要连上一个服务器并保持 TCP 连接，客户端会不定时的发送请求给服务器，服务器收到请求后需及时处理并返回结果。
 
@@ -74,17 +74,17 @@ IO 多路复用通过把多个 IO 的阻塞复用到同一个 select 的阻塞�
 
 IO 多路复用技术通俗阐述，即是由一个线程轮询每个连接，如果某个连接有请求则处理请求，没有请求则处理下一个连接。首先来看下可读事件与可写事件：当如下**任一**情况发生时，会产生套接字的**可读**事件：
 
-* 该套接字的接收缓冲区中的数据字节数大于等于套接字接收缓冲区低水位标记的大小；
-* 该套接字的读半部关闭(也就是收到了 FIN)，对这样的套接字的读操作将返回 0(也就是返回 EOF)；
-* 该套接字是一个监听套接字且已完成的连接数不为 0；
-* 该套接字有错误待处理，对这样的套接字的读操作将返回-1。
+- 该套接字的接收缓冲区中的数据字节数大于等于套接字接收缓冲区低水位标记的大小；
+- 该套接字的读半部关闭(也就是收到了 FIN)，对这样的套接字的读操作将返回 0(也就是返回 EOF)；
+- 该套接字是一个监听套接字且已完成的连接数不为 0；
+- 该套接字有错误待处理，对这样的套接字的读操作将返回-1。
 
 当如下任一情况发生时，会产生套接字的可写事件：
 
-* 该套接字的发送缓冲区中的可用空间字节数大于等于套接字发送缓冲区低水位标记的大小；
-* 该套接字的写半部关闭，继续写会产生 SIGPIPE 信号；
-* 非阻塞模式下，connect 返回之后，该套接字连接成功或失败；
-* 该套接字有错误待处理，对这样的套接字的写操作将返回-1。
+- 该套接字的发送缓冲区中的可用空间字节数大于等于套接字发送缓冲区低水位标记的大小；
+- 该套接字的写半部关闭，继续写会产生 SIGPIPE 信号；
+- 非阻塞模式下，connect 返回之后，该套接字连接成功或失败；
+- 该套接字有错误待处理，对这样的套接字的写操作将返回-1。
 
 ## Signal-Driven I/O Model: 信号驱动式 IO
 
@@ -106,15 +106,15 @@ Reactor 模型在 Linux 系统中的具体实现即是 select/poll/epoll/kqueue�
 
 ![](http://www.dengshenyu.com/assets/redis-reactor/reactor-mode3.png)
 
-* Handles ：表示操作系统管理的资源，我们可以理解为 fd。
+- Handles ：表示操作系统管理的资源，我们可以理解为 fd。
 
-* Synchronous Event Demultiplexer ：同步事件分离器，阻塞等待 Handles 中的事件发生。
+- Synchronous Event Demultiplexer ：同步事件分离器，阻塞等待 Handles 中的事件发生。
 
-* Initiation Dispatcher ：初始分派器，作用为添加 Event handler(事件处理器)、删除 Event handler 以及分派事件给 Event handler。也就是说，Synchronous Event Demultiplexer 负责等待新事件发生，事件发生时通知 Initiation Dispatcher，然后 Initiation Dispatcher 调用 event handler 处理事件。
+- Initiation Dispatcher ：初始分派器，作用为添加 Event handler(事件处理器)、删除 Event handler 以及分派事件给 Event handler。也就是说，Synchronous Event Demultiplexer 负责等待新事件发生，事件发生时通知 Initiation Dispatcher，然后 Initiation Dispatcher 调用 event handler 处理事件。
 
-* Event Handler ：事件处理器的接口
+- Event Handler ：事件处理器的接口
 
-* Concrete Event Handler ：事件处理器的实际实现，而且绑定了一个 Handle。因为在实际情况中，我们往往不止一种事件处理器，因此这里将事件处理器接口和实现分开，与 C++、Java 这些高级语言中的多态类似。
+- Concrete Event Handler ：事件处理器的实际实现，而且绑定了一个 Handle。因为在实际情况中，我们往往不止一种事件处理器，因此这里将事件处理器接口和实现分开，与 C++、Java 这些高级语言中的多态类似。
 
 ## 处理逻辑
 
@@ -136,10 +136,10 @@ Reactor 只是一个事件发生器，实际对 socket 句柄的操作，如 con
 
 Reactor 模型还可以与多进程、多线程结合起来用，既实现异步非阻塞 IO，又利用到多核。目前流行的异步服务器程序都是这样的方式：如
 
-* Nginx：多进程 Reactor
-* Nginx+Lua：多进程 Reactor+协程
-* Golang：单线程 Reactor+多线程协程
-* Swoole：多线程 Reactor+多进程 Worker
+- Nginx：多进程 Reactor
+- Nginx+Lua：多进程 Reactor+协程
+- Golang：单线程 Reactor+多线程协程
+- Swoole：多线程 Reactor+多进程 Worker
 
 协程从底层技术角度看实际上还是异步 IO Reactor 模型，应用层自行实现了任务调度，借助 Reactor 切换各个当前执行的用户态线程，但用户代码中完全感知不到 Reactor 的存在。
 
