@@ -31,7 +31,7 @@ Host: example.org
 
 Apache 的用户常用 DocumentRoot 这个命令来设置这个文档根路径。如果请求的 url 是 HTTP://example.org/path/to/script.php, 那么请求的路径就是 /path/to/script.php。假如 document root 被定义为 usr/lcoal/apache/htdocs 的话 , 整个请求的资源路径就是 /usr/local/apache/htdocs/path/to/script.php。
 
-第二行描述的是 HTTP 头部的语法。在这个例子中的头部是 Host, 它标识了浏览器希望获取资源的域名主机。还有很多其它的请求头部可以包含在 HTTP 请求中，比如 user-Agent 头部，在 php 可以通过 $\_SERVER['HTTP_USER_AGENT']获取请求中所携带的这个头部信息。
+第二行描述的是 HTTP 头部的语法。在这个例子中的头部是 Host, 它标识了浏览器希望获取资源的域名主机。还有很多其它的请求头部可以包含在 HTTP 请求中，比如 user-Agent 头部，在 php 可以通过 \$\_SERVER['HTTP_USER_AGENT']获取请求中所携带的这个头部信息。
 
 # HTTP 前世今生
 
@@ -246,5 +246,3 @@ $ httpolice -i har -o html /path/to/file.har >report.html
 ```
 
 ![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2016/8/2/6BF80CC5-C64A-4753-8EBA-FDDEA87C0297.png)
-
-![](http://153.3.251.190:11900/HTTP)
