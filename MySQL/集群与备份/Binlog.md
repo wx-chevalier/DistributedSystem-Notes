@@ -2,6 +2,13 @@
 
 Mysql binlog 日志有三种格式，分别为 Statement、ROW、MiXED。
 
+MySQL 通过 BINLOG 录执行成功的 INSERT、UPDATE、DELETE 等更新数据的 SQL 语句，并由此实现 MySQL 数据库的恢复和主从复制。
+
+- 一是 MySQL 的恢复是 SQL 语句级的，也就是重新执行 BINLOG 中的 SQL 语句。这与 Oracle 数据库不同，Oracle 是基于数据库文件块的。
+- 二是 MySQL 的 Binlog 是按照事务提交的先后顺序记录的，恢复也是按这个顺序进行的。这点也与 Oralce 不同，Oracle 是按照系统更新号（System Change Number，SCN）来恢复数据的，每个事务开始时，Oracle 都会分配一个全局唯一的 SCN，SCN 的顺序与事务开始的时间顺序是一致的。
+
+从上面两点可知，MySQL 的恢复机制要求：在一个事务未提交前，其他并发事务不能插入满足其锁定条件的任何记录，也就是不允许出现幻读，这已经超过了 ISO/ANSI SQL92“可重复读”隔离级别的要求，实际上是要求事务要串行化。这也是许多情况下，InnoDB 要用到间隙锁的原因，比如在用范围条件更新记录时，无论在 Read Commited 或是 Repeatable Read 隔离级别下，InnoDB 都要使用间隙锁，但这并不是隔离级别要求的，有关 InnoDB 在不同隔离级别下加锁的差异在下一小节还会介绍。
+
 ## Statement:每一条会修改数据的 sql 都会记录在 binlog 中
 
 **优点：**不需要记录每一行的变化，减少了 binlog 日志量，节约了 IO，提高性能。(相比 row 能节约多少性能与日志量，这个取决于应用的 SQL 情况，正常同一条记录修改或者插入 row 格式所产生的日志量还小于 Statement 产生的日志量，但是考虑到如果带条件的 update 操作，以及整表删除，alter 表等操作，ROW 格式会产生大量日志，因此在考虑是否使用 ROW 格式日志时应该跟据应用的实际情况，其所产生的日志量会增加多少，以及带来的 IO 性能问题。)
@@ -55,63 +62,5 @@ Mysql 默认是使用 Statement 日志格式，推荐使用 MIXED.
 3.mysqlbinlog 格式选择
 
 mysql 对于日志格式的选定原则:如果是采用 INSERT，UPDATE，DELETE 等直接操作表的情况，则日志格式根据 binlog_format 的设定而记录,如果是采用 GRANT，REVOKE，SET PASSWORD 等管理语句来做的话，那么无论如何 都采用 SBR 模式记录
-
-通过 MysqlBinlog 指令查看具体的 mysql 日志，如下:
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-SET TIMESTAMP=1350355892/_!_/;
-
-BEGIN
-
-/_!_/;
-
-# at 1643330
-
-#121016 10:51:32 server id 1 end_log_pos 1643885 Query thread_id=272571 exec_time=0 error_code=0
-
-SET TIMESTAMP=1350355892/_!_/;
-
-Insert into T_test….)
-
-/_!_/;
-
-# at 1643885
-
-#121016 10:51:32 server id 1 end_log_pos 1643912 Xid = 0
-
-COMMIT/_!_/;
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-1.开始事物的时间:
-
-SET TIMESTAMP=1350355892/_!_/;
-
-BEGIN
-
-2.sqlevent 起点
-
-#at 1643330 :为事件的起点，是以 1643330 字节开始。
-
-3.sqlevent 发生的时间点
-
-#121016 10:51:32:是事件发生的时间，
-
-4.serverId
-
-server id 1 :为 master 的 serverId
-
-5.sqlevent 终点及花费时间，错误码
-
-end_log_pos 1643885:为事件的终点，是以 1643885 字节结束。
-
-execTime 0: 花费的时间
-
-error_code=0:错误码
-
-Xid:事件指示提交的 XA 事务
-
-Mixed 日志说明：
 
 在 slave 日志同步过程中，对于使用 now 这样的时间函数，MIXED 日志格式，会在日志中产生对应的 unix_timestamp()\*1000 的时间字符串，slave 在完成同步时，取用的是 sqlEvent 发生的时间来保证数据的准确性。另外对于一些功能性函数 slave 能完成相应的数据同步，而对于上面指定的一些类似于 UDF 函数，导致 Slave 无法知晓的情况，则会采用 ROW 格式存储这些 Binlog，以保证产生的 Binlog 可以供 Slave 完成数据同步。
