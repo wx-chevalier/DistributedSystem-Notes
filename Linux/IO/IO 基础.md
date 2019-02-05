@@ -36,3 +36,7 @@ I/O 中断方式是以字节为单位，DMA 控制方式是以一个连续的数
 
 顺序 / 并发 I/O
 从概念上讲，并发 I/O 就是指向一块磁盘发出一条 I/O 指令后，不必等待它回应，接着向另外一块磁盘发 I/O 指令。对于具有条带性的 RAID（LUN），对其进行的 I/O 操作是并发的，例如：raid 0+1(1+0),raid5 等。反之则为顺序 I/O。
+
+# Todos
+
+- http://blog.omega-prime.co.uk/2015/09/03/asynchronous-and-non-blocking-io/
