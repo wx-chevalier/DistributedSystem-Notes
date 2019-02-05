@@ -1,5 +1,3 @@
-# CPU 执行与调度
-
 ![](https://inews.co.uk/wp-content/uploads/2018/01/meltdownspectre-1376x1032.jpg)
 
 # Meltdown 简述
