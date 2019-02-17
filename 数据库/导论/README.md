@@ -1,15 +1,3 @@
-![](https://cdn-images-1.medium.com/max/1200/1*PSDdfqc5jaleNz418Fx2LA.png)
-
-# 分布式存储与 NoSQL 数据库基础
-
-`Copyright © 2017 王下邀月熊`
-
-![](https://www.confluent.io/wp-content/uploads/platform_chart_updated.png)
-
-![](https://www.confluent.io/wp-content/uploads/streaming_platform_rev.png)
-
-# 前言
-
 首先要明确的是，没有完美的系统，任何一个系统的出现都是为了解决当时最主要的问题，但是会产生一些其他的小问题，跟药一样，能治病，但是一般都会有副作用。
 
 那么完美的数据库系统什么样呢，我现在能想到以下几点: 1. 易用与灵活性：数据库可以理解自然语言，我跟它说我要存储什么样的数据，就存进去了，要查询什么样的数据，就给我取出来了，不需要我告诉它怎么存，怎么取 2. 扩展性：可以存储无限多的数据，不需要担心容量的问题 3. 高性能：性能非常强大，不管想存或取什么数据，瞬间就完成了 4. 高可用：数据存储之后，永远也不会丢，系统永远也不会挂掉，1 年 365 天，1 天 24 小时随叫随到 5. 并发与隔离性：数据库不仅可以满足我一个人，也可以满足所有人的同时读写，并且我们之间互不干扰
@@ -30,24 +18,16 @@ Mysql Group Replication 帮助传统单机关系数据库解决了问题 4
 
 NoSQL 数据库的英文定义为：Next Generation Databases mostly addressing some of the points: being non-relational, distributed, open-source and horizontally scalable.
 
-* 硬件系统资源的自动化调度(CloudOS )；
+- 硬件系统资源的自动化调度(CloudOS )；
 
-* 应用的并行化和分布化实现业务的自动扩展；
+- 应用的并行化和分布化实现业务的自动扩展；
 
-* 基于初始配置的自动化业务开通和业务部署；
+- 基于初始配置的自动化业务开通和业务部署；
 
-* 基于前述能力，实现基于 SLA、QoS 等策略的自动化质量保障、故障隔离和故障自愈；
+- 基于前述能力，实现基于 SLA、QoS 等策略的自动化质量保障、故障隔离和故障自愈；
 
-* 基于大数据智能驱动的系统自动化和自动调优。
+- 基于大数据智能驱动的系统自动化和自动调优。
 
-## 参考
+![](https://www.confluent.io/wp-content/uploads/platform_chart_updated.png)
 
-## 版权
-
-![](https://parg.co/bDY) ![](https://parg.co/bDm)
-
-笔者所有文章遵循 [知识共享 署名 - 非商业性使用 - 禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)，欢迎转载，尊重版权。如果觉得本系列对你有所帮助，欢迎给我家布丁买点狗粮(支付宝扫码)~
-
-![](https://github.com/wxyyxc1992/OSS/blob/master/2017/8/1/Buding.jpg?raw=true)
-
-# 目录
+![](https://www.confluent.io/wp-content/uploads/streaming_platform_rev.png)
