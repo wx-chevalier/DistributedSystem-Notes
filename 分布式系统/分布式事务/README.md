@@ -38,6 +38,8 @@
 
 - Saga 事务：由于 Saga 事务不能保证隔离性，需要在业务层控制并发，适合于业务场景事务并发操作同一资源较少的情况。Saga 相比缺少预提交动作，导致补偿动作的实现比较麻烦，例如业务是发送短信，补偿动作则得再发送一次短信说明撤销，用户体验比较差。Saga 事务较适用于补偿动作容易处理的场景。
 
-# Todos
+# 链接
+
+- 永久链接：[分布式事务 https://url.wx-coder.cn/7p8Xx](https://url.wx-coder.cn/7p8Xx)
 
 - https://mp.weixin.qq.com/s/vgohXl1LxYk3CyDI8WHxwA
