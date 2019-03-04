@@ -4,8 +4,6 @@
 
 NoSQL 数据库的英文定义为：Next Generation Databases mostly addressing some of the points: being non-relational, distributed, open-source and horizontally scalable.
 
-# CAP 与 Base
-
 # 行存储与列存储
 
 [![image.png](https://i.postimg.cc/L8d2KF7R/image.png)](https://postimg.cc/Wh7QgCTf)
