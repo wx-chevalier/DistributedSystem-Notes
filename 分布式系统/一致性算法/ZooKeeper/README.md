@@ -23,7 +23,6 @@ Now that you created the configuration file, you can start ZooKeeper:bin/zkServe
 ```shell
 FROM ubuntu:vivid
 
-
 RUN apt-get update \
  && apt-get -y install git ant openjdk-8-jdk \
  && apt-get clean
