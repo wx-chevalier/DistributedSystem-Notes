@@ -1,5 +1,114 @@
 # Systemd
 
+[init 进程](./Linux-CheatSheet.md)是 Linux 系统 Booting 之后的首个进程，其作为守护进程运行直至系统关闭；传统的 Linux 中的服务控制方式也主要依赖于 sysvinit 机制:
+
+```sh
+$ sudo /etc/init.d/apache2 start
+# 或者
+$ service apache2 start
+```
+
+当 sysvinit 系统初始化的时候，它是串行启动，并且会将所有可能用到的后台服务进程全部启动运行；系统必须等待所有的服务都启动就绪之后，才允许用户登录，导致启动时间过长与系统资源浪费。并且 init 进程只是执行启动脚本，不管其他事情，脚本需要自己处理各种情况，使得脚本复杂度增加很多。Systemd 就是为了解决这些问题而诞生的。它的设计目标是，为系统的启动和管理提供一套完整的解决方案；Systemd 并不是一个命令，而是一组命令，涉及到系统管理的方方面面。
+
+```sh
+# 查看 Systemd 的版本
+$ systemctl --version
+
+# 重启系统
+$ sudo systemctl reboot
+
+# 关闭系统，切断电源
+$ sudo systemctl poweroff
+
+# CPU 停止工作
+$ sudo systemctl halt
+
+# 查看启动耗时
+$ systemd-analyze
+
+# 查看每个服务的启动耗时
+$ systemd-analyze blame
+
+# 显示瀑布状的启动过程流
+$ systemd-analyze critical-chain
+
+# 显示指定服务的启动流
+$ systemd-analyze critical-chain atd.service
+```
+
+Systemd 可以管理所有系统资源。不同的资源统称为 Unit(单位)，Unit 一共分成 12 种。
+
+- Service unit：系统服务
+- Target unit：多个 Unit 构成的一个组
+- Device Unit：硬件设备
+- Mount Unit：文件系统的挂载点
+- Automount Unit：自动挂载点
+- Path Unit：文件或路径
+- Scope Unit：不是由 Systemd 启动的外部进程
+- Slice Unit：进程组
+- Snapshot Unit：Systemd 快照，可以切回某个快照
+- Socket Unit：进程间通信的 socket
+- Swap Unit：swap 文件
+- Timer Unit：定时器
+
+systemctl status 命令用于查看系统状态和单个 Unit 的状态。
+
+```sh
+# 显示系统状态
+$ systemctl status
+
+# 显示单个 Unit 的状态
+$ sysystemctl status bluetooth.service
+
+# 显示远程主机的某个 Unit 的状态
+$ systemctl -H root@rhel7.example.com status httpd.service
+```
+
+我们最常用的就是 Unit 管理命令：
+
+```sh
+# 立即启动一个服务
+$ sudo systemctl start apache.service
+
+# 立即停止一个服务
+$ sudo systemctl stop apache.service
+
+# 重启一个服务
+$ sudo systemctl restart apache.service
+
+# 杀死一个服务的所有子进程
+$ sudo systemctl kill apache.service
+
+# 重新加载一个服务的配置文件
+$ sudo systemctl reload apache.service
+
+# 重载所有修改过的配置文件
+$ sudo systemctl daemon-reload
+
+# 显示某个 Unit 的所有底层参数
+$ systemctl show httpd.service
+
+# 显示某个 Unit 的指定属性的值
+$ systemctl show -p CPUShares httpd.service
+
+# 设置某个 Unit 的指定属性
+$ sudo systemctl set-property httpd.service CPUShares=500
+```
+
+每一个 Unit 都有一个配置文件，告诉 Systemd 怎么启动这个 Unit。Systemd 默认从目录 `/etc/systemd/system/` 读取配置文件。但是，里面存放的大部分文件都是符号链接，指向目录 `/usr/lib/systemd/system/`，真正的配置文件存放在那个目录。systemctl enable 命令用于在上面两个目录之间，建立符号链接关系。配置文件的基础格式如下：
+
+```sh
+[Unit]
+Description=ATD daemon
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/atd
+
+[Install]
+WantedBy=multi-user.target
+```
+
 centos 7 以上是用 Systemd 进行系统初始化的，Systemd 是 Linux 系统中最新的初始化系统(init)，它主要的设计目标是克服 sysvinit 固有的缺点，提高系统的启动速度。关于 Systemd 的详情介绍在[这里](http://www.ibm.com/developerworks/cn/linux/1407_liuming_init3/)。
 
 Systemd 服务文件以.service 结尾，比如现在要建立 nginx 为开机启动，如果用 yum install 命令安装的，yum 命令会自动创建 nginx.service 文件，直接用命令
