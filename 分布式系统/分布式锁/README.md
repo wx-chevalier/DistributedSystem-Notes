@@ -6,21 +6,6 @@
 
 简单的理解就是：分布式锁是一个在很多环境中非常有用的原语，它是不同的系统或是同一个系统的不同主机之间互斥操作共享资源的有效方法。
 
-## Reference
-
-- [分布式锁的多种实现方式~ ](http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650120465&idx=1&sn=26fefc34e461dac09b87eb577ae064e2&chksm=f36bbc30c41c3526f22ecd2182850e9b0fb146050cef3e7a2940cbb711ddd55384111541697a&mpshare=1&scene=1&srcid=1108yFRXkT2iol2JKikclVWQ#rd)
-- [如何用 redis 造一把分布式锁](http://sanyuesha.com/2016/08/20/distributed-lock-with-redis/)
-- [聊聊分布式锁](http://mp.weixin.qq.com/s?__biz=MzIwNDU2MTI4NQ==&mid=2247483754&idx=1&sn=2164a80b98911f86dc8ffc9b112212ea&chksm=973f0f80a0488696ed9bd0c488c139780b7cf8aee8e40bf6667de463cdce2dc38e31b7a0122d#rd)
-
-# Redis-Based Lock
-
-> [使用 Redis 实现分布式锁](http://blog.jobbole.com/95211/)
-
-- [Redlock-rb](https://github.com/antirez/redlock-rb) (Ruby 实现).
-- [Redlock-php](https://github.com/ronnylt/redlock-php) (PHP 实现).
-- [Redsync.go](https://github.com/hjr265/redsync.go) (Go 实现).
-- [Redisson](https://github.com/mrniko/redisson) (Java 实现).
-
 1、为避免特殊原因导致锁无法释放, 在加锁成功后, 锁会被赋予一个生存时间(通过 lock 方法的参数设置或者使用默认值), 超出生存时间锁将被自动释放.
 
 2、锁的生存时间默认比较短(秒级, 具体见 lock 方法), 因此若需要长时间加锁, 可以通过 expire 方法延长锁的生存时间为适当的时间. 比如在循环内调用 expire
