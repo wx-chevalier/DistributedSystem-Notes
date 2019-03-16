@@ -1,4 +1,4 @@
-![default](https://i.postimg.cc/V6m3yh19/image.png)
+![default](https://user-images.githubusercontent.com/5803001/45228854-de88b400-b2f6-11e8-9ab0-d393ed19f21f.png)
 
 Twemproxy 不能平滑增加 Redis 实例的问题带来了很大的不便，于是豌豆荚自主研发了 Codis，一个支持平滑增加 Redis 实例的 Redis 代理软件，其基于 Go 和 C 语言开发，并于 2014 年 11 月在 GitHub 上开源。
 

@@ -8,7 +8,7 @@ ElasticSearch 是一个基于 [Apache Lucene(TM)](https://lucene.apache.org/core
 
 # 目录结构
 
-```
+```sh
 home---这是Elasticsearch解压的目录
 　　bin---这里面是ES启动的脚本
 
