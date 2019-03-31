@@ -37,3 +37,7 @@ OS 处于用户与计算机硬件系统之间，用户通过 OS 来使用计算�
 ![image](https://user-images.githubusercontent.com/5803001/52340913-0c138e00-2a4c-11e9-8fc3-00b5b65f5bc1.png)
 
 文件是对 I/O 的抽象，虚拟存储器是对程序存储器的抽象，而进程是对一个正在运行的程序的抽象。我们再增加一个新的抽象：虚拟机，它提供对整个计算机（包括操作系统、处理器和程序）的抽象。虚拟机的思想是 IBM 在 20 世纪 60 年代提出来的，但是最近才显示出其管理计算机方式上的优势，因为一些计算机必须能够运行为不同操作系统（例如，Microsoft Windows、MacOS 和 Linux）或同一操作系统的不同版本而设计的程序。
+
+# 链接
+
+- [深入浅出 Linux 操作系统 https://url.wx-coder.cn/Q0AmI ](https://url.wx-coder.cn/Q0AmI)
