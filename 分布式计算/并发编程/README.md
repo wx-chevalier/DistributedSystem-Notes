@@ -4,6 +4,8 @@
 
 # 并发与并行
 
+[![image.png](https://i.postimg.cc/N0jG91Pz/image.png)](https://postimg.cc/w1nYnszX)
+
 # 链接
 
 - [并发编程导论 https://url.wx-coder.cn/Yagu8 ](https://url.wx-coder.cn/Yagu8)
