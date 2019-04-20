@@ -28,7 +28,9 @@
 
 # 事务方案对比
 
-![](https://ww1.sinaimg.cn/large/007rAy9hly1g0pxsgab3aj30u00h4dh8.jpg)
+![](https://ww1.sinaimg.cn/large/007rAy9hgy1g29eo85f8sj30u00ek75x.jpg)
+
+![](https://ww1.sinaimg.cn/large/007rAy9hgy1g29eo837q8j30pk0b9wez.jpg)
 
 - 2PC/3PC：依赖于数据库，能够很好的提供强一致性和强事务性，但相对来说延迟比较高，比较适合传统的单体应用，在同一个方法中存在跨库操作的情况，不适合高并发和高性能要求的场景。
 
