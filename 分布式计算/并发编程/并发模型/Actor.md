@@ -1,12 +1,4 @@
-# Introduction
-
-## Reference
-
-- [concurrency-models](http://tutorials.jenkov.com/java-concurrency/concurrency-models.html)
-- [七周七并发模型](https://drive.wps.cn/view/l/3db758274cf94555a456332436ec5f19)
-- [并发之痛 Thread，Goroutine，Actor](http://www.tuicool.com/articles/MNVbAbQ)
-
-# Actor
+# Actor 模型
 
 Smalltalk 的设计者、面向对象编程之父 Alan Kay 曾经这样描述面向对象的本质 ①：很久以前，我在描述“面向对象编程”时使用了“对象”这个概念。很抱歉这个概念让许多人误入歧途，他们将学习的重心放在了“对象”这个次要的方面。真正主要的方面是“消息”……日文中有一个词 ma，表示“间隔”，与其最为相近的英文或许是“
 
@@ -43,16 +35,3 @@ actor 模型支持共享内存模型，也支持分布式内存模型，这就�
 ## Benchmark
 
 ### [Skynet](https://github.com/atemerev/skynet)
-
-Skynet 用于测试各种语言在生成百万 Actor/Fiber 的开销。大致的逻辑是先生成 10 个 Fiber，每个 Fiber 再生成 10 个 Fiber，直到生成 1 百万个 Fiber，然后每个 Fiber 做加法累积计算，并把结果发 到 channel 里，这样一直递归到根 Fiber。后将最终结果发到 channel。如果逻辑没有错的话结果应该是 499999500000。
-| Benchmark(ms) | Macbook 12 | Win 8.1 | Ubuntu 15.10 |
-| ------------------------------ | ---------- | --------- | ------------ |
-| Actors-Scala/Akka | 6379 | 4419 | 1700-2700 |
-| Actors-Erlang(non-HIPE) | 4414 | 1700 | 700-1100 |
-| Actors(HIPE) | 3999 | | 2100-3500 |
-| Coroutines/Channels-Haskell | 6181 | 2820 | 41-44 |
-| Coroutines/Channels-Go | 979 | | 200-224 |
-| Coroutines/Channels-F# | | 756 | |
-| Futures/Promises-.NET Core | 650 | 290 | |
-| Futures/Promises-RxJava | 219 | | |
-| Futures/Promises-Node-bluebird | | 285 / 195 | |
