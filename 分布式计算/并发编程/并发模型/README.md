@@ -23,3 +23,7 @@
 - [七周七并发模型](https://drive.wps.cn/view/l/3db758274cf94555a456332436ec5f19)
 
 - [并发之痛 Thread，Goroutine，Actor](http://www.tuicool.com/articles/MNVbAbQ)
+
+- [Lock-Free and Wait-Free, definition and examples](http://concurrencyfreaks.blogspot.co.id/2013/05/lock-free-and-wait-free-definition-and.html)
+
+- [并行编程 —— 并发级别](http://www.cnblogs.com/jiayy/p/3246167.html)
