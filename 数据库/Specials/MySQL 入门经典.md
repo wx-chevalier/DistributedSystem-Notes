@@ -1,4 +1,4 @@
-# 第2章 定义数据结构
+# 第 2 章 定义数据结构
 
 ## 2.1 数据是什么
 
@@ -14,15 +14,15 @@
 
 显示转换:CAST/CONVERT
 
-``` 
+```
 SELECT CAST('12/21/2015' AS DATETIME) AS MYDATE
 ```
 
 最基本的数据类型：
 
-* 字符串类型
-* 数值类型
-* 日期和时间类型
+- 字符串类型
+- 数值类型
+- 日期和时间类型
 
 ### 2.2.1 定长字符串
 
@@ -40,42 +40,42 @@ SELECT CAST('12/21/2015' AS DATETIME) AS MYDATE
 
 ### 2.2.3 大对象类型
 
-需要保存更长的数据(一般超过VARCHAR字段所保留的长度)：BLOB(二进制字节串)和TEXT(长字符串)
+需要保存更长的数据(一般超过 VARCHAR 字段所保留的长度)：BLOB(二进制字节串)和 TEXT(长字符串)
 
 ### 2.2.4 数值类型
 
 保存在定义为某种数值类型的字段里：NUMBER,INTEGER,REAL,
 
-DECIMAL等
+DECIMAL 等
 
-SQL数值标准：
+SQL 数值标准：
 
-* BIT(n)
-* BIT VARYING(n)
-* DECIMAL(p,s)
-* INTEGER
-* SMALLINT
-* BIGINT
-* FLOAT(p,s)
-* DOUBLE PRECISION(p,s)
-* REAL(s)
+- BIT(n)
+- BIT VARYING(n)
+- DECIMAL(p,s)
+- INTEGER
+- SMALLINT
+- BIGINT
+- FLOAT(p,s)
+- DOUBLE PRECISION(p,s)
+- REAL(s)
 
 p:字段最大长度
 
 s:小数点后面的位数。
 
-通用的数值类型：NUMERIC，可以为0、正值、负值、定点数、浮点数
+通用的数值类型：NUMERIC，可以为 0、正值、负值、定点数、浮点数
 
-``` 
+```
 NUMERIC(5) //接受最大值限制为99999
 ```
 
 ### 2.2.5 小数类型
 
-包含小数点的数值。SQL小数标准如下：
+包含小数点的数值。SQL 小数标准如下：
 
-``` 
-DECIMAL(p,s) 
+```
+DECIMAL(p,s)
 
 p:有效位数，即数值总长度
 s:标度，即小数点后面的位数，如超过，四舍五入。
@@ -90,26 +90,26 @@ s:标度，即小数点后面的位数，如超过，四舍五入。
 
 有效位数和标度都可变并且没有限制的小数数值。
 
-* REAL：单精度浮点数值(有效位数：1-21，含)
-* DOUBLE PRECISION：双精度浮点数值(有效位数：22-53，含)
+- REAL：单精度浮点数值(有效位数：1-21，含)
+- DOUBLE PRECISION：双精度浮点数值(有效位数：22-53，含)
 
 ### 2.2.8 日期和时间类型
 
-用于保存日期和时间信息。SQL支持DATETIME数据类型，包含：
+用于保存日期和时间信息。SQL 支持 DATETIME 数据类型，包含：
 
-* DATE
-* TIME
-* DATETIME
-* TIMESTAMP
+- DATE
+- TIME
+- DATETIME
+- TIMESTAMP
 
-DATETIME数据类型的元素包括：
+DATETIME 数据类型的元素包括：
 
-* YEAR
-* MONTH
-* DAY
-* HOUR
-* MINUTE
-* SECOND
+- YEAR
+- MONTH
+- DAY
+- HOUR
+- MINUTE
+- SECOND
 
 日期数据一般不指定长度。
 
@@ -117,17 +117,15 @@ DATETIME数据类型的元素包括：
 
 就是一系列字符
 
+### 2.2.10 NULL 数据类型
 
+NULL 表示没有值。
 
-### 2.2.10 NULL数据类型
+引用 NULL 值的方法:`NULL(关键字NULL本身)`
 
-NULL表示没有值。
+`'null'`并不代表 NULL 值，只是一个包含字符 N-U-L-L 的直义字符串
 
-引用NULL值的方法:`NULL(关键字NULL本身)`
-
-`'null'`并不代表NULL值，只是一个包含字符N-U-L-L的直义字符串
-
-如果某个字段必须包含数据，设置为NOT NULL。
+如果某个字段必须包含数据，设置为 NOT NULL。
 
 ### 2.2.11 布尔值
 
@@ -139,7 +137,7 @@ NULL表示没有值。
 
 语句`CREATE TYPE`用于创建自定义类型
 
-``` 
+```
 CREATE TYPE PERSON AS OBJECT
 (NAME     VARCHAR(30),
  SSN      VARCHAR(9));
@@ -157,7 +155,7 @@ CREATE TYPE PERSON AS OBJECT
 
 创建域之后，可以向域添加约束，约束与数据类型共同发挥作用，从而进一步限制字段能够接受的数据。
 
-``` 
+```
 //创建域
 CREATE DOMAIN MONEY_D AS NUMBER(8,2);
 //添加约束
@@ -170,9 +168,7 @@ CREATE TABLE EMP_PAY
 
 ```
 
-
-
-# 第3章 管理数据库对象
+# 第 3 章 管理数据库对象
 
 ## 3.1 什么是数据库对象
 
@@ -182,9 +178,9 @@ CREATE TABLE EMP_PAY
 
 与数据库某个用户名相关联的*数据库对象集合*。相应的用户名称为规划所有人，或关联对象组的所有人。数据库里可以有一个或多个规划，用户只与同名规划相关联。
 
-USER1创建EMPLOYEE_TBL表，规划名为USER1，两种方式引用这张表：
+USER1 创建 EMPLOYEE_TBL 表，规划名为 USER1，两种方式引用这张表：
 
-``` 
+```
 EMPLOYEE_TBL
 USER1.EMPLOYEE_TBL
 //对USER1，两种方式均可；对其他用户，要指定规划名，即USER1.EMPLOYEE_TBL(使用异名可以不指定规划名)
@@ -200,19 +196,19 @@ USER1.EMPLOYEE_TBL
 
 字段或者列，被设置为特定的数据类型，用于存放特定类型的数据。
 
-列名应该连续，使用下划线做分隔符，长度在不用SQL中有规定。
+列名应该连续，使用下划线做分隔符，长度在不用 SQL 中有规定。
 
-列可以指定为NULL或NOT NULL。NULL不是空白，而是类似于一个空的字符串，在数据库中占据一个特殊的位置。
+列可以指定为 NULL 或 NOT NULL。NULL 不是空白，而是类似于一个空的字符串，在数据库中占据一个特殊的位置。
 
 ### 3.3.2 行
 
 数据库里的一条记录。
 
-### 3.3.3 CREATE TABLE语句
+### 3.3.3 CREATE TABLE 语句
 
 用于建表。
 
-``` 
+```
 CREATE TABLE table_name
 ( field1 date_type [not null],
   field2 date_type [not null],
@@ -227,11 +223,11 @@ CREATE TABLE table_name
 
 。。。
 
-### 3.3.5 ALTER TABLE命令
+### 3.3.5 ALTER TABLE 命令
 
-用于修改表，可以添加列、删除列、修改列定义、添加和去除约束。有些实现还可以修改表STORAGE值
+用于修改表，可以添加列、删除列、修改列定义、添加和去除约束。有些实现还可以修改表 STORAGE 值
 
-``` 
+```
 alter table table_name [modify] [column column_name] [datatype|null not null] [restrict|cascade] [drop] [constraint constraint_name] [add] [column] column definition
 ```
 
@@ -239,66 +235,66 @@ alter table table_name [modify] [column column_name] [datatype|null not null] [r
 
 修改列的属性：
 
-* 数据类型
-* 长度、有效位数或标度
-* 值能否为空
+- 数据类型
+- 长度、有效位数或标度
+- 值能否为空
 
-``` 
+```
 ALTER TABLE EMPLOYEE_TBL MODIFY EMP_ID VARCHAR(10);
 //改变长度
 ```
 
 #### 二、添加列
 
-如果表已经包含数据，新添加的列不能定义为NOT NULL。
+如果表已经包含数据，新添加的列不能定义为 NOT NULL。
 
 强行向表添加一列的方法：
 
-1. 添加一列，定义为NOT NULL；
+1. 添加一列，定义为 NOT NULL；
 2. 给该列在每条记录里都插入数据；
-3. 列定义修改为NOT NULL。
+3. 列定义修改为 NOT NULL。
 
 #### 三、添加自动增加的列
 
-MySQL提供了SERIAL方法为表生成真正的唯一值：
+MySQL 提供了 SERIAL 方法为表生成真正的唯一值：
 
-``` 
+```
 CREATE TABLE TEST_INCRMENT
 (ID   SERIAL,
  TEST_NAME  VARCAHR(20));
 ```
 
-列的默认属性是NULL，不需要明确设置，但NOT NULL需要。
+列的默认属性是 NULL，不需要明确设置，但 NOT NULL 需要。
 
 #### 四、修改列
 
 修改列的一些通用规则：
 
-* 列的长度可以增加到某类型的最大长度
-* 若要缩短长度，则要求该列中的所有数据长度都小于等于新长度。
-* 数值数据的位数可以增加
-* 若要缩短数值数据的位数，则要求已有记录数值的位数小于等于新位数
-* 数值里的小数位数可以增加或减少
-* 列的数据类型一般是可以改变的
+- 列的长度可以增加到某类型的最大长度
+- 若要缩短长度，则要求该列中的所有数据长度都小于等于新长度。
+- 数值数据的位数可以增加
+- 若要缩短数值数据的位数，则要求已有记录数值的位数小于等于新位数
+- 数值里的小数位数可以增加或减少
+- 列的数据类型一般是可以改变的
 
 ### 3.3.6 从现有表新建另一个表
 
-利用CREATE TABLE和SELECT的组合可以复制现有的表。可以选择部分或全部列。
+利用 CREATE TABLE 和 SELECT 的组合可以复制现有的表。可以选择部分或全部列。
 
-``` 
-create table new_table_name as 
+```
+create table new_table_name as
 select [*|column1,column2,...] from table_name [where]
 ```
 
-默认使用相同的STORAGE属性
+默认使用相同的 STORAGE 属性
 
 ### 3.3.7 删除表
 
-如果使用了RESTRICT选项，并且表被视图或约束所引用，DROP语句会返回一个错误。
+如果使用了 RESTRICT 选项，并且表被视图或约束所引用，DROP 语句会返回一个错误。
 
-使用CASCADE选项时，删除操作会成功，全部引用视图和约束都会被删除。
+使用 CASCADE 选项时，删除操作会成功，全部引用视图和约束都会被删除。
 
-``` 
+```
 drop table table_name [restrict|cascade]
 ```
 
@@ -310,7 +306,7 @@ drop table table_name [restrict|cascade]
 
 主键是表里一个或多个用于实现记录唯一性的字段。主键可以有一个或多个字段构成。主键在创建表时指定。
 
-``` 
+```
 CREATE TABLE EMPLOYEE_TBL
 (EMP_ID CHAR(9) NOT NULL PRIMARY KEY,
  EMP_NAME VARCHAR(40) NOT NULL,
@@ -320,7 +316,7 @@ CREATE TABLE EMPLOYEE_TBL
 
 这时主键是个隐含约束。还可以在建表时明确指定主键作为一个约束
 
-``` 
+```
 CREATE TABLE EMPLOYEE_TBL
 (EMP_ID CHAR(9) NOT NULL,
  EMP_NAME VARCHAR(40) NOT NULL,
@@ -330,7 +326,7 @@ PRIMARY KEY (EMP_ID));
 
 包含多个字段的主键有两种定义方式：
 
-``` 
+```
 CREATE TABLE PRODUCT_TST
 (PROD_ID   VARCHAR(10)  NOT NULL,
  VEND_ID   VARCHAR(10)  NOT NULL,
@@ -340,7 +336,7 @@ PRIMARY KEY(PROD_ID,VEND_ID));
 
 或者：
 
-``` 
+```
 ALTER TABLE PRODUCT_TST
 ADD CONSTRAINT PRODUCTS_PK PRIMARY KEY(PROD_ID,VEND_ID);
 ```
@@ -349,7 +345,7 @@ ADD CONSTRAINT PRODUCTS_PK PRIMARY KEY(PROD_ID,VEND_ID);
 
 要求表里某个字段的值在每条记录里都是唯一的，与主键类似。可以对非主键字段设置唯一性约束
 
-``` 
+```
 CREATE TABLE EMPLOYEE_TBL
 (EMP_ID CHAR(9) NOT NULL PRIMARY KEY,
  EMP_NAME VARCHAR(40) NOT NULL,
@@ -362,29 +358,29 @@ CREATE TABLE EMPLOYEE_TBL
 
 外键是子表里的字段，引用父表里的主键。外键约束确保表与表之间引用完整性的主要机制。
 
-``` 
+```
 CREATE TABLE EMPLOYY_PAY_TST
 (EMP_ID     CHAR(9)    NOT NULL,
  ...
  CONSTRAINT EMP_ID_FK FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEE_TBL);
 ```
 
-利用ALTER TABLE可以向表里添加外键：
+利用 ALTER TABLE 可以向表里添加外键：
 
-``` 
+```
 alter table employee_pay_tbl
 add constraint id_fk foreign key(emp_id) refrences employee_tbl (emp_id);
 ```
 
-### 3.4.4 NOT NULL约束
+### 3.4.4 NOT NULL 约束
 
-NOT NULL也是一个可用于字段的约束。
+NOT NULL 也是一个可用于字段的约束。
 
 ### 3.4.5 检查约束
 
 检查(CHK)约束用于检查输入到特定字段的数据的有效性。
 
-``` 
+```
 CREATE TABLE EMPLOYEE_CHECK_TST
 (EMP_ID   CHAR(9)   NOT NULL,
  ...
@@ -394,11 +390,11 @@ CREATE TABLE EMPLOYEE_CHECK_TST
  CONSTRINT CHK_EMP_ZIP CHECK (EMP_ZIP='1234'));
 ```
 
-这里，EMP_ZIP字段设置了检查约束，确保输入到这个表里的全部雇员的ZIP代码均为"1234"。
+这里，EMP_ZIP 字段设置了检查约束，确保输入到这个表里的全部雇员的 ZIP 代码均为"1234"。
 
-如果想利用检查约束确保ZIP代码属于某个值列表：
+如果想利用检查约束确保 ZIP 代码属于某个值列表：
 
-``` 
+```
 CONSTRINT CHK_EMP_ZIP CHECK (EMP_ZIP IN ('1234','2234','3234'));
 ```
 
@@ -406,15 +402,13 @@ CONSTRINT CHK_EMP_ZIP CHECK (EMP_ZIP IN ('1234','2234','3234'));
 
 ### 3.4.6 去除约束
 
-利用ALTER TABLE命令的DROP CONSTRAINT选项可以去除已经定义的约束
+利用 ALTER TABLE 命令的 DROP CONSTRAINT 选项可以去除已经定义的约束
 
-``` 
+```
 ALTER TABLE EMPLOYEES DROP CONSTRAINT EMPLOYEES_PK;
 ```
 
-
-
-# 第4章 规格化过程
+# 第 4 章 规格化过程
 
 规格化：原始数据分解为表的过程。
 
@@ -432,15 +426,15 @@ ALTER TABLE EMPLOYEES DROP CONSTRAINT EMPLOYEES_PK;
 
 考虑与用户相关的因素：
 
-* 应保存什么数据
-* 用户如何访问数据库
-* 用户权限
-* 数据如何分组
-* 哪些数据最经常被访问
-* 全部数据与数据库如何关联
-* 采取什么措施保证数据的正确性
-* 采取什么措施减少数据冗余
-* 采取什么措施让负责维护数据的用户易于使用数据库
+- 应保存什么数据
+- 用户如何访问数据库
+- 用户权限
+- 数据如何分组
+- 哪些数据最经常被访问
+- 全部数据与数据库如何关联
+- 采取什么措施保证数据的正确性
+- 采取什么措施减少数据冗余
+- 采取什么措施让负责维护数据的用户易于使用数据库
 
 #### 二、数据冗余
 
@@ -452,9 +446,9 @@ ALTER TABLE EMPLOYEES DROP CONSTRAINT EMPLOYEES_PK;
 
 常见的三种规格形式：
 
-* 第一规格形式
-* 第二规格形式
-* 第三规格形式
+- 第一规格形式
+- 第二规格形式
+- 第三规格形式
 
 这三种主要的规格形式中，每一种都依赖于前一种形式所采用的规格化步骤。(即，要想以第二规格形式对数据库进行规格化，数据库必须处于第一种规格形式)
 
@@ -478,12 +472,12 @@ ALTER TABLE EMPLOYEES DROP CONSTRAINT EMPLOYEES_PK;
 
 主要有：
 
-* 更好的数据库整体组织性
-* 减少冗余数据
-* 数据库内部的数据一致性
-* 更灵活的数据库设计
-* 更好地处理数据库安全
-* 加强引用整体性的概念
+- 更好的数据库整体组织性
+- 减少冗余数据
+- 数据库内部的数据一致性
+- 更灵活的数据库设计
+- 更好地处理数据库安全
+- 加强引用整体性的概念
 
 引用完整性表示一个表里某列的值依赖于另一个表里某列的值。一般通过主键和外键来控制。
 
@@ -497,82 +491,80 @@ ALTER TABLE EMPLOYEES DROP CONSTRAINT EMPLOYEES_PK;
 
 去规格化会增加数据冗余，程序代码会更复杂，引用完整性更加琐碎。
 
-
-
-# 第5章 操作数据
+# 第 5 章 操作数据
 
 本章重点：
 
-* 数据操作语言概述(DML)
-* 如何操作表里的数据
-* 数据填充
-* 从表里删除数据
-* 从表里修改数据
+- 数据操作语言概述(DML)
+- 如何操作表里的数据
+- 数据填充
+- 从表里删除数据
+- 从表里修改数据
 
 ## 5.1 数据操作概述
 
-3个基本的DML命令：
+3 个基本的 DML 命令：
 
-* INSERT
-* UPDATE
-* DELETE
+- INSERT
+- UPDATE
+- DELETE
 
 ## 5.2 用新数据填充表
 
 ### 5.2.1 把数据插入列表
 
-INSERT语句：
+INSERT 语句：
 
-``` 
+```
 INSERT INTO TABLE_NAME VALUES ('value1','value2','value3')；
 ```
 
-SQL语句不区分大小写(但最好统一)，数据区分大小写。
+SQL 语句不区分大小写(但最好统一)，数据区分大小写。
 
-必须在VALUES列表里包含表里的每个列。列表里，每个值以逗号","隔开，字符、日期和时间类型的值必须以单引号包围，数值和NULL值不需要(单引号对数值型数据是可选的)。注意值的顺序。
+必须在 VALUES 列表里包含表里的每个列。列表里，每个值以逗号","隔开，字符、日期和时间类型的值必须以单引号包围，数值和 NULL 值不需要(单引号对数值型数据是可选的)。注意值的顺序。
 
 ### 5.2.2 给表里指定列插入数据
 
-``` 
+```
 INSERT INTO TABLE_NAME ('COLUMN1','COLUMN2') VALUES ('VALUE1','VALUE2');
 ```
 
-注：INSERT语句里的字段列表次序并不一定与表定义中的字段次序相同，但插入值的次序要与字段列表的次序相同。
+注：INSERT 语句里的字段列表次序并不一定与表定义中的字段次序相同，但插入值的次序要与字段列表的次序相同。
 
 ### 5.2.3 从另一个表插入数据
 
-``` 
-insert into table _name [('column1','column2')] 
+```
+insert into table _name [('column1','column2')]
 select [*|('column1','column2')] from table_name [where condition(s)];
 ```
 
 主要字段顺序，以及数据类型的兼容性
 
-### 5.2.4 插入NULL值
+### 5.2.4 插入 NULL 值
 
-``` 
+```
 insert into schema.table_name values('column1',NULL,'column3');
 ```
 
-NULL要位于正确的位置上。也可以不指定字段以及NULL值，插入时会被自动赋予NULL(该字段要允许为NULL，且没有默认值)
+NULL 要位于正确的位置上。也可以不指定字段以及 NULL 值，插入时会被自动赋予 NULL(该字段要允许为 NULL，且没有默认值)
 
 ## 5.3 更新现有数据
 
-UPDATE命令，一般每次之更新数据库里的一个表，但可以同时更新一张表中的多个字段。
+UPDATE 命令，一般每次之更新数据库里的一个表，但可以同时更新一张表中的多个字段。
 
 ### 5.3.1 更新一列的数据
 
-``` 
+```
 update table_name set column_name='value' [where condition];
 ```
 
 可能更新一条或多条记录。
 
-注：大多数情况下，DML命令都需要使用WHERE子句。
+注：大多数情况下，DML 命令都需要使用 WHERE 子句。
 
 ### 5.3.2 更新一条或多条记录里的多个字段
 
-``` 
+```
 update table_name
 set column1='value',
    [column2='value',
@@ -580,39 +572,35 @@ set column1='value',
 [where condition]
 ```
 
-注：set只使用一次。
+注：set 只使用一次。
 
 ## 5.4 从表里删除数据
 
-DELETE命令，不能删除某一列数据，而是删除行里全部字段(即一条或多条记录)
+DELETE 命令，不能删除某一列数据，而是删除行里全部字段(即一条或多条记录)
 
-``` 
+```
 delete from table_name [where condition];
 ```
 
-
-
-
-
-# 第6章 管理数据库事务
+# 第 6 章 管理数据库事务
 
 重点：
 
-* 事务的定义
-* 用于控制事务的命令
-* 事务命令的语法和范例
-* 何时使用事务命令
-* 低劣事务控制的后果
+- 事务的定义
+- 用于控制事务的命令
+- 事务命令的语法和范例
+- 何时使用事务命令
+- 低劣事务控制的后果
 
 ## 6.1 什么事务
 
-事务是对数据库执行的一个操作单位。一个事务可以是一个或多个DML语句。
+事务是对数据库执行的一个操作单位。一个事务可以是一个或多个 DML 语句。
 
 事务的本质特征：
 
-* 所有的事务都有开始和结束
-* 事务可以被保存或撤销
-* 如果事务中途失败，事务中的任何部分都不会记录到数据库。
+- 所有的事务都有开始和结束
+- 事务可以被保存或撤销
+- 如果事务中途失败，事务中的任何部分都不会记录到数据库。
 
 ## 6.2 控制事务
 
@@ -620,23 +608,21 @@ delete from table_name [where condition];
 
 一个事务成功执行时，目标表并不是立即被修改，而是通过事务控制将结果保存到目标表或者撤销执行。
 
-控制事务的3个命令：
+控制事务的 3 个命令：
 
-* COMMIT
-* ROLLBACK
-* SAVEPOINT
+- COMMIT
+- ROLLBACK
+- SAVEPOINT
 
-注：事务控制命令只与INSERT、UPDATE和DELETE配合使用。
+注：事务控制命令只与 INSERT、UPDATE 和 DELETE 配合使用。
 
-### 6.2.1 COMMIT命令
+### 6.2.1 COMMIT 命令
 
-用于把事务所做的修改保存到数据库，它把上一个COMMIT或ROLLBACK命令之后的全部事务都保存到数据库。
+用于把事务所做的修改保存到数据库，它把上一个 COMMIT 或 ROLLBACK 命令之后的全部事务都保存到数据库。
 
-``` 
+```
 commit [work]
 ```
-
-
 
 COMMIT：其后是用于终止语句的字符或命令
 
@@ -644,40 +630,40 @@ WORK：是个选项，让命令对用户更加友好
 
 注：全部修改都会先被送到临时回退区域，如果这个临时回退区域没有空间，数据库很可能会被挂起，禁止进一步的事务操作。
 
-### 6.2.2 ROLLBACK命令
+### 6.2.2 ROLLBACK 命令
 
-用于撤销还没有保存到数据库的命令，只能用于撤销一个COMMIT或ROLLBACK命令之后的事务
+用于撤销还没有保存到数据库的命令，只能用于撤销一个 COMMIT 或 ROLLBACK 命令之后的事务
 
-``` 
+```
 rollback [work];
 ```
 
-### 6.2.3 SAVEPOINT命令
+### 6.2.3 SAVEPOINT 命令
 
 保存点是事务过程的一个逻辑点，可以把事务回退到这个点，而不必回退整个事务。
 
-``` 
+```
 savepoint savepoint_name
 //在事务语句之间创建一个保存点
 ```
 
 保存点可以将大量事务操作划分为较小的、更易于管理的组
 
-### 6.2.4 ROLLBACK TO SAVEPOINT命令
+### 6.2.4 ROLLBACK TO SAVEPOINT 命令
 
 回退到保存点：
 
-``` 
+```
 ROLLBACK TO SAVEPOINT_NAME
 ```
 
 注：在相应的事务操作里，保存点的名字要唯一。
 
-### 6.2.5 RELEASE SAVEPOINT命令
+### 6.2.5 RELEASE SAVEPOINT 命令
 
-用于删除创建的保存点。某个保存点被释放后，不能利用ROLLBACK命令来撤销这个保存点之后的事务操作。
+用于删除创建的保存点。某个保存点被释放后，不能利用 ROLLBACK 命令来撤销这个保存点之后的事务操作。
 
-``` 
+```
 RELEASE SAVEPOINT savepoint_name
 ```
 
@@ -685,7 +671,7 @@ RELEASE SAVEPOINT savepoint_name
 
 用于初始化数据库事务，可以指定事务的特性。
 
-``` 
+```
 SET TRANSACTION READ WRITE
 SET TRANSACTION READ ONLY;
 //设置事务只读或读写
@@ -693,30 +679,28 @@ SET TRANSACTION READ ONLY;
 
 ## 6.3 事务控制与数据库性能
 
-COMMIT和ROLLBACK命令会将临时存储区域里的回退信息被清除。若一直没出现COMMIT或ROLLBACK命令，临时存储区域里的回退信息会不断增长，直到没有剩余空间，导致数据库停止全部进程。
+COMMIT 和 ROLLBACK 命令会将临时存储区域里的回退信息被清除。若一直没出现 COMMIT 或 ROLLBACK 命令，临时存储区域里的回退信息会不断增长，直到没有剩余空间，导致数据库停止全部进程。
 
-
-
-# 第7章 数据库查询
+# 第 7 章 数据库查询
 
 ## 7.1 什么是查询
 
 ...
 
-## 7.2 SELECT语句
+## 7.2 SELECT 语句
 
-SELECT语句里有4个关键字(子句):
+SELECT 语句里有 4 个关键字(子句):
 
-* SELECT
-* FROM
-* WHERE
-* ORDER BY
+- SELECT
+- FROM
+- WHERE
+- ORDER BY
 
-### 7.2.1 SELECT语句
+### 7.2.1 SELECT 语句
 
-SELECT语句与FROM子句联合使用，以一种有组织的、可读的方式从数据库提取数据
+SELECT 语句与 FROM 子句联合使用，以一种有组织的、可读的方式从数据库提取数据
 
-``` 
+```
 SELECT [*|ALL|DISTINCT COLUMN1,COLUMN2] FROM TABLE1[,TABLE2];
 ```
 
@@ -726,66 +710,66 @@ DISTINCT：禁止在输出结果里面包含重复的行
 
 注：用逗号分隔参数
 
-``` 
+```
 SELECT DISTINCT PROD_DESC FROM CANDY_TBL
 SELECT DISTINCT(PRO_DESC) FROM CANDY_TBL
 //ALL也可以这样，不过ALL是默认操作，可以不指明
 ```
 
-### 7.2.2 FROM子句
+### 7.2.2 FROM 子句
 
 指明查询的数据源，可以指定一个或多个表，任何查询的必要条件
 
-``` 
+```
 from table1 [,table2]
 ```
 
-### 7.2.3 WHERE子句
+### 7.2.3 WHERE 子句
 
-指定了要返回满足什么标准的信息。条件的值是TRUE或FALSE。
+指定了要返回满足什么标准的信息。条件的值是 TRUE 或 FALSE。
 
-WHERE子句里可以有多个条件，它们之间以操作符AND或OR连接
+WHERE 子句里可以有多个条件，它们之间以操作符 AND 或 OR 连接
 
-``` 
+```
 select [*|all|distinct column1,column2]
 from table1 [,table2]
 where [condition1 | expression 1] [and|or condition2|expression2]
 ```
 
-### 7.2.4 ORDER BY子句
+### 7.2.4 ORDER BY 子句
 
-以用户指定的列表格式对查询结果进行排列。ORDER BY子句的默认次序是升序(对于字符，从A到Z的次序，对于数字值，0到9，降序则相反)
+以用户指定的列表格式对查询结果进行排列。ORDER BY 子句的默认次序是升序(对于字符，从 A 到 Z 的次序，对于数字值，0 到 9，降序则相反)
 
-ORDER BY子句的语法：
+ORDER BY 子句的语法：
 
-``` 
+```
 select [*|all|distinct column1,column2]
 from table1 [,table2]
 where [condition1 | expression1] [and|or condition2|expression2]
 order by column1|integer [ASC|DESC]
 ```
 
-注：SQL排序是基于字符的ASCII排序，数字在字母前面，且数字值在排序时被当做字符处理，例如`1、12、2、255、3`
+注：SQL 排序是基于字符的 ASCII 排序，数字在字母前面，且数字值在排序时被当做字符处理，例如`1、12、2、255、3`
 
-ORDER BY子句里的字段可以缩写为一个整数，该整数取代了实际的字段名称(即作为一个别名)，表示字段在关键字SELECT之后列表里的位置。
+ORDER BY 子句里的字段可以缩写为一个整数，该整数取代了实际的字段名称(即作为一个别名)，表示字段在关键字 SELECT 之后列表里的位置。
 
 一个查询里可以对多个字段进行排序，使用字段名或对应的整数。可以指定不同字段升序或者降序(即允许一个升，一个降...)
 
-ORDER BY子句里的字段次序不一定要与关键字SELECT之后的字段次序一致。但字段次序决定了排序过程的完成方式
+ORDER BY 子句里的字段次序不一定要与关键字 SELECT 之后的字段次序一致。但字段次序决定了排序过程的完成方式
 
 ### 7.2.5 大小写敏感
 
-SQL命令和关键字不区分大小写。
+SQL 命令和关键字不区分大小写。
 
-排序规则决定了RDBMS如何解释数据，包括排序方式和大小写敏感性等内容。
+排序规则决定了 RDBMS 如何解释数据，包括排序方式和大小写敏感性等内容。
 
-数据的大小写敏感性直接决定了WHERE子句如何匹配记录。MySQL默认大小写不敏感。
+数据的大小写敏感性直接决定了 WHERE 子句如何匹配记录。MySQL 默认大小写不敏感。
 
 ## 7.3 简单查询的范例
 
 ### 统计表里的记录数量
 
-``` 
+```
 select count(*) from table_name...
 select count(column_name) from table_name...
 select count(distinct column_name) from table_name...
@@ -793,49 +777,45 @@ select count(distinct column_name) from table_name...
 
 ### 使用字段别名
 
-``` 
+```
 select column_name alias_name from table_name...
 ```
 
-
-
-# 第8章 使用操作符对数据进行分类
+# 第 8 章 使用操作符对数据进行分类
 
 重点：
 
-* 什么是操作符
-* SQL里操作符的概述
-* 操作符如何单独使用
-* 操作符如何联合使用
+- 什么是操作符
+- SQL 里操作符的概述
+- 操作符如何单独使用
+- 操作符如何联合使用
 
-## 8.1 什么是SQL里的操作符
+## 8.1 什么是 SQL 里的操作符
 
-操作符是一个保留字或字符，主要用于SQL语句的WHERE子句来执行操作，可以指定条件，还可以联接多个条件。
+操作符是一个保留字或字符，主要用于 SQL 语句的 WHERE 子句来执行操作，可以指定条件，还可以联接多个条件。
 
 操作符有：
 
-* 比较操作符
-* 逻辑操作符
-* 求反操作符
-* 算术操作符
+- 比较操作符
+- 逻辑操作符
+- 求反操作符
+- 算术操作符
 
 ## 8.2 比较操作符
 
-用于在SQL语句里对单个值进行测试，主要有：=、<>、<、>
+用于在 SQL 语句里对单个值进行测试，主要有：=、<>、<、>
 
 ### 8.2.1 相等
 
-进行相等比较时，被比较的值必须完全匹配，否则不返回数据(根据比较结果true或false来决定)。
+进行相等比较时，被比较的值必须完全匹配，否则不返回数据(根据比较结果 true 或 false 来决定)。
 
 ### 8.2.2 不等于
 
-MySQL中<>和!=均表示不等于
+MySQL 中<>和!=均表示不等于
 
 ### 8.2.3 小于和大于
 
 。。。
-
-
 
 ### 8.2.4 比较操作符的组合
 
@@ -845,19 +825,19 @@ MySQL中<>和!=均表示不等于
 
 逻辑操作符包括：
 
-* IS NULL
-* BETWEEN
-* IN
-* LIKE
-* EXISTS
-* UNIQUE
-* ALL和ANY
+- IS NULL
+- BETWEEN
+- IN
+- LIKE
+- EXISTS
+- UNIQUE
+- ALL 和 ANY
 
 ### 8.3.1 IS NULL
 
-用于与NULL值进行比较
+用于与 NULL 值进行比较
 
-``` 
+```
 where salary is null
 where salary='null'
 //这两个不一样
@@ -867,26 +847,26 @@ where salary='null'
 
 用于寻找位于一个给定最大值和最小值之间的值，且包含边界值
 
-``` 
+```
 where salary between '20000' and '30000'
 ```
 
 ### 8.3.3 IN
 
-操作符IN用于把一个值与一个指定列表进行比较，当被比较的值至少与列表中的一个值相匹配时，返回TRUE
+操作符 IN 用于把一个值与一个指定列表进行比较，当被比较的值至少与列表中的一个值相匹配时，返回 TRUE
 
-操作符IN可以得到与操作符OR一样的结果，但速度更快
+操作符 IN 可以得到与操作符 OR 一样的结果，但速度更快
 
 ### 8.3.4 LIKE
 
 利用通配符把一个值与类似的值进行比较，通配符通常有两个：
 
-* %：0或多个字符
-* _：一个数字或字符
+- %：0 或多个字符
+- \_：一个数字或字符
 
 可以复合使用：
 
-``` 
+```
 where salary like '2_%_%'
 where salary like '_2%3'
 where salary like '2___3'
@@ -896,69 +876,67 @@ where salary like '2___3'
 
 用于搜索指定表里是否存在满足特定条件的记录
 
-``` 
+```
 select cost from products_tbl
 where exists (select cost from products_tbl where cost>100);
 ```
 
-### 8.3.6 ALL、SOME和ANY操作符
+### 8.3.6 ALL、SOME 和 ANY 操作符
 
 **ALL**用于把一个值与另一个集合里的全部值进行比较
 
-``` 
-select * from products_tbl 
-where cost > ALL (select cost from products_tbl where cost<10); 
+```
+select * from products_tbl
+where cost > ALL (select cost from products_tbl where cost<10);
 ```
 
-**ANY**用于把一个与另一个列表里任意值进行比较。SOME是ANY的别名，可以互换使用。
+**ANY**用于把一个与另一个列表里任意值进行比较。SOME 是 ANY 的别名，可以互换使用。
 
-``` 
-select * from products_tbl 
-where cost > ANY (select cost from products_tbl where cost<10); 
+```
+select * from products_tbl
+where cost > ANY (select cost from products_tbl where cost<10);
 ```
 
-ANY与IN的不同：
+ANY 与 IN 的不同：
 
-IN可以使用下面的表达式列表，而ANY不行：
+IN 可以使用下面的表达式列表，而 ANY 不行：
 
-``` 
+```
 In (<Item#1>,<Item#2>,<Item#3>)
 ```
 
-另外，与IN相反的是NOT IN，相当于<>ALL，而不是<>ANY
+另外，与 IN 相反的是 NOT IN，相当于<>ALL，而不是<>ANY
 
 ## 8.4 连接操作符
 
 两个连接操作符：
 
-* AND
-* OR
+- AND
+- OR
 
 使用连接操作符可以用多个不同的操作符进行多种比较
 
 ### 8.4.1 AND
 
-所有由AND连接的条件都必须为TRUE，SQL语句才会实际执行
+所有由 AND 连接的条件都必须为 TRUE，SQL 语句才会实际执行
 
 ### 8.4.2 OR
 
-只要OR连接的条件里有至少一个TRUE，SQL语句就会执行
+只要 OR 连接的条件里有至少一个 TRUE，SQL 语句就会执行
 
 操作符是从左向右进行解析的
 
-
-
 # 8.5 求反操作
 
-NOT可以颠倒逻辑操作符的含义，可以与其他操作符构成以下几种形式：
+NOT 可以颠倒逻辑操作符的含义，可以与其他操作符构成以下几种形式：
 
-* <>,!=(NOT EQUAL)
-* NOT BETWEEN
-* NOT IN
-* NOT LIKE
-* IS NOT NULL
-* NOT EXISTS
-* NOT UNIQUE
+- <>,!=(NOT EQUAL)
+- NOT BETWEEN
+- NOT IN
+- NOT LIKE
+- IS NOT NULL
+- NOT EXISTS
+- NOT UNIQUE
 
 ### 8.5.1 不相等
 
@@ -967,8 +945,6 @@ NOT可以颠倒逻辑操作符的含义，可以与其他操作符构成以下�
 ### 8.5.2 NOT BETWEEN
 
 不包含边界值
-
-
 
 ### 8.5.3 NOT IN
 
@@ -990,19 +966,17 @@ NOT可以颠倒逻辑操作符的含义，可以与其他操作符构成以下�
 
 四个操作符：
 
-* +
-* -
-* *
-* /
+- +
+- -
+- \*
+- /
 
 ### 8.6.1 加法
 
-``` 
+```
 select salary+bonus from employee_pay_tbl
 select salary from employee_pay_tbl where salary+bonus>'40000'
 ```
-
-
 
 ### 8.6.2 减法
 
@@ -1010,114 +984,108 @@ select salary from employee_pay_tbl where salary+bonus>'40000'
 
 ### 8.6.4 除法
 
-
-
 ### 8.6.5 算术操作符的组合
 
 算术操作符可以彼此组合，并遵循基本算术运算中的优先级。可以使用圆括号控制算术运算次序(也是唯一的方式)
 
-
-
-# 第9章 汇总查询得到的数据
+# 第 9 章 汇总查询得到的数据
 
 重点：
 
-* 什么是函数
-* 如何使用函数
-* 何时使用函数
-* 使用汇总函数
-* 使用汇总函数对数据进行合计
-* 函数得到的结果
+- 什么是函数
+- 如何使用函数
+- 何时使用函数
+- 使用汇总函数
+- 使用汇总函数对数据进行合计
+- 函数得到的结果
 
 ## 9.1 什么是汇总函数
 
-函数是SQL里的关键字，用于对字段里的数据进行操作。函数是一个命令，通常与字段或表达式联合使用，处理输入的数据并产生结果。
+函数是 SQL 里的关键字，用于对字段里的数据进行操作。函数是一个命令，通常与字段或表达式联合使用，处理输入的数据并产生结果。
 
 基本汇总函数包括：
 
-* COUNT
-* SUM
-* MAX
-* MIN
-* AVG
+- COUNT
+- SUM
+- MAX
+- MIN
+- AVG
 
-### 9.1.1 COUNT函数
+### 9.1.1 COUNT 函数
 
-用于统计不包含NULL值的记录或字段值，返回一个数值，可以与DISTINCT命令一起使用，默认使用ALL。
+用于统计不包含 NULL 值的记录或字段值，返回一个数值，可以与 DISTINCT 命令一起使用，默认使用 ALL。
 
-注：COUNT(*)会统计表里的全部记录数量，包括重复的，不管是否包含NULL值，因此不能与DISTINCT一起使用。
+注：COUNT(\*)会统计表里的全部记录数量，包括重复的，不管是否包含 NULL 值，因此不能与 DISTINCT 一起使用。
 
-``` 
+```
 COUNT [(*)|(DISTINCT|ALL)] (COLUMN NAME)
 ```
 
-注：COUNT统计的是行数，不涉及数据类型，行里可以包含任意类型的数据
+注：COUNT 统计的是行数，不涉及数据类型，行里可以包含任意类型的数据
 
-### 9.1.2 SUM函数
+### 9.1.2 SUM 函数
 
-返回一组记录中某一字段值的总和。可以DISTINCT一起使用
+返回一组记录中某一字段值的总和。可以 DISTINCT 一起使用
 
-``` 
+```
 SUM ([DISTINCT] COLUMN NAME)
 ```
 
-注：SUM函数只能处理数值类型字段。但CHAR数据可以隐式转换为数值类型。如果数据不能隐式转换为数值类型，返回结果为0
+注：SUM 函数只能处理数值类型字段。但 CHAR 数据可以隐式转换为数值类型。如果数据不能隐式转换为数值类型，返回结果为 0
 
-### 9.1.3 AVG函数
+### 9.1.3 AVG 函数
 
-计算一组指定记录的平均值，也可以与DISTINCT一起使用。
+计算一组指定记录的平均值，也可以与 DISTINCT 一起使用。
 
-``` 
+```
 AVG ([DISTINCT] COLUMN NAME)
 ```
 
-注：AVG函数只能处理数值型字段。查询结果可能会被舍到相应数据类型的精度
+注：AVG 函数只能处理数值型字段。查询结果可能会被舍到相应数据类型的精度
 
-### 9.1.4 MAX函数
+### 9.1.4 MAX 函数
 
-返回一组记录中某个字段的最大值，NULL值不在计算范围之内。可以和DISTINCT一起使用，但全部记录和不同记录的最大值一样，所有没有意义
+返回一组记录中某个字段的最大值，NULL 值不在计算范围之内。可以和 DISTINCT 一起使用，但全部记录和不同记录的最大值一样，所有没有意义
 
-``` 
+```
 MAX ([DISTINCT] COLUMN NAME)
 ```
 
-注：可以对字符数据使用汇总函数，如MAX，MIN，对于这种类型，使用排序规则
+注：可以对字符数据使用汇总函数，如 MAX，MIN，对于这种类型，使用排序规则
 
-### 9.1.5 MIN函数
+### 9.1.5 MIN 函数
 
-返回一组记录里某个字段的最小值，NULL不在计算范围之内。同MAX，DISTINCT没有意义
+返回一组记录里某个字段的最小值，NULL 不在计算范围之内。同 MAX，DISTINCT 没有意义
 
-``` 
+```
 MIN ([DISTINCT] COLUMN NAME)
 ```
 
-注：与MAX类似，MIN也可以根据数据词典，返回字符数据的最小值
+注：与 MAX 类似，MIN 也可以根据数据词典，返回字符数据的最小值
 
-
-
-# 第10章 数据排序与分组
+# 第 10 章 数据排序与分组
 
 重点：
 
-* 为何想对数据进行分组
-* GROUP BY子句
-* 分组估值函数
-* 分组函数的使用方法
-* 根据字段进行分组
-* GROUP BY与ORDER BY
-* HAVING子句
+- 为何想对数据进行分组
+- GROUP BY 子句
+- 分组估值函数
+- 分组函数的使用方法
+- 根据字段进行分组
+- GROUP BY 与 ORDER BY
+- HAVING 子句
 
 ## 10.1 为什么要对数据进行分组
 
 数据分组是按照逻辑次序把具有重复值的字段进行合并。
 
-数据分组是通过在SELECT语句里使用GROUP BY子句实现的。
+数据分组是通过在 SELECT 语句里使用 GROUP BY 子句实现的。
 
-## 10.2 GROUP BY子句
+## 10.2 GROUP BY 子句
 
-GROUP BY子句配合SELECT使用，把相同的数据划分为组。SELECT语句中，GROUP BY子句在WHERE子句之后，在ORDER BY子句之前
+GROUP BY 子句配合 SELECT 使用，把相同的数据划分为组。SELECT 语句中，GROUP BY 子句在 WHERE 子句之后，在 ORDER BY 子句之前
 
-``` 
+```
 SELECT COLUMN1,COLUMN2
 FROM TABLE1,TABLE2
 WHERE CONDITIONS
@@ -1125,7 +1093,7 @@ GROUP BY COLUMN1,COLUMN2
 ORDER BY COLUMN1,COLUMN2
 ```
 
-注：GROUP BY子句对CPU的运行效率有很大影响，所以需要使用WHERE子句来缩小数据范围。
+注：GROUP BY 子句对 CPU 的运行效率有很大影响，所以需要使用 WHERE 子句来缩小数据范围。
 
 ### 10.2.1 分组函数
 
@@ -1133,13 +1101,13 @@ ORDER BY COLUMN1,COLUMN2
 
 ### 10.2.2 对选中的数据进行分组
 
-被选中的字段(SELECT之后的字段列表)才能在GROUP BY子句里引用，并且达到要求的字段名称必须出现在GROUP BY子句里(字段名称也可以用相应的数字代替，分组字段的次序不一定要与SELECT子句里的字段次序相同)。
+被选中的字段(SELECT 之后的字段列表)才能在 GROUP BY 子句里引用，并且达到要求的字段名称必须出现在 GROUP BY 子句里(字段名称也可以用相应的数字代替，分组字段的次序不一定要与 SELECT 子句里的字段次序相同)。
 
 ## 10.2.3 创建分组和使用汇总函数
 
-``` 
+```
 #1:
-SELECT EMP_ID,SUM(SALARY) FROM EMPLOYEE_PAY_TBL 
+SELECT EMP_ID,SUM(SALARY) FROM EMPLOYEE_PAY_TBL
 GROUP BY SALARY,EMP_ID;
 #2:
 SELECT CITY,COUNT(*) FROM EMPLOYEE_TBL GROUP BY CITY;
@@ -1151,61 +1119,57 @@ GROUP BY CITY
 ORDER BY 2,3
 ```
 
-
-
 ### 10.2.4 以整数代表字段名称
 
 。。。
 
-### 10.3 GROUP BY与ORDER BY
+### 10.3 GROUP BY 与 ORDER BY
 
-两者的相同之处在于他们都是对数据进行排序，ORDER BY专门用于对查询得到的数据进行排序，GROUP BY也把查询得到的数据排序为适当分组的数据，因此，GROUP BY子句也可以像ORDER BY子句那样用于数据排序。
+两者的相同之处在于他们都是对数据进行排序，ORDER BY 专门用于对查询得到的数据进行排序，GROUP BY 也把查询得到的数据排序为适当分组的数据，因此，GROUP BY 子句也可以像 ORDER BY 子句那样用于数据排序。
 
-GROUP BY实现排序曹组的区别与缺点：
+GROUP BY 实现排序曹组的区别与缺点：
 
-* 所有被选中、非汇总函数的字段必须列在GROUP BY子句里
-* 除非需要使用汇总函数，否则使用GROUP BY子句进行排序通常是没必要的。
+- 所有被选中、非汇总函数的字段必须列在 GROUP BY 子句里
+- 除非需要使用汇总函数，否则使用 GROUP BY 子句进行排序通常是没必要的。
 
-``` 
+```
 SELECT LAST_NAME,FIRST_NAME,CITY FROM EMPLOYEE_TBL
 GROUP BY LAST_NAME,FIRST_NAME,CITY
 ```
 
-注：SElECT语句里列出的全部字段，除了汇总字段之外，全部都要出现在GROUP BY子句里。
+注：SElECT 语句里列出的全部字段，除了汇总字段之外，全部都要出现在 GROUP BY 子句里。
 
-GROUP BY子句可以用于在CREATE VIEW语句里进行排序，而ORDER BY不行。
+GROUP BY 子句可以用于在 CREATE VIEW 语句里进行排序，而 ORDER BY 不行。
 
-## 10.4 CUBE与ROLLUP语句
+## 10.4 CUBE 与 ROLLUP 语句
 
-ROLLUP语句可以用来进行小计，即在全部分组数据的基础上，对其中一部分进行汇总：
+ROLLUP 语句可以用来进行小计，即在全部分组数据的基础上，对其中一部分进行汇总：
 
-``` 
+```
 GROUP BY ROLLUP(ordered column list of grouping sets)
 ```
 
-在完成了基本的分组数据汇总以后，按照从右向左的顺序，每次去掉字段列表中的最后一个字段，再对剩余的字段进行分组统计，并将获得的小计结果插入返回表中，被去掉的字段位置使用NULL填充，最后，再对全表进行一次统计，所有字段位置均使用NULL填充。
+在完成了基本的分组数据汇总以后，按照从右向左的顺序，每次去掉字段列表中的最后一个字段，再对剩余的字段进行分组统计，并将获得的小计结果插入返回表中，被去掉的字段位置使用 NULL 填充，最后，再对全表进行一次统计，所有字段位置均使用 NULL 填充。
 
-MySQL的语法：
+MySQL 的语法：
 
-``` 
+```
 GROUP BY order column list of grouping sets WITH ROLLUP
 ```
 
-CUBE语句对分组列表中的所有字段进行排列组合，并根据每一种组合结果，分别进行统计汇总。最后，CUBE语句对全表进行统计。
+CUBE 语句对分组列表中的所有字段进行排列组合，并根据每一种组合结果，分别进行统计汇总。最后，CUBE 语句对全表进行统计。
 
-``` 
+```
 GROUP BY CUBE(column list of grouping sets)
 ```
 
+## 10.5 HAVING 子句
 
+在 SELECT 语句里与 GROUP BY 子句联合使用，用于告诉 GROUP BY 子句在输出里包含哪些分组，即设置 GROUP BY 子句形成分组的条件。
 
-## 10.5 HAVING子句
+HAVING 子句必须跟着 GROUP BY 子句之后，ORDER BY 子句之前
 
-在SELECT语句里与GROUP BY子句联合使用，用于告诉GROUP BY子句在输出里包含哪些分组，即设置GROUP BY子句形成分组的条件。
-
-HAVING子句必须跟着GROUP BY子句之后，ORDER BY子句之前
-
-``` 
+```
 SELECT COLUMN1,COLUMN2
 FROM TABLE1,TABLE2
 WHERE CONDITIONS
@@ -1214,7 +1178,7 @@ HAVING CONDITIONS
 ORDER BY COLUMN1,COLUMN2
 ```
 
-``` 
+```
 SELECT CITY,AVG(PAY_RATE),AVG(SALARY)
 FROM EMP_PAY_TMP
 WHERE CITY <> 'GREENWOOD'
@@ -1223,41 +1187,38 @@ HAVING AVG(SALARY)>20000
 ORDER BY 3;
 ```
 
-
-
-# 第11章 调整数据的外观
+# 第 11 章 调整数据的外观
 
 重点：
 
-* 字符函数简介
-* 如何及何时使用字符函数
-* ANSI SQL函数范例
-* 常见实现的特定函数范例
-* 转换函数概述
-* 如何及何时使用转换函数
+- 字符函数简介
+- 如何及何时使用字符函数
+- ANSI SQL 函数范例
+- 常见实现的特定函数范例
+- 转换函数概述
+- 如何及何时使用转换函数
 
+## 11.1 ANSI 字符函数
 
-## 11.1 ANSI字符函数
+字符函数用于在 SQL 里以不同于存储方式的格式来表示字符串。
 
-字符函数用于在SQL里以不同于存储方式的格式来表示字符串。
-
-最常用的ANSI字符函数主要用于进行串接、子串和TRANSLATE等操作。
+最常用的 ANSI 字符函数主要用于进行串接、子串和 TRANSLATE 等操作。
 
 ## 11.2 常用字符函数
 
 ### 11.2.1 串接函数
 
-(串接及其他一些函数在不同实现里略有不同，MySQL、Oracle(||)、SQL Server(+)都不太一样，只介绍MySQL)
+(串接及其他一些函数在不同实现里略有不同，MySQL、Oracle(||)、SQL Server(+)都不太一样，只介绍 MySQL)
 
 ```
 CONCAT(COLUMN_NAME,['',] COLUMN_NAME [COLUMN_NAME])
 ```
 
-MySQL的串接函数可以连接多个字符串。
+MySQL 的串接函数可以连接多个字符串。
 
 注：串接函数用于连接字符，若要连接数字，需要将数字首先转换为字符串
 
-### 11.2.2 TRANSLATE函数
+### 11.2.2 TRANSLATE 函数
 
 搜索字符串里的字符并查找特定的字符，标记找到的位置，然后用替代字符串里对应的字符替换它。
 
@@ -1266,13 +1227,13 @@ TRANSLATE(CHARACTER SET,VALUE2,VALUE2)
 ```
 
 ```
-SELECT CITY,TRANSLATE(CITY,'IND','ABC') FROM EMPLOYEE_TBL 
+SELECT CITY,TRANSLATE(CITY,'IND','ABC') FROM EMPLOYEE_TBL
 //把字符串里每个I替换为A，每个N替换为B，每个D替换为C
 ```
 
 ### 11.2.3 REPLACE
 
-用于把某个字符或字符串替换为指定的一个字符或多个字符，使用方法类似于TRANSLATE函数
+用于把某个字符或字符串替换为指定的一个字符或多个字符，使用方法类似于 TRANSLATE 函数
 
 ```
 REPLACE('VALUE','VALUE',[NULL]'VALUE')
@@ -1280,7 +1241,7 @@ REPLACE('VALUE','VALUE',[NULL]'VALUE')
 SELECT REPLACE(FIRST_NAME,'T','B') FROM EMPLOYEE_TBL
 ```
 
-注：translate(char,from,to)中from和to是逐字对应的，若to的长度小于from，返回值中from多出来的部分字符会被删除。而replace(char,search_string,replacement_string)，要在char中找到匹配search_string的字符串，然后完全替换为replacement_string，并不像translate那样逐字对应。
+注：translate(char,from,to)中 from 和 to 是逐字对应的，若 to 的长度小于 from，返回值中 from 多出来的部分字符会被删除。而 replace(char,search_string,replacement_string)，要在 char 中找到匹配 search_string 的字符串，然后完全替换为 replacement_string，并不像 translate 那样逐字对应。
 
 ### 11.2.4 UPPER
 
@@ -1294,7 +1255,7 @@ SELECT UPPER(CITY) FROM EMPLOYEE_TBL
 
 ### 11.2.5 LOWER
 
-与UPPER相反，略
+与 UPPER 相反，略
 
 ### 11.2.6 SUBSTR
 
@@ -1304,13 +1265,11 @@ SELECT UPPER(CITY) FROM EMPLOYEE_TBL
 SUBSTR(COLUMN_NAME,STARTING POSITION,LENGTH)
 ```
 
-注：navicat中SUBSTRING也可以用
-
-
+注：navicat 中 SUBSTRING 也可以用
 
 ### 11.2.7 INSTR
 
-用于在字符串里寻找指定的字符集，返回其所在的位置，若不存在，返回0。
+用于在字符串里寻找指定的字符集，返回其所在的位置，若不存在，返回 0。
 
 ```
 INSTR (COLUMN_NAME,'SET',[STARTING POSITION [,OCCURRENCE]]);
@@ -1329,13 +1288,11 @@ LTRIM(CHARACTER STRING [,'set'])
 SELECT POSITION,LTRIM(POSITION,'SALES') FROM EMPLOYEE_PAY_TBL
 ```
 
-注：LTRIM会剪除被搜索的字符串在目标字符串里最后一次出现位置之左的全部字符(被搜索的字符必须以相同次序出现在目标字符串里，而且必须位于目标字符串的最左侧)。例如，被搜索字符串为'SALES'，目标字符串为'SHIPPER'，剪除后为'HIPPER'
-
-
+注：LTRIM 会剪除被搜索的字符串在目标字符串里最后一次出现位置之左的全部字符(被搜索的字符必须以相同次序出现在目标字符串里，而且必须位于目标字符串的最左侧)。例如，被搜索字符串为'SALES'，目标字符串为'SHIPPER'，剪除后为'HIPPER'
 
 ### 11.2.9 RTRIM
 
-类似于LTRIM，用于剪除字符串的右侧字符。
+类似于 LTRIM，用于剪除字符串的右侧字符。
 
 ```
 RTRIM (CHARACTER STRING [,'set'])
@@ -1343,7 +1300,7 @@ RTRIM (CHARACTER STRING [,'set'])
 
 ### 11.2.10 DECODE
 
-DECODE函数不是ANSI标准里的，主要用于Oracle和PostgreSQL。
+DECODE 函数不是 ANSI 标准里的，主要用于 Oracle 和 PostgreSQL。
 
 它可以再字符串里搜索一个值或字符串，如果找到了，就在结果里显示另一个字符串
 
@@ -1363,11 +1320,9 @@ DECODE(COLUMN_NAME,'SEARCH1','RETURN1',['SEARCH2','RETURN2','DEFAULT VALUE'])
 LENGTH(CHARACTER STRING)
 ```
 
+### 11.3.2 IFNULL(检查 NULL 值)
 
-
-### 11.3.2 IFNULL(检查NULL值)
-
-用于在一个表达式是NULL时从另一个表达式获得值。它可以用于大多数数据类型，但值与替代值必须是同一数据类型。
+用于在一个表达式是 NULL 时从另一个表达式获得值。它可以用于大多数数据类型，但值与替代值必须是同一数据类型。
 
 ```
 IFNULL('VALUE','SUBSTITUTION')
@@ -1375,11 +1330,9 @@ IFNULL('VALUE','SUBSTITUTION')
 SELECT PAGER,IF(PAGER,999999) FROM EMPLOYEE_TBL
 ```
 
-
-
 ### 11.3.3 COALESCE
 
-用指定值替代NULL值，这点与IFNULL一样，不同点在于，COALESCE可以接受一个数据集，依次检查其中每一个值，直到发现一个非NULL值，如果没有找到非NULL值，会返回一个NULL值。
+用指定值替代 NULL 值，这点与 IFNULL 一样，不同点在于，COALESCE 可以接受一个数据集，依次检查其中每一个值，直到发现一个非 NULL 值，如果没有找到非 NULL 值，会返回一个 NULL 值。
 
 ```
 SELECT EMP_ID,COALESCE(BONUS,SALARY,PAY_RATE) FROM EMPLOYEE_PAY_TBL
@@ -1405,17 +1358,13 @@ SELECT LPAD(PROD_DESC,30,'.') PRODUCT FROM PRODUCTS_TBL
 RPAD(CHARACTER SET)
 ```
 
-
-
 ### 11.3.6 ASCII
 
-返回字符串最左侧字符的ASCII码
+返回字符串最左侧字符的 ASCII 码
 
 ```
 ASCII(CHARACTER SET)
 ```
-
-
 
 ## 11.4 算术函数
 
@@ -1423,14 +1372,14 @@ ASCII(CHARACTER SET)
 
 常见的算术函数有：
 
-* ABS
-* ROUND(舍入)
-* SQRT
-* SIGN(符号)
-* POWER
-* CEIL、FLOOR(上限、下限)
-* EXP
-* SIN、COS、TAN
+- ABS
+- ROUND(舍入)
+- SQRT
+- SIGN(符号)
+- POWER
+- CEIL、FLOOR(上限、下限)
+- EXP
+- SIN、COS、TAN
 
 一般语法：
 
@@ -1444,29 +1393,27 @@ FUNCTION(EXPRESSION)
 
 常见的数据转换：
 
-* 字符到数字
-* 数字到字符
-* 字符到日期
-* 日期到字符
+- 字符到数字
+- 数字到字符
+- 字符到日期
+- 日期到字符
 
 ### 11.5.1 字符串转换为数字
 
 数值数据类型和字符串数据类型的两个主要区别：
 
-* 算术表达式和算术函数可以用于数值
-* 在输出结果里，数值是右对齐，字符串是左对齐
+- 算术表达式和算术函数可以用于数值
+- 在输出结果里，数值是右对齐，字符串是左对齐
 
-注：对于要转换为数值的字符串来说，其中的字符必须是0-9
+注：对于要转换为数值的字符串来说，其中的字符必须是 0-9
 
 ### 11.5.2 数字转换为字符串
 
 。。。
 
-
-
 ## 11.6 字符函数的组合使用
 
-大多数函数可以在SQL语句里组合使用。
+大多数函数可以在 SQL 语句里组合使用。
 
 ```
 SELECT CONCAT(LAST_NAME,',',FIRST_NAME) NAME,
@@ -1476,52 +1423,50 @@ SELECT CONCAT(LAST_NAME,',',FIRST_NAME) NAME,
 FROM EMPLOYEE_TBL
 ```
 
-
-
-# 第12章 日期和时间
+# 第 12 章 日期和时间
 
 重点：
 
-* 理解日期和时间
-* 日期和时间是如何存储的
-* 典型的日期和时间格式
-* 如何使用日期函数
-* 如何使用日期转换
+- 理解日期和时间
+- 日期和时间是如何存储的
+- 典型的日期和时间格式
+- 如何使用日期函数
+- 如何使用日期转换
 
 ## 12.1 日期是如何存储的
 
 ### 12.1.1 日期和时间的标准数据类型
 
-日期和时间(DATETIME)存储的标准SQL数据类型有3种：
+日期和时间(DATETIME)存储的标准 SQL 数据类型有 3 种：
 
-* DATE：直接存储日期，YYYY-MM-DD
-* TIME：直接存储时间，HH:MM:SS.nn...
-* TIMESTAMP：存储日期和时间，YYYY-MM-DD HH:MM:SS.nn...
+- DATE：直接存储日期，YYYY-MM-DD
+- TIME：直接存储时间，HH:MM:SS.nn...
+- TIMESTAMP：存储日期和时间，YYYY-MM-DD HH:MM:SS.nn...
 
-### 12.1.2 DATETIME元素
+### 12.1.2 DATETIME 元素
 
-DATETIME元素是属于日期和时间的元素，包含在DATETIME定义里。
+DATETIME 元素是属于日期和时间的元素，包含在 DATETIME 定义里。
 
-| DATETIME元素 | 有效范围             |
-| ---------- | ---------------- |
-| YEAR       | 0001-9999        |
-| MONTH      | 01-12            |
-| DAY        | 01-31            |
-| HOUR       | 00-23            |
-| MINUTE     | 00-59            |
-| SECOND     | 00.00..-61.999.. |
+| DATETIME 元素 | 有效范围         |
+| ------------- | ---------------- |
+| YEAR          | 0001-9999        |
+| MONTH         | 01-12            |
+| DAY           | 01-31            |
+| HOUR          | 00-23            |
+| MINUTE        | 00-59            |
+| SECOND        | 00.00..-61.999.. |
 
 ### 12.1.3 不同是实现的日期类型
 
-只列出MySQL的：
+只列出 MySQL 的：
 
-| 数据类型      | 用途        |
-| --------- | --------- |
+| 数据类型  | 用途               |
+| --------- | ------------------ |
 | DATETIME  | 存数日期和时间信息 |
 | TIMESTAMP | 存储日期和时间信息 |
-| DATE      | 存储日期值     |
-| TIME      | 存储时间值     |
-| YEAR      | 单字节，表示年   |
+| DATE      | 存储日期值         |
+| TIME      | 存储时间值         |
+| YEAR      | 单字节，表示年     |
 
 ## 12.2 日期函数
 
@@ -1529,7 +1474,7 @@ DATETIME元素是属于日期和时间的元素，包含在DATETIME定义里。
 
 ### 12.2.1 当前日期
 
-MySQL通过NOW()函数获取当前日期和时间
+MySQL 通过 NOW()函数获取当前日期和时间
 
 ### 12.2.2 时区
 
@@ -1537,7 +1482,7 @@ MySQL通过NOW()函数获取当前日期和时间
 
 ### 12.2.3 时间与日期相加
 
-DATETIME值可以增加时间间隔。
+DATETIME 值可以增加时间间隔。
 
 MySQL:
 
@@ -1549,14 +1494,14 @@ DATE_ADD(date,INTERVAL expr unit)
 
 MySQL：
 
-* DAYNAME(date)
-* DAYOFMONTH(date)
-* DAYOFWEEK(date)
-* DAYOFYEAR(date)
+- DAYNAME(date)
+- DAYOFMONTH(date)
+- DAYOFWEEK(date)
+- DAYOFYEAR(date)
 
 ### 12.3 日期转换
 
-CAST操作符可以把一种数据类型转换为另一种:
+CAST 操作符可以把一种数据类型转换为另一种:
 
 ```
 CAST(EXPRESSION AS NEW_DATE_TYPE)
@@ -1566,7 +1511,7 @@ CAST(EXPRESSION AS NEW_DATE_TYPE)
 
 日期描述由格式元素组成，用于从数据库以期望的格式提取日期和时间信息
 
-(P147  一张表   略)
+(P147 一张表 略)
 
 ### 12.3.2 日期转换为字符串
 
@@ -1576,26 +1521,20 @@ CAST(EXPRESSION AS NEW_DATE_TYPE)
 STR_TO_DATE(str,format)
 ```
 
-
-
-
-
-# 第13章 在查询里结合表
+# 第 13 章 在查询里结合表
 
 重点：
 
-* 表的结合
-* 不同类型的结合
-* 如何、何时使用结合
-* 表结合的范例
-* 不恰当表结合的影响
-* 在查询中利用别名对表进行重命名
+- 表的结合
+- 不同类型的结合
+- 如何、何时使用结合
+- 表结合的范例
+- 不恰当表结合的影响
+- 在查询中利用别名对表进行重命名
 
 ## 13.1 从多个表获取数据
 
 通过主键和外键形成相互关联的表，并通过这些字段结合在一起
-
-
 
 ## 13.2 结合的类型
 
@@ -1603,14 +1542,14 @@ STR_TO_DATE(str,format)
 
 常用的结合方式：
 
-* 等值结合与内部结合
-* 非等值结合
-* 外部结合
-* 自结合
+- 等值结合与内部结合
+- 非等值结合
+- 外部结合
+- 自结合
 
 ### 13.2.1 结合条件的位置
 
-结合表时，WHERE子句是必要的。要结合的表列在FROM子句里，结合在WHERE子句里完成。
+结合表时，WHERE 子句是必要的。要结合的表列在 FROM 子句里，结合在 WHERE 子句里完成。
 
 ### 13.2.2 等值结合(内部结合)
 
@@ -1618,13 +1557,13 @@ STR_TO_DATE(str,format)
 
 ```
 SELECT TABLE1.COLUMN1,TABLE2.COLUMN2...
-FROM TABLE1,TABLE2[,TABLE3] 
+FROM TABLE1,TABLE2[,TABLE3]
 WHERE TABLE1.COLUMN_NAME=TABLE2.COLUMN_NAME [AND TABLE1.COLUMN=TABLE3.COLUMN_NAME]
 ```
 
-SELECT子句里每个字段名称都以表名作为前缀，这称为限定字段。
+SELECT 子句里每个字段名称都以表名作为前缀，这称为限定字段。
 
-还可以利用INNER JOIN关键字
+还可以利用 INNER JOIN 关键字
 
 ```
 SELECT TABLE1.COLUMN1,TABLE2.COLUMN2...
@@ -1634,7 +1573,7 @@ INNER JOIN TABLE2 ON TABLE1.COLUMN_NAME=TABLE2.COLUMN_NAME
 
 ### 13.2.3 使用表的别名
 
-在SQL语句里对表进行重命名，是一种临时性的改变。表具有别名是完成自结合的必要条件。表的别名跟在表名后面。
+在 SQL 语句里对表进行重命名，是一种临时性的改变。表具有别名是完成自结合的必要条件。表的别名跟在表名后面。
 
 ### 13.2.4 不等值结合
 
@@ -1650,21 +1589,21 @@ WHERE TABLE1.COLUMN_NAME !=TABLE2.COLUMN_NAME
 
 ### 13.2.5 外部结合
 
-外部结合会返回一个表里的全部记录，即使对应的记录在第二个表里不存在。"+"用于在查询里表示外部结合，放在WHERE子句里表名的后面。具有加号的表是没有匹配记录的表。
+外部结合会返回一个表里的全部记录，即使对应的记录在第二个表里不存在。"+"用于在查询里表示外部结合，放在 WHERE 子句里表名的后面。具有加号的表是没有匹配记录的表。
 
 外部结合：左外部结合、右外部结合、全外部结合
 
 ```
-FROM TABLE1 
+FROM TABLE1
 {RIGHT | LEFT | FULL} [OUTER] JOIN TABLE2
 ON TABLE1.COLUMN=TABLE2.COLUMN
 ```
 
-可以在JOIN条件里对同一个表里的多个字段进行外部结合。
+可以在 JOIN 条件里对同一个表里的多个字段进行外部结合。
 
 ### 13.2.6 自结合
 
-自结合利用表别名在SQL语句对表进行重命名，像处理两个表一样把表结合到自身。
+自结合利用表别名在 SQL 语句对表进行重命名，像处理两个表一样把表结合到自身。
 
 ```
 SELECT A.COLUMN_NAME,B.COLUMN_NAME [,C.COLUMN_NAME]
@@ -1676,13 +1615,11 @@ WHERE A.COLUMN_NAME=B.COLUMN_NAME
 SELECT A.LAST_NAME,B.LAST_NAME,A.FIRST_NAME
 FROM EMPLOYEE_TBL A,EMPLOYEE_TBL B
 WHERE A.LAST_NAME=B.LAST_NAME;
-#2 
+#2
 SELECT A.LAST_NAME,B.LAST_NAME,A.FIRST_NAME
 FROM EMPLOYEE_TABLE A
 INNER JOIN EMPLOYEE_TBL B ON A.LAST_NAME=B.LAST_NAME
 ```
-
-
 
 ### 13.2.7 结合多个主键
 
@@ -1697,7 +1634,7 @@ INNER JOIN EMPLOYEE_TBL B ON A.LAST_NAME=B.LAST_NAME
 基表用于结合具有公用字段的一个或多个表，或是结合没有公用字段的多个表。
 
 ```
-SELECT C.CUST_NAME,P.PROD_DESC 
+SELECT C.CUST_NAME,P.PROD_DESC
 FROM CUSTOMER_TBL C,PRODUCTS_TBL P,ORDERS_TBL O
 WHERE C.CUST_ID=O.CUST_ID AND P.PROD_ID=O.PROD_ID;
 ```
@@ -1713,42 +1650,42 @@ FROM TABLE1,TABLE2 [,TABLE3]
 WHERE TABLE1,TABLE2 [,TABLE3]
 ```
 
-笛卡尔积的结果数量是两个或多个表记录数量的乘积，一般结合where子句使用
+笛卡尔积的结果数量是两个或多个表记录数量的乘积，一般结合 where 子句使用
 
-# 第14章 使用子查询定义未确定数据
+# 第 14 章 使用子查询定义未确定数据
 
 重点：
 
-* 子查询
-* 子查询与数据操作命令
-* 嵌入式子查询
+- 子查询
+- 子查询与数据操作命令
+- 嵌入式子查询
 
 ## 14.1 什么是子查询
 
-子查询也被称为嵌套查询，是位于另一个查询的WHERE或HAVAING子句里的查询，它返回的数据通常在主查询里作为一个条件，从而进一步限制数据库返回的数据。可用于SELECT、INSERT、UPDATE、DELETE语句
+子查询也被称为嵌套查询，是位于另一个查询的 WHERE 或 HAVAING 子句里的查询，它返回的数据通常在主查询里作为一个条件，从而进一步限制数据库返回的数据。可用于 SELECT、INSERT、UPDATE、DELETE 语句
 
 子查询必须遵循的规则：
 
-* 子查询必须位于圆括号内
-* 除非主查询里有多个字段让子查询进行比较，否则子查询的SELECT子句里只能有一个字段
-* 子查询不能使用ORDER BY子句，可以使用GROUP BY子句实现ORDER BY功能
-* 返回多条记录的子查询只能与多值操作符配合使用
-* SELECT列表里不能引用任何BLOB、ARRAY、CLOB或NCLOB类型的值
-* 子查询不能直接被包围在函数里
-* 操作符BETWEEN不能用于子查询，但子查询内部可以使用它。
+- 子查询必须位于圆括号内
+- 除非主查询里有多个字段让子查询进行比较，否则子查询的 SELECT 子句里只能有一个字段
+- 子查询不能使用 ORDER BY 子句，可以使用 GROUP BY 子句实现 ORDER BY 功能
+- 返回多条记录的子查询只能与多值操作符配合使用
+- SELECT 列表里不能引用任何 BLOB、ARRAY、CLOB 或 NCLOB 类型的值
+- 子查询不能直接被包围在函数里
+- 操作符 BETWEEN 不能用于子查询，但子查询内部可以使用它。
 
 基本语法：
 
 ```
-SELECT COLUMN_NAME [,COLUMN_NAME] 
+SELECT COLUMN_NAME [,COLUMN_NAME]
 FROM TABLE2 [,TABLE2]
 WHERE COMLUMN_NAME OPERATOR
-(SELECT COLUMN_NAME[,COLUMN_NAME] 
- FROM TABLE1 [,TABLE2] 
+(SELECT COLUMN_NAME[,COLUMN_NAME]
+ FROM TABLE1 [,TABLE2]
  [WHERE CONDITIONS])
 ```
 
-正确使用BETWEEN：
+正确使用 BETWEEN：
 
 ```
 SELECT COLUMN_NAME
@@ -1758,20 +1695,18 @@ WHERE COLUMN_NAME OPERATOR (SELECT COLUMN_NAME
                             WHERE VALUE BETWEEN VALUE)
 ```
 
-错误使用BETWEEN：
+错误使用 BETWEEN：
 
 ```
 SELECT COLUMN_NAME
 FROM TABLE_A
-WHERE COLUMN_NAME BETWEEN VALUE AND (SELECT COLUMN_NAME      
+WHERE COLUMN_NAME BETWEEN VALUE AND (SELECT COLUMN_NAME
                                      FROM TABLE_B)
 ```
 
+### 14.1.1 子查询与 SELECT 语句
 
-
-### 14.1.1 子查询与SELECT语句
-
-子查询也可用于数据操作语句，但主要还是用于SELECT语句里。
+子查询也可用于数据操作语句，但主要还是用于 SELECT 语句里。
 
 使用子查询来查找不确定的值：
 
@@ -1782,7 +1717,7 @@ WHERE E.EMP_ID=EP.EMP_ID
 AND EP.PAY_RATE < (SELECT PAY_RATE FROM EMPLOYEE_PAY_TBL WHERE EMP_ID='34555')
 ```
 
-### 14.1.2 子查询与INSERT语句
+### 14.1.2 子查询与 INSERT 语句
 
 子查询可以与数据操作语言(DML)配合使用
 
@@ -1795,12 +1730,12 @@ FROM TABLE1 [,TABLE2]
 [WHERE VALUE OPERATOR [SELECT ....]]
 ```
 
-### 14.1.3 子查询与UPDATE
+### 14.1.3 子查询与 UPDATE
 
-子查询可以与UPDATE语句配合使用来更新一个表里的一个或多个字段：
+子查询可以与 UPDATE 语句配合使用来更新一个表里的一个或多个字段：
 
 ```
-UPDATE TABLE 
+UPDATE TABLE
 SET COLUMN_NAME[,COLUMN_NAME]=
     (SELECT COLUMN_NAME[,COLUMN_NAME]
      FROM TABLE [WHERE])
@@ -1808,17 +1743,15 @@ SET COLUMN_NAME[,COLUMN_NAME]=
 
 注：这语句有问题啊
 
-### 14.1.4 子查询与DELETE语句
+### 14.1.4 子查询与 DELETE 语句
 
 ```
 DELETE FROM TABLE_NAME
-[WHERE COLUMUN_NAME OPERATOR 
-                (SELECT COLUMN_NAME 
-                 FROM TABLE_NAME 
+[WHERE COLUMUN_NAME OPERATOR
+                (SELECT COLUMN_NAME
+                 FROM TABLE_NAME
                  [WHERE])]
 ```
-
-
 
 ## 14.2 嵌套的子查询
 
@@ -1827,8 +1760,6 @@ DELETE FROM TABLE_NAME
 在有子查询时，子查询先于主查询执行。最内层子查询最先被执行，再依次执行外层的子查询，直到主查询
 
 注：多个子查询可能会延长响应时间，还可能降低结果的准确性
-
-
 
 ## 14.3 关联子查询
 
@@ -1839,7 +1770,7 @@ SELECT C.CUST_NAME
 FROM CUSTOMER_TBL C
 WHERE 10<(SELECT SUM(O.OTY)
           FROM ORDERS_TBL O
-          WHERE O.CUST_ID=C.CUST_ID); 
+          WHERE O.CUST_ID=C.CUST_ID);
 ```
 
 ## 14.4 子查询的效率
@@ -2576,7 +2507,7 @@ CALL NEW_PRODUCT('9999','INDIAN CORN',1.99);
 
 触发器是数据库编译了的 SQL 过程，基于数据库里发生的其他行为来执行操作。是存储过程的一种，会在特定 DML 行为作用于表格时被执行。可以再 INSERT、DELETE、UPDATE 语句之前或之后执行，可以在这些语句之前检查数据完整性，可以回退事务，可以修改一个表里的数据，可以从另一个数据库的表里读取数据
 
-触发器会导致更多的 I/O 开销，尽量不使用。
+触发器会导致更多的 IO 开销，尽量不使用。
 
 ### 22.3.1 CREATE TRIGGER 语句
 

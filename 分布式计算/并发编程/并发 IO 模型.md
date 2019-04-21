@@ -56,17 +56,17 @@ BIO 即同步阻塞式 IO，是面向流的，阻塞式的，串行的一个过�
 
 Unix 中内置了 5 种 IO 模型，阻塞式 IO, 非阻塞式 IO，IO 复用模型，信号驱动式 IO 和异步 IO：
 
-## Blocking I/O: 同步/阻塞式 IO
+## Blocking IO: 同步/阻塞式 IO
 
 ![](https://notes.shichao.io/unp/figure_6.1.png)
 
-## Nonblocking I/O: 非阻塞式 IO
+## Nonblocking IO: 非阻塞式 IO
 
 ![](https://notes.shichao.io/unp/figure_6.2.png)
 
-## I/O Multiplexing: IO 复用(select,poll)
+## IO Multiplexing: IO 复用(select,poll)
 
-I/O multiplexing means what it says - allowing the programmer to examine and block on multiple I/O streams (or other "synchronizing" events), being notified whenever any one of the streams is active so that it can process data on that stream.
+IO multiplexing means what it says - allowing the programmer to examine and block on multiple IO streams (or other "synchronizing" events), being notified whenever any one of the streams is active so that it can process data on that stream.
 
 In the Unix world, it's called select() or poll() (when using the CeeLanguage API for Unix). In the MicrosoftWindowsApi world, it's called WaitForMultipleObjects().
 
@@ -88,11 +88,11 @@ IO 多路复用技术通俗阐述，即是由一个线程轮询每个连接，�
 - 非阻塞模式下，connect 返回之后，该套接字连接成功或失败；
 - 该套接字有错误待处理，对这样的套接字的写操作将返回-1。
 
-## Signal-Driven I/O Model: 信号驱动式 IO
+## Signal-Driven IO Model: 信号驱动式 IO
 
 ![](https://notes.shichao.io/unp/figure_6.4.png)
 
-## Asynchronous I/O Model: 异步 IO
+## Asynchronous IO Model: 异步 IO
 
 Asynchronous IO refers to an interface where you supply a callback to an IO operation, which is invoked when the operation completes. This invocation often happens to an entirely different thread to the one that originally made the request, but this is not necessarily the case. Asynchronous IO is a manifestation of the ["proactor" pattern](https://en.wikipedia.org/wiki/Proactor_pattern).
 
