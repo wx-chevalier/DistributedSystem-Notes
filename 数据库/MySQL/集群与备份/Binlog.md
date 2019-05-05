@@ -43,3 +43,7 @@ max_binlog_size 100m // binlog 每个日志文件大小
 ```
 
 Mysql 默认是使用 Statement 日志格式，推荐使用 MIXED.由于一些特殊使用，可以考虑使用 ROWED，如自己通过 binlog 日志来同步数据的修改，这样会节省很多相关操作。对于 binlog 数据处理会变得非常轻松,相对 mixed，解析也会很轻松(当然前提是增加的日志量所带来的 IO 开销在容忍的范围内即可)。
+
+# 链接
+
+- https://mp.weixin.qq.com/s/5J84JzO1uqln5EWqvEpqLw
