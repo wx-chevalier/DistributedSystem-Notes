@@ -8,6 +8,34 @@ SQL 是一种专用编程语言，用于管理关系数据库管理系统（RDMS
 
 - 数据操作语言（DML）：DML 包括用于查询和修改数据库的命令。 它包括用于查询数据库的 select 语句，以及用于修改数据库的 insert，update 和 delete 语句。
 
+```sql
+SELECT
+    [ALL | DISTINCT | DISTINCTROW ]
+      [HIGH_PRIORITY]
+      [STRAIGHT_JOIN]
+      [SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]
+      [SQL_CACHE | SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]
+    select_expr [, select_expr ...]
+    [FROM table_references
+      [PARTITION partition_list]
+    [WHERE where_condition]
+    [GROUP BY {col_name | expr | position}
+      [ASC | DESC], ... [WITH ROLLUP]]
+    [HAVING where_condition]
+    [WINDOW window_name AS (window_spec)
+        [, window_name AS (window_spec)] ...]
+    [ORDER BY {col_name | expr | position}
+      [ASC | DESC], ...]
+    [LIMIT {[offset,] row_count | row_count OFFSET offset}]
+    [INTO OUTFILE 'file_name'
+        [CHARACTER SET charset_name]
+        export_options
+      | INTO DUMPFILE 'file_name'
+      | INTO var_name [, var_name]]
+    [FOR {UPDATE | SHARE} [OF tbl_name [, tbl_name] ...] [NOWAIT | SKIP LOCKED]
+      | LOCK IN SHARE MODE]]
+```
+
 # 关系代数
 
 关系代数是一种抽象的查询语言，它用对关系的运算来表达查询。任何一种运算都是将一定的运算符作用于一定的运算对象上，得到预期的结果。所以运算对象、运算符、运算结果是运算的三大要素。按运算符的不同分为传统的集合运算和专门的关系运算两类：
