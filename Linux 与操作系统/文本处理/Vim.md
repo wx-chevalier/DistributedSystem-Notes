@@ -24,3 +24,7 @@ Vim 中可以使用 `:s` 命令来替换字符串：
 # 替换每一行中所有 vivian 为 sky
 ：%s/vivian/sky/g(等同于 ：g/vivian/s//sky/g)
 ```
+
+# 链接
+
+- https://learnxinyminutes.com/docs/zh-cn/vim-cn/
