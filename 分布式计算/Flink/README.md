@@ -5,3 +5,7 @@
 Flink 包含了一个网络栈，支持低延迟 / 高吞吐的流式数据交换和高吞吐的批次 shuffle。它还提供了很多流式运行时操作符，也为有界输入提供了专门的操作符，如果你选择了 DataSet API 或 Table API，就可以使用这些操作符。
 
 ![](https://ww1.sinaimg.cn/large/007rAy9hgy1g25vrpwkhzj30v00gkabw.jpg)
+
+# 链接
+
+- https://read.douban.com/reader/ebook/114289022/?from=book
