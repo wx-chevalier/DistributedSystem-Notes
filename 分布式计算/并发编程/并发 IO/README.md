@@ -6,6 +6,8 @@ IO 的概念，从字义来理解就是输入输出。操作系统从上层到�
 
 # IO 类型
 
+## 连续与随机
+
 Unix 中内置了 5 种 IO 模型，阻塞式 IO, 非阻塞式 IO，IO 复用模型，信号驱动式 IO 和异步 IO。而从应用的角度来看，IO 的类型可以分为：
 
 - 大/小块 IO：这个数值指的是控制器指令中给出的连续读出扇区数目的多少。如果数目较多，如 64，128 等，我们可以认为是大块 IO；反之，如果很小，比如 4，8，我们就会认为是小块 IO，实际上，在大块和小块 IO 之间，没有明确的界限。
@@ -14,7 +16,11 @@ Unix 中内置了 5 种 IO 模型，阻塞式 IO, 非阻塞式 IO，IO 复用模
 
 - 顺序/并发 IO：从概念上讲，并发 IO 就是指向一块磁盘发出一条 IO 指令后，不必等待它回应，接着向另外一块磁盘发 IO 指令。对于具有条带性的 RAID（LUN），对其进行的 IO 操作是并发的，例如：raid 0+1(1+0),raid5 等。反之则为顺序 IO。
 
-在传统的网络服务器的构建中，IO 模式会按照 Blocking/Non-Blocking、Synchronous/Asynchronous 这两个标准进行分类，其中 Blocking 与 Synchronous 大同小异，而 NIO 与 Async 的区别在于 NIO 强调的是 轮询（Polling），而 Async 强调的是通知（Notification）。譬如在一个典型的单进程单线程 Socket 接口中，阻塞型的接口必须在上一个 Socket 连接关闭之后才能接入下一个 Socket 连接。而对于 NIO 的 Socket 而言，服务端应用会从内核获取到一个特殊的 "Would Block" 错误信息，但是并不会阻塞到等待发起请求的 Socket 客户端停止。
+## 非阻塞与异步
+
+在传统的网络服务器的构建中，IO 模式会按照 Blocking/Non-Blocking、Synchronous/Asynchronous 这两个标准进行分类，其中 Blocking 与 Synchronous 大同小异，而 NIO 与 Async 的区别在于 NIO 强调的是轮询（Polling），而 Async 强调的是通知（Notification）。
+
+譬如在一个典型的单进程单线程 Socket 接口中，阻塞型的接口必须在上一个 Socket 连接关闭之后才能接入下一个 Socket 连接。而对于 NIO 的 Socket 而言，服务端应用会从内核获取到一个特殊的 "Would Block" 错误信息，但是并不会阻塞到等待发起请求的 Socket 客户端停止。
 
 ![](https://i.postimg.cc/wx4t0D8f/image.png)
 
@@ -53,3 +59,7 @@ select，poll，epoll 本质上都是同步 IO，因为他们都需要在读写�
 | select | 描述符个数由内核中的 FD_SETSIZE 限制，仅为 1024；重新编译内核改变 FD_SETSIZE 的值，但是无法优化性能 | 每次调用 select 都会线性扫描所有描述符的状态，在 select 结束后，用户也要线性扫描 fd_set 数组才知道哪些描述符准备就绪(O(n)) | 每次调用 select 都要在用户空间和内核空间里进行内存复制 fd 描述符等信息                                                    |
 | poll   | 使用 pollfd 结构来存储 fd，突破了 select 中描述符数目的限制                                         | 类似于 select 扫描方式                                                                                                     | 需要将 pollfd 数组拷贝到内核空间，之后依次扫描 fd 的状态，整体复杂度依然是 O(n)的，在并发量大的情况下服务器性能会快速下降 |
 | epoll  | 该模式下的 Socket 对应的 fd 列表由一个数组来保存，大小不限制(默认 4k)                               | 基于内核提供的反射模式，有活跃 Socket 时，内核访问该 Socket 的 callback，不需要遍历轮询                                    | epoll 在传递内核与用户空间的消息时使用了内存共享，而不是内存拷贝，这也使得 epoll 的效率比 poll 和 select 更高             |
+
+# 链接
+
+- https://www.zhihu.com/question/26393784/answer/328707302
