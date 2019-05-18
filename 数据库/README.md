@@ -6,5 +6,3 @@
 ](https://www.processon.com/view/link/5a8b96cee4b024b99bfd650a)
 
 # 链接
-
-- 永久链接：[深入浅出分布式基础架构-数据库篇 https://url.wx-coder.cn/kl3ms](https://url.wx-coder.cn/kl3ms)
