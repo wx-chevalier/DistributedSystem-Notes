@@ -10,17 +10,15 @@
 
 # Nav | 导航
 
-- [Linux 篇](./Linux)
+- [Linux 与操作系统](./Linux%20与操作系统)
 
-- [分布式计算篇](./DistributedComputing)
+- [分布式计算](./分布式计算)
 
-- [虚拟化与容器调度篇](./Virtualization)
+- [虚拟化与编排](./虚拟化与编排)
 
-- [分布式存储篇](./DistributedStorage)
+- [分布式系统](./分布式系统)
 
-- [MySQL 篇](./MySQL)
-
-- [Redis 篇](./NoSQL)
+- [数据库](./数据库)
 
 # Preface | 前言
 
