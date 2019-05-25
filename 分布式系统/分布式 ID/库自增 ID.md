@@ -31,4 +31,11 @@ sequence 表的核心字段就两个：name 和 value，name 就是当前序列�
 
 # 水平扩展
 
-单台机器自然存在可用性问题，最简单的方式就是考虑将其扩展到多台机器，在前文的 sequence 单表方案中，我们是基于单表的自增；在分布式情况下，我们可以通过设置不同数据库的
+单台机器自然存在可用性问题，最简单的方式就是考虑将其扩展到多台机器，在前文的 sequence 单表方案中，我们是基于单表的自增；在分布式情况下，我们可以通过设置不同数据库的 auto_increment_increment 以及 auto_increment_offset 来不同的自增规则：
+
+```sql
+begin;
+REPLACE INTO Tickets64 (stub) VALUES ('a');
+SELECT LAST_INSERT_ID();
+commit;
+```
