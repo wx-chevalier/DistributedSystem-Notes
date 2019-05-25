@@ -6,6 +6,19 @@
 
 ![](https://i.postimg.cc/TwNZP70n/image.png)
 
+# 数据库组件
+
+![](https://i.postimg.cc/02hPY8z7/image.png)
+
+典型的数据库组件可能会包含如下部分：
+
+- 过程管理器(The process manager)：数据库都会有一个过程池/线程池需要进行管理。此外，为了使运行时间更短，现代数据库会使用自己的线程来替代操作系统线程。
+- 网络管理器(The network manager)：网络的输入输出是个大问题，特别是对于分布式数据库来说。所以部分数据库针对网络管理打造了自己的管理器。
+- 文件系统管理器(File system manager)：磁碟 IO 是数据库的第一瓶颈。使用管理器进行磁碟文件进行管理是很重要的。
+- 内存管理器(Memory manager)：当你需要处理大量内存数据或大量查询，一个高效的内存管理器是必须的。
+- 安全管理器(Security manager)：进行认证和用户认证管理。
+- 客户端管理器(Client manager)：进行客户端连接管理。
+
 # 链接
 
 - 持久链接：[关系型数据库理论 https://url.wx-coder.cn/DJNQn ](https://url.wx-coder.cn/DJNQn)
