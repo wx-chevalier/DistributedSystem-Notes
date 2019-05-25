@@ -39,3 +39,23 @@ REPLACE INTO Tickets64 (stub) VALUES ('a');
 SELECT LAST_INSERT_ID();
 commit;
 ```
+
+![](https://i.postimg.cc/rFMZr5pW/image.png)
+
+在分布式系统中我们可以多部署几台机器，每台机器设置不同的初始值，且步长和机器数相等。比如有两台机器。设置步长 step 为 2，TicketServer1 的初始值为 1（1，3，5，7，9，11…）、TicketServer2 的初始值为 2（2，4，6，8，10…）。如下所示，为了实现上述方案分别设置两台机器对应的参数，TicketServer1 从 1 开始发号，TicketServer2 从 2 开始发号，两台机器每次发号之后都递增 2：
+
+```sh
+TicketServer1:
+auto-increment-increment = 2
+auto-increment-offset = 1
+
+TicketServer2:
+auto-increment-increment = 2
+auto-increment-offset = 2
+```
+
+假设我们要部署 N 台机器，步长需设置为 N，每台的初始值依次为 0,1,2…N-1 那么整个架构就变成了如下图所示：
+
+![](https://i.postimg.cc/L6Qk8Pgm/image.png)
+
+不过这种方式也存在问题，系统水平扩展比较困难，比如定义好了步长和机器台数之后，很难进行增删。ID 没有了单调递增的特性，只能趋势递增，并且数据库压力还是很大，每次获取 ID 都得读写一次数据库，只能靠堆机器来提高性能。
