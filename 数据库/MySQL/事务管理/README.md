@@ -8,9 +8,9 @@ MySQL 中的事务管理概述了数据插入、更新、删除等流程中的�
 
 - 在数据页内找到 id = 1 这行记录，取出，将 age 改为 30 然后写入内存。
 
-- 生成 redolog undolog 到内存，redolog 状态为 prepare。
+- 生成 redolog Undo Log 到内存，redolog 状态为 prepare。
 
-- 将 redolog undolog 写入文件并调用 fsync。
+- 将 redolog Undo Log 写入文件并调用 fsync。
 
 - server 层生成 binlog 并写入文件调用 fsync。
 
