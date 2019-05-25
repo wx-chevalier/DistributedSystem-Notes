@@ -1,12 +1,12 @@
 ![default](https://user-images.githubusercontent.com/5803001/45228854-de88b400-b2f6-11e8-9ab0-d393ed19f21f.png)
 
-# 分布式 ID
-
 # UUID
 
 什么是 UUID？
 
 UUID 是 Universally Unique Identifier 的缩写，它是在一定的范围内（从特定的名字空间到全球）唯一的机器生成的标识符。UUID 具有以下涵义：
+
+UUID(Universally Unique Identifier)的标准型式包含 32 个 16 进制数字，以连字号分为五段，形式为 8-4-4-4-12 的 36 个字符，示例：550e8400-e29b-41d4-a716-446655440000，到目前为止业界一共有 5 种方式生成 UUID，详情见 IETF 发布的 UUID 规范 A Universally Unique IDentifier (UUID) URN Namespace。
 
 经由一定的算法机器生成
 为了保证 UUID 的唯一性，规范定义了包括网卡 MAC 地址、时间戳、名字空间（Namespace）、随机或伪随机数、时序等元素，以及从这些元素生成 UUID 的算法。UUID 的复杂特性在保证了其唯一性的同时，意味着只能由计算机生成。

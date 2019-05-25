@@ -1,14 +1,12 @@
 # Snowflake
 
-Twitter 的 Snowflake 算法产生的背景相当简单，为了满足 Twitter 每秒上万条消息的请求，每条消息都必须分配一条唯一的 id，这些 id 还需要一些大致的顺序(方便客户端排序)，并且在分布式系统中不同机器产生的 id 必须不同。
-
-其核心思想就是：使用一个 64 bit 的 long 型的数字作为全局唯一 id。这 64 个 bit 中，其中 1 个 bit 是不用的，然后用其中的 41 bit 作为毫秒数，用 10 bit 作为工作机器 id，12 bit 作为序列号。首位 bit 不可用，是因为二进制里第一个 bit 为如果是 1，那么都是负数，但是我们生成的 id 都是正数，所以第一个 bit 统一都是 0。
+Snowflake 算法产生于 Twitter 的高并发场景下，其需要为每秒上万条消息的请求分配一条唯一的 ID，这些 ID 还需要一些大致的顺序以方便客户端排序，并且在分布式系统中不同机器产生的 ID 必须不同。Snowflake 算法的核心思想在于，使用一个 64 bit 的 long 型的数字作为全局唯一 ID。这 64 个 bit 中，其中 1 个 bit 是不用的，然后用其中的 41 bit 作为毫秒数，用 10 bit 作为工作机器 id，12 bit 作为序列号。
 
 ![](http://121.40.136.3/wp-content/uploads/2015/04/snowflake-64bit.jpg)
 
-除了最高位 bit 标记为不可用以外，其余三组 bit 占位均可浮动，看具体的业务需求而定。默认情况下 41bit 的时间戳可以支持该算法使用到 2082 年，10bit 的工作机器 id 可以支持 1023 台机器，序列号支持 1 毫秒产生 4095 个自增序列 id。在 [关系型数据库理论 https://url.wx-coder.cn/DJNQn ](https://url.wx-coder.cn/DJNQn)一文中，我们也讨论了该算法的作用。
+首位 bit 不可用，是因为二进制里第一个 bit 为如果是 1，那么都是负数，但是我们生成的 id 都是正数，所以第一个 bit 统一都是 0。除了最高位 bit 标记为不可用以外，其余三组 bit 占位均可浮动，看具体的业务需求而定。默认情况下 41bit 的时间戳可以支持该算法使用到 2082 年，10bit 的工作机器 id 可以支持 1023 台机器，序列号支持 1 毫秒产生 4095 个自增序列 id。由此也可看出，Snowflake 限制 workid 最多能有 1024，也就是说，应用规模不能超过 1024；虽然可以进行细微的调整，但是总是有数量的限制。
 
-Snowflake 算法是一个完全去中心化的分布式 id 算法，但是限制 workid 最多能有 1024，也就是说，应用规模不能超过 1024。虽然可以进行细微的调整，但是总是有数量的限制。另外，美团开源了的 [Leaf](https://github.com/Meituan-Dianping/Leaf)，是用于生成分布式 id 的，可以用作第三方服务。
+在[关系型数据库理论 https://url.wx-coder.cn/DJNQn ](https://url.wx-coder.cn/DJNQn)一文中，我们也讨论了该算法的作用。
 
 # 时间戳
 
@@ -49,7 +47,9 @@ uint64_t waitNextMs(uint64_t lastStamp)
 }
 ```
 
-# Java 版本实现
+# 代码实现
+
+## Java
 
 ```java
 public class IdWorker {
@@ -79,9 +79,9 @@ public class IdWorker {
   private long datacenterIdBits = 5L;
 
   // 这个是二进制运算，就是5 bit最多只能有31个数字，也就是说机器id最多只能是32以内
-  private long maxWorkerId = -1L ^ (-1L << workerIdBits); 
+  private long maxWorkerId = -1L ^ (-1L << workerIdBits);
   // 这个是一个意思，就是5 bit最多只能有31个数字，机房id最多只能是32以内
-  private long maxDatacenterId = -1L ^ (-1L << datacenterIdBits); 
+  private long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
   private long sequenceBits = 12L;
   private long workerIdShift = sequenceBits;
   private long datacenterIdShift = sequenceBits + workerIdBits;
@@ -115,7 +115,7 @@ public class IdWorker {
 
       // 这个意思是说一个毫秒内最多只能有4096个数字，无论你传递多少进来，
       //这个位运算保证始终就是在4096这个范围内，避免你自己传递个sequence超过了4096这个范围
-      sequence = (sequence + 1) & sequenceMask; 
+      sequence = (sequence + 1) & sequenceMask;
       if (sequence == 0) {
         timestamp = tilNextMillis(lastTimestamp);
       }
