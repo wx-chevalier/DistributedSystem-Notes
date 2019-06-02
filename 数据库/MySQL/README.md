@@ -5,6 +5,8 @@
 在本系列文章中我们使用官方的 [test_db](https://github.com/datacharmer/test_db) 以及标准的电商库 [mysql-mall-matrix https://url.wx-coder.cn/Lmzp3](https://url.wx-coder.cn/Lmzp3)
 作为我们的测试数据库。
 
+![](https://i.postimg.cc/2yV9q7h1/image.png)
+
 # 链接
 
 - 永久链接：[MySQL 实战 https://url.wx-coder.cn/Tu5dq ](https://url.wx-coder.cn/Tu5dq)
