@@ -50,3 +50,7 @@ spec:
       protocol: TCP
       targetPort: 80
 ```
+
+# 链接
+
+- https://draveness.me/ 系列 K8S 相关文章
