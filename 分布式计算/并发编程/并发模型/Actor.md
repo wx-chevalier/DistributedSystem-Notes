@@ -29,9 +29,3 @@ actor 模型支持共享内存模型，也支持分布式内存模型，这就�
 **其他语言**
 
 与许多伟大的思想一样， actor 模型也由来悠久——20 世纪 70 年代 Carl Hewitt 首次提出这个模型。 Erlang 无疑为布道 actor 做了最大的贡献。比如 Erlang 的创始人 Joe Armstrong 也是“任其崩溃”哲学的先驱。大部分流行的编程语言都提供了一个 actor 库，特别是 Akka 库 ① 为 Java 和其他运行于 JVM 的语言提供了对 actor 模型的支持。如果想深入学习 Akka，建议阅读本书的奖励章节 ②，其中描述了如何用 Scala 进行 actor 编程。
-
-# Model Comparison
-
-## Benchmark
-
-### [Skynet](https://github.com/atemerev/skynet)
