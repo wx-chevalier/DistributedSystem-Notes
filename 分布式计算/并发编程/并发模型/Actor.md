@@ -20,6 +20,8 @@ Actor 模型支持共享内存模型，也支持分布式内存模型，这就�
 
 ## 案例
 
+![](https://i.postimg.cc/9MgfnSTJ/image.png)
+
 # 模型组成
 
 Actor 由 3 部分组成：状态（State）+行为（Behavior）+邮箱（Mailbox），State 是指 Actor 对象的变量信息，存在于 Actor 之中，Actor 之间不共享内存数据，Actor 只会在接收到消息后，调用自己的方法改变自己的 state，从而避免并发条件下的死锁等问题；Behavior 是指 Actor 的计算行为逻辑；邮箱建立 Actor 之间的联系，一个 Actor 发送消息后，接收消息的 Actor 将消息放入邮箱中等待处理，邮箱内部通过队列实现，消息传递通过异步方式进行。
