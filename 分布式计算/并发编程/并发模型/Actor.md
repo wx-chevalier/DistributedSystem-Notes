@@ -29,3 +29,11 @@ actor 模型支持共享内存模型，也支持分布式内存模型，这就�
 **其他语言**
 
 与许多伟大的思想一样， actor 模型也由来悠久——20 世纪 70 年代 Carl Hewitt 首次提出这个模型。 Erlang 无疑为布道 actor 做了最大的贡献。比如 Erlang 的创始人 Joe Armstrong 也是“任其崩溃”哲学的先驱。大部分流行的编程语言都提供了一个 actor 库，特别是 Akka 库 ① 为 Java 和其他运行于 JVM 的语言提供了对 actor 模型的支持。如果想深入学习 Akka，建议阅读本书的奖励章节 ②，其中描述了如何用 Scala 进行 actor 编程。
+
+
+Actor模型是一个概念模型，用于处理并发计算。Actor由3部分组成：状态（State）+行为（Behavior）+邮箱（Mailbox），State是指Actor对象的变量信息，存在于Actor之中，Actor之间不共享内存数据，Actor只会在接收到消息后，调用自己的方法改变自己的state，从而避免并发条件下的死锁等问题；Behavior是指Actor的计算行为逻辑；邮箱建立Actor之间的联系，一个Actor发送消息后，接收消息的Actor将消息放入邮箱中等待处理，邮箱内部通过队列实现，消息传递通过异步方式进行。 
+
+![](https://tva1.sinaimg.cn/large/007DFXDhgy1g44cph1xu1j30hc0bwq3c.jpg)
+
+Actor是分布式存在的内存状态及单线程计算单元，一个ID对应的Actor只会在集群种存在一个（有状态的 Actor在集群中一个ID只会存在一个实例，无状态的可配置为根据流量存在多个），使用者只需要通过ID就能随时访问不需要关注该Actor在集群的什么位置。单线程计算单元保证了消息的顺序到达,不存在Actor内部状态竞用问题。
+
