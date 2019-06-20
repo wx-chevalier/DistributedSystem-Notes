@@ -41,7 +41,7 @@ DCE（Distributed Computing Environment）安全的 UUID 和基于时间的 UUID
 
 UUID Version 3：基于名字的 UUID（MD5）
 
-基于名字的 UUID 通过计算名字和名字空间的 MD5 散列值得到。这个版本的 UUID 保证了：相同名字空间中不同名字生成的 UUID 的唯一性；不同名字空间中的 UUID 的唯一性；相同名字空间中相同名字的 UUID 重复生成是相同的。
+基于名字的 UUID 通过计算名字和名字空间的 MD5 哈希值得到。这个版本的 UUID 保证了：相同名字空间中不同名字生成的 UUID 的唯一性；不同名字空间中的 UUID 的唯一性；相同名字空间中相同名字的 UUID 重复生成是相同的。
 
 UUID Version 4：随机 UUID
 
@@ -49,7 +49,7 @@ UUID Version 4：随机 UUID
 
 UUID Version 5：基于名字的 UUID（SHA1）
 
-和版本 3 的 UUID 算法类似，只是散列值计算使用 SHA1（Secure Hash Algorithm 1）算法。
+和版本 3 的 UUID 算法类似，只是哈希值计算使用 SHA1（Secure Hash Algorithm 1）算法。
 
 UUID 的应用
 
