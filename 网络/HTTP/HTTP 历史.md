@@ -4,17 +4,13 @@
 
 # HTTP 概述: HTTP/1.1 与 HTTP/2
 
+![](https://i.postimg.cc/zDL2K4Ns/image.png)
+
+随着网络技术的发展，1999 年设计的 HTTP/1.1 已经不能满足需求，所以 Google 在 2009 年设计了基于 TCP 的 SPDY，后来 SPDY 的开发组推动 SPDY 成为正式标准，不过最终没能通过。不过 SPDY 的开发组全程参与了 HTTP/2 的制定过程，参考了 SPDY 的很多设计，因此一般认为 SPDY 就是 HTTP/2 的前身。无论 SPDY 还是 HTTP/2，都是基于 TCP 的，TCP 与 UDP 相比效率上存在天然的劣势，所以 2013 年 Google 开发了基于 UDP 的名为 QUIC 的传输层协议，QUIC 全称 Quick UDP Internet Connections，希望它能替代 TCP，使得网页传输更加高效。后经提议，互联网工程任务组正式将基于 QUIC 协议的 HTTP （HTTP over QUIC）重命名为 HTTP/3。
+
 # HTTP
 
 HTTP(HyperTextTransferProtocol)是超文本传输协议的缩写，它用于传送 WWW 方式的数据，关于 HTTP 协议的详细内容请参考 RFC2616。HTTP 协议采用了请求 / 响应模型。客户端向服务器发送一个请求，请求头包含请求的方法、URI 、协议版本、以及包含请求修饰符、客户 信息和内容的类似于 MIME 的消息结构。服务器以一个状态行作为响应，相应的内容包括消息协议的版本，成功或者错误编码加上包含服务器信息、实体元信息以及可能的实体内容。 HTTP 是一种无状态性的协议。这是因为此种协议不要求浏览器在每次请求中标明它自己的身份，并且浏览器以及服务器之间并没有保持一个持久性的连接用于多个页面之间的访问。当一个用户访问一个站点的时候，用户的浏览器发送一个 HTTP 请求到服务器，服务器返回给浏览器一个 HTTP 响应。其实很简单的一个概念，客户端一个请求，服务器端一个回复，这就是整个基于 HTTP 协议的通讯过程。
-
-## URL
-
-在 WWW 上，每一信息资源都有统一的且在网上唯一的地址，该地址就叫 URL(Uniform Resource Locator, 统一资源定位符)，它是 WWW 的统一资源定位标志。URL 分为绝对 URL 与相对 URL 两种。绝对 URL 和访问时的状态完全无关。与之相对应的是省略了部分信息的相对(relative ) URL，如 ../file.php?text=hello+world，它需要根据当前浏览所在上下文环境里的基准 URL，才能确定完整的 URL 地址。
-
-![](HTTP://7xlgth.com1.z0.glb.clouddn.com/fafasfasfdsfads%E5%9B%BE%E7%89%871.png)
-
-URL 由三部分组成：资源类型、存放资源的主机域名、资源文件名。URL 的一般语法格式为：( 带方括号 [] 的为可选项 )：protocol :// hostname[:port] / path / [;parameters][?query]#fragment
 
 ## 消息格式
 
