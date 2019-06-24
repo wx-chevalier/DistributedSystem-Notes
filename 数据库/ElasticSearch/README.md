@@ -20,3 +20,7 @@ home---这是Elasticsearch解压的目录
 
 　　plugins---这里存放一些常用的插件，如果有一切额外的插件，可以放在这里使用。
 ```
+
+# 链接
+
+- 提取其中知识脑图 https://mp.weixin.qq.com/s/pWU-c0hfTi51SPtFT4iFKA
