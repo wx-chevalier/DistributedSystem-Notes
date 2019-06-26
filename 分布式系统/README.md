@@ -1,5 +1,13 @@
 # 深入浅出分布式基础架构--分布式系统篇
 
+参考 Tanenbaum 在 Distributed System 中的定义：
+
+> A distributed system is a collection of independent computers that appears to its users as a single coherent system.
+
+一个分布式系统将底层的实现抽象化，用户只会看到一个统一的接口。譬如我们通常在云端存储文件，而作为用户，我们并不知道这个文件具体存储在哪个实例上。
+
+![](https://i.postimg.cc/GhmVHR43/image.png)
+
 本篇主要讨论分布式系统核心理论的相关内容。
 
 ![](https://i.postimg.cc/GtrwtKbg/image.png)
