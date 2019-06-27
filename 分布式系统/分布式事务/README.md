@@ -49,3 +49,4 @@
 - https://mp.weixin.qq.com/s/vgohXl1LxYk3CyDI8WHxwA
 - https://dbaplus.cn/news-159-2152-1.html?utm_source=oschina-app
 - [分布式事务笔记](http://www.yangguo.info/2016/05/23/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%AC%94%E8%AE%B0/)
+- https://www.atatech.org/articles/139627
