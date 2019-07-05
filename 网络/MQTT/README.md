@@ -21,3 +21,7 @@ MQTT 是一个基于客户端-服务器的消息发布/订阅传输协议。MQTT
 - 假设数据不可知，不强求传输数据的类型与格式，保持灵活性。
 
 # 主要特性
+
+# 链接
+
+- https://www.runoob.com/w3cnote/mqtt-intro.html

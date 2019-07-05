@@ -1,4 +1,4 @@
-[![返回目录](https://parg.co/Udx)](https://parg.co/UdT)
+[![返回目录](https://i.postimg.cc/WzXsh0MX/image.png)](https://parg.co/UdT)
 
 # HTTP Response | HTTP 响应详解
 
