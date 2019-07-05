@@ -17,3 +17,5 @@ MySQL 的优化主要分为结构优化（Scheme optimization）和查询优化�
 - http://blog.codinglabs.org/articles/theory-of-mysql-index.html 利用 test_db 分析索引的使用情况系列
 
 - https://mp.weixin.qq.com/s/Edn_gPwcAHo5sYIzLJghzA
+
+- https://mp.weixin.qq.com/s/ajYl2eBrgqc9cBd9_OH3_w?from=groupmessage&isappinstalled=0

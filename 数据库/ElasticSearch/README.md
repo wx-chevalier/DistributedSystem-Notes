@@ -24,3 +24,5 @@ home---这是Elasticsearch解压的目录
 # 链接
 
 - 提取其中知识脑图 https://mp.weixin.qq.com/s/pWU-c0hfTi51SPtFT4iFKA
+
+- https://mp.weixin.qq.com/s/Zgcx45R2HPDV6az37g8HzA?from=groupmessage&isappinstalled=0
