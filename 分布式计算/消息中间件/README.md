@@ -4,6 +4,8 @@
 
 目前业界常用的消息中间件包括 ActiveMQ、RabbitMQ、Kafka、阿里巴巴的 Notify、MetaQ、RocketMQ 等。
 
+![mindmap](https://i.postimg.cc/wBth1KCb/image.png)
+
 # 消息中间件的价值
 
 - 解耦：在项目启动之初来预测将来项目会碰到什么需求，是极其困难的。消息系统在处理过程中间插入了一个隐含的、基于数据的接口层，两边的处理过程都要实现这一接口。这允许你独立的扩展或修改两边的处理过程，只要确保它们遵守同样的接口约束。
@@ -25,3 +27,5 @@
 # 链接
 
 - https://mp.weixin.qq.com/s/hYfTl8eR2Vkue8-EpgZY7g
+- https://mp.weixin.qq.com/s/y3CheyPMJpLpD3pB3lTT9g
+- https://zhuanlan.zhihu.com/p/34700753

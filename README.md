@@ -35,7 +35,7 @@
 
 # Preface | 前言
 
-![](https://tva1.sinaimg.cn/large/007DFXDhgy1g4jlvqqryvj30u014o4qp.jpg)
+![mindmap](https://tva1.sinaimg.cn/large/007DFXDhgy1g4jlvqqryvj30u014o4qp.jpg)
 
 # 版权
 
