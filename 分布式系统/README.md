@@ -10,7 +10,7 @@
 
 本篇主要讨论分布式系统核心理论的相关内容。
 
-![](https://i.postimg.cc/GtrwtKbg/image.png)
+![mindmap](https://i.postimg.cc/GtrwtKbg/image.png)
 
 随着移动互联网的发展智能终端的普及，计算机系统早就从单机独立工作过渡到多机器协作工作。计算机以集群的方式存在，按照分布式理论的指导构建出庞大复杂的应用服务，也已经深入人心。
 
