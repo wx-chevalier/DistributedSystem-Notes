@@ -244,5 +244,3 @@ E 1221 Strict-Transport-Security without TLS
 ```
 $ httpolice -i har -o html /path/to/file.har >report.html
 ```
-
-![](https://coding.net/u/hoteam/p/Cache/git/raw/master/2016/8/2/6BF80CC5-C64A-4753-8EBA-FDDEA87C0297.png)

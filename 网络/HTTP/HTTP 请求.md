@@ -35,7 +35,7 @@ HTTP 的请求报文分为三个部分 请求行、请求头和请求体，格�
 | Authorization       | HTTP 授权的授权证书                                                                            | Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==       |
 | Cache-Control       | 指定请求和响应遵循的缓存机制                                                                   | Cache-Control: no-cache                                 |
 | Connection          | 表示是否需要持久连接。( HTTP 1.1 默认进行持久连接)                                             | Connection: close                                       |
-| Cookie              | HTTP 请求发送时，会把保存在该请求域名下的所有 cookie 值一起发送给 web 服务器。                 | Cookie: $Version=1; Skin=new;                           |
+| Cookie              | HTTP 请求发送时，会把保存在该请求域名下的所有 cookie 值一起发送给 web 服务器。                 | Cookie: \$Version=1; Skin=new;                          |
 | Content-Length      | 请求的内容长度                                                                                 | Content-Length: 348                                     |
 | Content-Type        | 请求的与实体对应的 MIME 信息                                                                   | Content-Type: application/x-www-form-urlencoded         |
 | Date                | 请求发送的日期和时间                                                                           | Date: Tue, 15 Nov 2010 08:12:31 GMT                     |
@@ -94,7 +94,7 @@ Content-Type: application/json;charset=utf-8
 {"title":"test","sub":[1,2,3]}
 ```
 
-这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug 、 Fiddler，都会以树形结构展示 JSON 数据，非常友好。但也有些服务端语言还没有支持这种方式，例如 php 就无法通过 $\_POST 对象从上面的请求中获得内容。这时候，需要自己动手处理下：在请求头中 Content-Type 为 application/json 时，从 `php://input` 里获得原始输入流，再 `json_decode` 成对象。一些 php 框架已经开始这么做了。
+这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug 、 Fiddler，都会以树形结构展示 JSON 数据，非常友好。但也有些服务端语言还没有支持这种方式，例如 php 就无法通过 \$\_POST 对象从上面的请求中获得内容。这时候，需要自己动手处理下：在请求头中 Content-Type 为 application/json 时，从 `php://input` 里获得原始输入流，再 `json_decode` 成对象。一些 php 框架已经开始这么做了。
 
 当然 AngularJS 也可以配置为使用 x-www-form-urlencoded 方式提交数据。如有需要，可以参考[这篇文章](http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/)。
 
@@ -192,5 +192,3 @@ web 设计者面临的众多难题之一便是怎样处理不同操作系统间�
 WARNING 这种策略在存在大量字符集的异构环境中效果不甚理想。例如：在 U.S. Windows 系统中 , é 被编码为 %E9. 在 U.S. Mac 中被编码为 %8E。这种不确定性的存在是现存的 URI 的一个明显的不足。所以在将来 URI 的规范当中应该通过国际资源标识符 (IRIs) 进行改善。
 
 类 URL 并不自动执行编码或解码工作。你能生成一个 URL 对象，它可以包括非法的 ASCII 和非 ASCII 字符和 / 或 %xx。当用方法 getPath() 和 toExternalForm( ) 作为输出方法时，这种字符和转移符不会自动编码或解码。你应对被用来生成一个 URL 对象的字符串对象负责，确保所有字符都会被恰当地编码。
-
-![](http://153.3.251.190:11900/HTTP-Request)
