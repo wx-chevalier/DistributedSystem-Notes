@@ -1,4 +1,6 @@
-# 深入浅出分布式基础架构--分布式系统篇
+![](https://i.postimg.cc/Z56JHk17/image.png)
+
+# 分布式系统
 
 参考 Tanenbaum 在 Distributed System 中的定义：
 
@@ -6,11 +8,9 @@
 
 一个分布式系统将底层的实现抽象化，用户只会看到一个统一的接口。譬如我们通常在云端存储文件，而作为用户，我们并不知道这个文件具体存储在哪个实例上。
 
-![](https://i.postimg.cc/GhmVHR43/image.png)
-
 本篇主要讨论分布式系统核心理论的相关内容。
 
-![mindmap](https://i.postimg.cc/GtrwtKbg/image.png)
+![mindmap](https://i.postimg.cc/hPpjxqR9/Distributed-System.png)
 
 随着移动互联网的发展智能终端的普及，计算机系统早就从单机独立工作过渡到多机器协作工作。计算机以集群的方式存在，按照分布式理论的指导构建出庞大复杂的应用服务，也已经深入人心。
 

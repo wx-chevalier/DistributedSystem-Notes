@@ -4,7 +4,7 @@
 
 1970 年，IBM 的研究员 E.F.Codd 博士在刊物 Communication of the ACM 上发表了一篇名为“A Relational Modelof Data for Large Shared Data Banks”的论文，提出了关系模型的概念，奠定了关系模型的理论基础。1974 年，IBM 的 Ray Boyce 和 DonChamberlin 将 Codd 关系数据库的 12 条准则的数学定义以简单的关键字语法表现出来，里程碑式地提出了 SQL（Structured Query Language）语言。在很长的时间内，关系数据库（如 MySQL 和 Oracle）对于开发任何类型的应用程序都是首选，巨石型架构也是应用程序开发的标准架构。
 
-![](https://i.postimg.cc/TwNZP70n/image.png)
+![mindmap](https://i.postimg.cc/TwNZP70n/image.png)
 
 # 数据库组件
 

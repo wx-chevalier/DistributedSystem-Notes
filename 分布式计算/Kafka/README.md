@@ -1,3 +1,5 @@
+![](https://www.confluent.io/wp-content/uploads/streaming_platform_rev.png)
+
 # Kafka
 
 Kafka 它本质上是一个消息系统，它提供了常用的消息系统的功能集，但是它的设计更加独特，原本开发自 LinkedIn，用作 LinkedIn 的活动流(Activity Stream)和运营数据处理管道(Pipeline)的基础。现在它已被多家不同类型的公司 作为多种类型的数据管道和消息系统使用。
