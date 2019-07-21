@@ -49,16 +49,6 @@ PAXOS 可以用来解决分布式环境下，选举(或设置)某一个值的问
 比如下面的情况：有三个服务器进程 A,B,C 运行在三台主机上提供数据库服务，当一个 client 连接到任何一台服务器上的时候，都能通过该服务器进行 read 和 update 的操作。首先先看一个 A、B、C 不那么均等的方法：
 A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 read、update 操作都发生在它上面，其余的两台服务器只是 slave(后者，在这里类似 proxy)，当 client 是连接在 master 的服务器的时候，其直接和 master 交互，就类似于单机的场景。当 client 时连接在 slave 的时候，所有的请求被转移到了 master 上进行操作，然后再结果返回给 client。如果 master 挂了，那么剩余两台主机在检测到 master 挂的情况后，再根据主机名最大的方法选举 master。上面的算法有一个问题，它让 A、B、C 不那么均等了，A、B、C 存在角色之分，且在某个时候 master 挂机后，需要立刻选举出新的 master 提供服务。同时，这个算法还要求各个服务器之间保持心跳。而 PAXOS 算法则不同，PAXOS 提供了一种将 A、B、C 等价的方式提供上面的操作，并保证数据的正确性。在某台主机宕机后，只要总数一半以上的服务器还存活，则整个集群依然能对外提供服务，甚至不需要心跳。
 
-## Reference
-
-* [维基百科上关于 Paxos 算法的讲解](https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95)
-* [Paxos 算法简述](http://my.oschina.net/linlifeng/blog/78918)
-* [一致性算法 Paxos 详解](http://www.solinx.co/archives/403)
-* [微信 PaxosStore：深入浅出 Paxos 算法协议 ](https://www.sdk.cn/news/5826)
-* [微信 PaxosStore 内存云揭秘：十亿 Paxos/分钟的挑战 ](http://mp.weixin.qq.com/s?__biz=MzI4NDMyNTU2Mw==&mid=2247483804&idx=1&sn=a6629ebdaefbc2470c2ecbf12577daff)
-* [图解 Paxos 一致性协议](http://blog.xiaohansong.com/2016/09/30/Paxos/)
-* [Plain Paxos Implementations in Python & Java](https://github.com/cocagne/paxos)
-
 # 算法原理
 
 ## Terminology:名词解释
@@ -71,12 +61,12 @@ A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 r
    ## Process:处理流程
    批准 value 的过程中，首先 proposers 将 value 发送给 Acceptors，之后 Acceptors 对 value 进行接受(accept)。为了满足只批准一个 value 的约束，要求经“多数派(majority)”接受的 value 成为正式的决议(称为“批准”决议)。这是因为无论是按照人数还是按照权重划分，两组“多数派”至少有一个公共的 Acceptor，如果每个 Acceptor 只能接受一个 value，约束 2 就能保证。整个过程(一个实例或称一个事务或一个 Round)分为两个阶段：
 
-* phase1(准备阶段)
-  * Proposer 向超过半数(n/2+1)Acceptor 发起 prepare 消息(发送编号)
-  * 如果 prepare 符合协议规则 Acceptor 回复 promise 消息，否则拒绝
-* phase2(决议阶段或投票阶段)
-  * 如果超过半数 Acceptor 回复 promise，Proposer 向 Acceptor 发送 accept 消息(此时包含真实的值)
-  * Acceptor 检查 accept 消息是否符合规则，消息符合则批准 accept 请求
+- phase1(准备阶段)
+  - Proposer 向超过半数(n/2+1)Acceptor 发起 prepare 消息(发送编号)
+  - 如果 prepare 符合协议规则 Acceptor 回复 promise 消息，否则拒绝
+- phase2(决议阶段或投票阶段)
+  - 如果超过半数 Acceptor 回复 promise，Proposer 向 Acceptor 发送 accept 消息(此时包含真实的值)
+  - Acceptor 检查 accept 消息是否符合规则，消息符合则批准 accept 请求
 
 根据上述过程当一个 proposer 发现存在编号更大的提案时将终止提案。这意味着提出一个编号更大的提案会终止之前的提案过程。如果两个 proposer 在这种情况下都转而提出一个编号更大的提案，就可能陷入活锁，违背了 Progress 的要求。这种情况下的解决方案是选举出一个 leader，仅允许 leader 提出提案。但是由于消息传递的不确定性，可能有多个 proposer 自认为自己已经成为 leader。Lamport 在 The Part-Time Parliament 一文中描述并解决了这个问题。
 
@@ -100,9 +90,9 @@ A、B、C 选举主机名最大的服务器为 master 提供服务，所有的 r
 
 该约束还可以表述为：
 
-* 一旦一个具有 value v 的提案被批准(chosen)，那么之后任何 Acceptor 再次接受(accept)的提案必须具有 value v。
-* 一旦一个具有 value v 的提案被批准(chosen)，那么以后任何 proposer 提出的提案必须具有 value v。
-* 如果一个编号为 n 的提案具有 value v，那么存在一个多数派，要么他们中所有人都没有接受(accept)编号小于 n
+- 一旦一个具有 value v 的提案被批准(chosen)，那么之后任何 Acceptor 再次接受(accept)的提案必须具有 value v。
+- 一旦一个具有 value v 的提案被批准(chosen)，那么以后任何 proposer 提出的提案必须具有 value v。
+- 如果一个编号为 n 的提案具有 value v，那么存在一个多数派，要么他们中所有人都没有接受(accept)编号小于 n
   的任何提案，要么他们已经接受(accept)的所有编号小于 n 的提案中编号最大的那个提案具有 value v。
 
 因为每个 Proposer 都可提出多个议案，每个议案最初都有一个不同的 Value 所以要满足 P3 就又要推出一个新的约束 P4；
@@ -235,7 +225,7 @@ A1 没有达到多数，A5 达到了，于是 A5 将主持投票，决议的内�
 
 ## 基于逻辑时钟的 Paxos 协议
 
-* [使用逻辑时钟重述 paxos 协议](http://www.tuicool.com/articles/MbQjQnB)
+- [使用逻辑时钟重述 paxos 协议](http://www.tuicool.com/articles/MbQjQnB)
 
 为了让这套系统能正确运行，我们需要一个精确的时钟。由于操作系统的物理时钟经常是有偏差的，所以我们决定采用一个逻辑时钟。时钟的目的是给系统中 发生的每一个事件编排一个序号。假设我们有一台单独的机器提供了一个全局的计数器服务。它只支持一个方法：incrementAndGet()。这个方法 的作用是将计数器的值加一，并且返回增加后的值。我们将这个计数器称为 globalClock。globalClock 的初始值为 0。然后，系统中的每个其它机器，都有一个自己的 localClock,它的初始值来自 globalClock。
 
