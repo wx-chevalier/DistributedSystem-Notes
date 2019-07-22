@@ -8,6 +8,10 @@
 
 - 采用 BFT 一致性算法的分布式系统，即使系统中的节点发生了任意类型的错误，只要发生错误的节点少于一定比例，整个系统的可靠性就可以保证。因此，在开放式分布式系统中，比如区块链网络，必须采用 BFT 一致性算法。
 
+# 拜占庭将军问题
+
+Byzantine failure，即虽然有可能一个消息被传递了两次，但是绝对不会出现错误的消息。
+
 # 主流算法对比
 
 Zookeeper 的 ZAB，Viewstamped Replication(VR)，Raft，Multi-Paxos，这些都可以被称之为 Leader-based 一致性协议。不同的是，Multi-Paxos Leader 是作为对经典 Paxos 的优化而提出，通过选择一个 Proposer 作为 Leader 降低多个 Proposer 引起冲突的频率，提升性能将一次决议的平均消息代价缩小到最优的两次，实际上就算有多个 Leader 存在，算法还是安全的，只是退化为经典的 Paxos 算法。
