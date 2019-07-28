@@ -1,4 +1,4 @@
-![default](https://user-images.githubusercontent.com/5803001/45228847-daf52d00-b2f6-11e8-9367-a48c196da018.png)
+![default](https://i.postimg.cc/2SVpd63d/image.png)
 
 # 深入浅出分布式基础架构
 
