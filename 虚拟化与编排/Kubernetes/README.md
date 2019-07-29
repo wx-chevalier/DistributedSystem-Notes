@@ -34,3 +34,4 @@ Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分�
 # 链接
 
 - https://draveness.me/ 系列 K8S 相关文章
+- https://jimmysong.io/kubernetes-handbook/concepts/pod-overview.html
