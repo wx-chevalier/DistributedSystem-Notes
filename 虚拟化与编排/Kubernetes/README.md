@@ -1,5 +1,7 @@
 # Kubernetes
 
+Kubernetes 的官方定义为：Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.It groups containers that make up an application into logical units for easy management and discovery.
+
 Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分布式容器编排架构，具有完备的功能用于支撑分布式系统以及微服务架构，同时具备超强的横向扩容能力；它提供了自动化容器的部署和复制，随时扩展或收缩容器规模，将容器组织成组，并且提供容器间的负载均衡，提供容器弹性等特性。以正确的方式使用 Kubernetes 可帮助 DevOps 即服务团队自动扩展应用程序并以零停机时间进行更新。
 
 # 功能特性
