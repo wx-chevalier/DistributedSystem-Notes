@@ -2,7 +2,7 @@
 
 Kubernetes 的官方定义为：Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.It groups containers that make up an application into logical units for easy management and discovery.
 
-Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分布式容器编排架构，具有完备的功能用于支撑分布式系统以及微服务架构，同时具备超强的横向扩容能力；它提供了自动化容器的部署和复制，随时扩展或收缩容器规模，将容器组织成组，并且提供容器间的负载均衡，提供容器弹性等特性。以正确的方式使用 Kubernetes 可帮助 DevOps 即服务团队自动扩展应用程序并以零停机时间进行更新。
+Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分布式容器编排架构，具有完备的功能用于支撑分布式系统以及微服务架构，同时具备超强的横向扩容能力；它提供了自动化容器的部署和复制，随时扩展或收缩容器规模，将容器组织成组，并且提供容器间的负载均衡，提供容器弹性等特性。Kubernetes 是 Google 基于 Borg 开源的容器编排调度引擎，作为 CNCF（Cloud Native Computing Foundation）最重要的组件之一，它的目标不仅仅是一个编排系统，而是提供一个规范，可以让你来描述集群的架构，定义服务的最终状态；以正确的方式使用 Kubernetes 可帮助 DevOps 即服务团队自动扩展应用程序并以零停机时间进行更新。Kubernetes 作为云原生应用的基石，相当于一个云操作系统，其重要性不言而喻。
 
 # 功能特性
 
@@ -33,19 +33,19 @@ Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分�
   - 水平基础架构缩放：在单个服务器级别执行操作以应用水平缩放。可以毫不费力地添加或分离 atest 服务器。
   - 自动扩展：根据 CPU 资源或其他应用程序指标的使用情况，您可以更改正在运行的容器数
   - 手动缩放：您可以通过命令或界面手动缩放正在运行的容器的数量
-  - 复制控制器：复制控制器确保群集在运行条件下具有指定数量的等效窗格。如果存在太多 pod，则复制控制器可以删除额外的 pod，反之亦然。
+  - 复制控制器：复制控制器确保群集在运行条件下具有指定数量的等效窗格。如果存在太多 Pod，则复制控制器可以删除额外的 Pod，反之亦然。
 
-- 处理应用程序的可用性：Kubernetes 检查节点和容器的运行状况，并在由于错误导致的盒中崩溃时提供自我修复和自动替换。此外，它在多个 pod 之间分配负载，以便在意外流量期间快速平衡资源。
+- 处理应用程序的可用性：Kubernetes 检查节点和容器的运行状况，并在由于错误导致的盒中崩溃时提供自我修复和自动替换。此外，它在多个 Pod 之间分配负载，以便在意外流量期间快速平衡资源。
 
-- 存储卷：在 Kubernetes 中，数据在容器之间共享，但如果 pod 被杀死，则会自动删除卷。此外，数据是远程存储的，因此如果将 pod 移动到另一个节点，数据将保留，直到用户删除为止。
+- 存储卷：在 Kubernetes 中，数据在容器之间共享，但如果 Pod 被杀死，则会自动删除卷。此外，数据是远程存储的，因此如果将 Pod 移动到另一个节点，数据将保留，直到用户删除为止。
 
 ## 不足
 
 - 初始过程需要时间：创建新进程时，您必须等待应用程序开始，然后才能供用户使用。如果要迁移到 Kubernetes，则需要对代码库进行修改，以使启动过程更有效，这样用户就不会有糟糕的体验。
-- 迁移到无状态需要付出很多努力：如果您的应用程序是群集或无状态的，则不会配置额外的 pod，并且必须在应用程序中重新配置。
+- 迁移到无状态需要付出很多努力：如果您的应用程序是群集或无状态的，则不会配置额外的 Pod，并且必须在应用程序中重新配置。
 - 安装过程繁琐：如果您不使用 Azure，Google 或 Amazon 等任何云提供商，则很难在群集上设置 Kubernetes。
 
 # 链接
 
 - https://draveness.me/ 系列 K8S 相关文章
-- https://jimmysong.io/kubernetes-handbook/concepts/pod-overview.html
+- https://jimmysong.io/kubernetes-handbook/concepts/Pod-overview.html
