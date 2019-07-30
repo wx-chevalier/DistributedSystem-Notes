@@ -11,8 +11,7 @@
 
 ```yaml
 apiVersion: apps/v1
-kind:
-Deployment
+kind: Deployment
 metadata:
   name: nginx
 spec:
@@ -22,17 +21,16 @@ spec:
       app-name: my-nginx
 
 template:
-    metadata:
-      labels:
-        app-name: my-nginx
-    spec:
-      containers:
-        - name: nginx
-          image: nginx
+  metadata:
+    labels:
+      app-name: my-nginx
+  spec:
+    containers:
+      - name: nginx
+        image: nginx
 ---
 apiVersion: v1
-kind:
-Service
+kind: Service
 metadata:
   name: nginx
 spec:

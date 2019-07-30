@@ -2,7 +2,7 @@
 
 推荐首先使用 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) 搭建简单的本地化集群，其需要依次安装 [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 以及 [minikube](https://github.com/kubernetes/minikube/releases) 等工具；在生产环境下，我们常常需要离线安装，此时可以参考[离线安装 K8S](https://parg.co/AT5)。
 
-# 集群初始化
+# kubelet
 
 kubeadm 用于搭建并启动一个集群，kubelet 用于集群中所有节点上都有的用于做诸如启动 pod 或容器这种事情，kubectl 则是与集群交互的命令行接口。kubelet 和 kubectl 并不会随 kubeadm 安装而自动安装，需要手工安装。
 
@@ -11,7 +11,8 @@ kubeadm 用于搭建并启动一个集群，kubelet 用于集群中所有节点�
 ```sh
 # 添加源并且更新
 $ vim /etc/apt/sources.list.d/kubernetes.list
-$ deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main
+# 添加如下行：
+# deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main
 $ apt-get update
 
 $ apt-get install -y kubelet kubeadm kubectl --allow-unauthenticated
@@ -33,6 +34,8 @@ KUBELET_KUBEADM_EXTRA_ARGS=--cgroup-driver=<value>
 $ systemctl daemon-reload
 $ systemctl restart kubelet
 ```
+
+# kubeadm 集群初始化
 
 kubeadm 安装完毕后，可以初始化 Master 节点：
 
@@ -73,6 +76,8 @@ for img in $(docker images --format "{{.Repository}}:{{.Tag}}"| grep "anjia0532"
 done
 ```
 
+# kubectl
+
 Master 节点初始化完毕后，我们需要加入工作节点，或者设置 Master 节点上可调度 Pods
 
 ```sh
@@ -88,6 +93,8 @@ $ kubeadm token list
 # 工作节点加入集群
 $ kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash>
 ```
+
+# 网络配置
 
 我们还需要配置节点间通信的网络:
 
