@@ -2,6 +2,10 @@
 
 Reactor 模型在 Linux 系统中的具体实现即是 select/poll/epoll/kqueue，像 Redis 中即是采用了 Reactor 模型实现了单进程单线程高并发。Reactor 模型的理论基础可以参考[reactor-siemens](http://www.dre.vanderbilt.edu/%7Eschmidt/PDF/reactor-siemens.pdf)
 
+# 线程模型
+
+# 实现逻辑
+
 ## 核心组件
 
 ![](http://www.dengshenyu.com/assets/redis-reactor/reactor-mode3.png)
@@ -30,7 +34,7 @@ Reactor 模型的基本的处理逻辑为：(1)我们注册 Concrete Event Handl
 3. del 从 reactor 中移除，不再监听事件
 4. callback 就是事件发生后对应的处理逻辑，一般在 add/set 时制定。C 语言用函数指针实现，JS 可以用匿名函数，PHP 可以用匿名函数、对象方法数组、字符串函数名。
 
-Reactor 只是一个事件发生器，实际对 socket 句柄的操作，如 connect/accept、send/recv、close 是在 callback 中完成的。具体编码可参考下面的伪代码：
+Reactor 只是一个事件发生器，实际对 socket 句柄的操作，如 connect/accept、send/recv、close 是在 callback 中完成的。具体编码可参考下面的 Swoole 伪代码：
 
 ![](http://rango.swoole.com/static/io/6.png)
 
@@ -43,11 +47,6 @@ Reactor 模型还可以与多进程、多线程结合起来用，既实现异步
 
 协程从底层技术角度看实际上还是异步 IO Reactor 模型，应用层自行实现了任务调度，借助 Reactor 切换各个当前执行的用户态线程，但用户代码中完全感知不到 Reactor 的存在。
 
-# Proactor 模型
+# 链接
 
-Reactor 和 Proactor 模式的主要区别就是真正的读取和写入操作是有谁来完成的，Reactor 中需要应用程序自己读取或者写入数据，而 Proactor 模式中，应用程序不需要进行实际的读写过程，它只需要从缓存区读取或者写入即可，操作系统会读取缓存区或者写入缓存区到真正的 IO 设备。Proactor 模型的基本处理逻辑如下：
-
-1. 应用程序初始化一个异步读取操作，然后注册相应的事件处理器，此时事件处理器不关注读取就绪事件，而是关注读取完成事件，这是区别于 Reactor 的关键。
-2. 事件分离器等待读取操作完成事件。
-3. 在事件分离器等待读取操作完成的时候，操作系统调用内核线程完成读取操作(异步 IO 都是操作系统负责将数据读写到应用传递进来的缓冲区供应用程序操作，操作系统扮演了重要角色)，并将读取的内容放入用户传递过来的缓存区中。这也是区别于 Reactor 的一点，Proactor 中，应用程序需要传递缓存区。
-4. 事件分离器捕获到读取完成事件后，激活应用程序注册的事件处理器，事件处理器直接从缓存区读取数据，而不需要进行实际的读取操作。
+- https://blog.csdn.net/u013074465/article/details/46276967
