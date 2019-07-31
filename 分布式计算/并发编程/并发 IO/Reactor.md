@@ -1,8 +1,32 @@
 # Reactor 模型
 
-Reactor 模型在 Linux 系统中的具体实现即是 select/poll/epoll/kqueue，像 Redis 中即是采用了 Reactor 模型实现了单进程单线程高并发。Reactor 模型的理论基础可以参考[reactor-siemens](http://www.dre.vanderbilt.edu/%7Eschmidt/PDF/reactor-siemens.pdf)
+Reactor 模型在 Linux 系统中的具体实现即是 select/poll/epoll/kqueue，像 Redis 中即是采用了 Reactor 模型实现了单进程单线程高并发。Reactor 模型的理论基础可以参考 [reactor-siemens](http://www.dre.vanderbilt.edu/%7Eschmidt/PDF/reactor-siemens.pdf)
 
 # 线程模型
+
+## 单线程模型
+
+所有的IO操作都在同一个NIO线程上面完成，NIO线程需要处理客户端的TCP连接，同时读取客户端Socket的请求或者应答消息以及向客户端发送请求或者应答消息。如下图：
+
+![](https://i.postimg.cc/cLws0kS8/1fdcd36e76359339539a507278f566d7.png)
+
+由于采用的是非阻塞的IO，所有IO操作都不会导致阻塞，从理论上来说，一个线程可以独立处理所有的IO相关操作，处理流程如下:
+
+![](https://i.postimg.cc/zfNqBwz2/65cdba67cfcee3302b88d114e2fd5baf.png)
+
+可以看出，单线程模型只适用并发量比较小的应用场景。当一个NIO线程同时处理上万个连接时，处理速度会变慢，会导致大量的客户端连接超时，超时之后如果进行重发，更加会加重了NIO线程的负载，最终会有大量的消息积压和处理超时，NIO线程会成为系统的瓶颈。
+
+## 多线程模型
+
+多线程模型与单线程模型最大的区别是有专门的一组NIO线程处理IO操作，一般使用线程池的方式实现。一个NIO线程同时处理多条连接，一个连接只能属于1个NIO线程，这样能够防止并发操作问题。
+
+![](https://i.postimg.cc/s2JsZB1j/fbd2af5606580061718cb69254f95a71.png)
+
+## 主从多线程模型
+
+服务端用于接收客户端连接的不是1个单独的NIO线程了，而是采用独立的NIO线程池。Acceptor接收TCP连接请求处理完成之后，将创建新的SocketChannel注册到处理连接的IO线程池中的某个IO线程上，有它去处理IO读写以及编解码的工作。Acceptor只用于客户端登录、握手以及认证，一旦连接成功之后，将链路注册到线程池的IO线程上。
+
+![](https://i.postimg.cc/SsNqLyzW/e774d586cd02cf2d4e7adba4b8300eac.png)
 
 # 实现逻辑
 
