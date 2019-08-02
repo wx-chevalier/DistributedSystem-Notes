@@ -19,3 +19,9 @@ MySQL 的优化主要分为结构优化（Scheme optimization）和查询优化�
 - https://mp.weixin.qq.com/s/Edn_gPwcAHo5sYIzLJghzA
 
 - https://mp.weixin.qq.com/s/ajYl2eBrgqc9cBd9_OH3_w?from=groupmessage&isappinstalled=0
+
+- https://mp.weixin.qq.com/s/AYnP-Sp82yYguCn0Gf8cIg
+
+- https://mp.weixin.qq.com/s/Qv5QzzVoUtIB58UmIRG-lQ
+
+- https://zhuanlan.zhihu.com/p/72071609

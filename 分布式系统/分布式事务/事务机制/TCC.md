@@ -9,3 +9,7 @@ TCC 是服务化的二阶段编程模型，其 Try、Confirm、Cancel 3 个方�
 - Cancel 是预留资源的取消。
 
 TCC 事务的 Try、Confirm、Cancel 可以理解为 SQL 事务中的 Lock、Commit、Rollback。
+
+# 链接
+
+- https://mp.weixin.qq.com/s/Qr6yGSSp_R5RUJXQkEeDlg
