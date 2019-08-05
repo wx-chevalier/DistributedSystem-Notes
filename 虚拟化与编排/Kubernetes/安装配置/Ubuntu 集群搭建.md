@@ -2,6 +2,8 @@
 
 推荐首先使用 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) 搭建简单的本地化集群，其需要依次安装 [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 以及 [minikube](https://github.com/kubernetes/minikube/releases) 等工具；在生产环境下，我们常常需要离线安装，此时可以参考[离线安装 K8S](https://parg.co/AT5)。
 
+# 镜像解析
+
 # kubelet
 
 kubeadm 用于搭建并启动一个集群，kubelet 用于集群中所有节点上都有的用于做诸如启动 pod 或容器这种事情，kubectl 则是与集群交互的命令行接口。kubelet 和 kubectl 并不会随 kubeadm 安装而自动安装，需要手工安装。
