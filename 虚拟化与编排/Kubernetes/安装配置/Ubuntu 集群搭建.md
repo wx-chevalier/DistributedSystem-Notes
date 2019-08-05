@@ -4,6 +4,53 @@
 
 # 镜像解析
 
+gcr.io 的很多镜像国内不便于访问，有[同学](https://github.com/anjia0532/gcr.io_mirror)将 gcr.io 相关镜像 pull 下来，然后 push 到 docker 官方仓库，相关转换语法如下：
+
+```sh
+gcr.io/namespace/image_name:image_tag
+# 等价于
+anjia0532/namespace.image_name:image_tag
+
+# 特别的
+k8s.gcr.io/{image}/{tag} <==> gcr.io/google-containers/{image}/{tag} <==> anjia0532/google-containers.{image}/{tag}
+```
+
+批量转换的脚本如下：
+
+```sh
+# replace gcr.io/google-containers/federation-controller-manager-arm64:v1.3.1-beta.1 to real image
+# this will convert gcr.io/google-containers/federation-controller-manager-arm64:v1.3.1-beta.1
+# to anjia0532/google-containers.federation-controller-manager-arm64:v1.3.1-beta.1 and pull it
+# k8s.gcr.io/{image}/{tag} <==> gcr.io/google-containers/{image}/{tag} <==> anjia0532/google-containers.{image}/{tag}
+
+images=$(cat img.txt)
+#or
+#images=$(cat <<EOF
+# gcr.io/google-containers/federation-controller-manager-arm64:v1.3.1-beta.1
+# gcr.io/google-containers/federation-controller-manager-arm64:v1.3.1-beta.1
+# gcr.io/google-containers/federation-controller-manager-arm64:v1.3.1-beta.1
+#EOF
+#)
+
+eval $(echo ${images}|
+        sed 's/k8s\.gcr\.io/anjia0532\/google-containers/g;s/gcr\.io/anjia0532/g;s/\//\./g;s/ /\n/g;s/anjia0532\./anjia0532\//g' |
+        uniq |
+        awk '{print "docker pull "$1";"}'
+       )
+
+# this code will retag all of anjia0532's image from local  e.g. anjia0532/google-containers.federation-controller-manager-arm64:v1.3.1-beta.1
+# to gcr.io/google-containers/federation-controller-manager-arm64:v1.3.1-beta.1
+# k8s.gcr.io/{image}/{tag} <==> gcr.io/google-containers/{image}/{tag} <==> anjia0532/google-containers.{image}/{tag}
+
+for img in $(docker images --format "{{.Repository}}:{{.Tag}}"| grep "anjia0532"); do
+  n=$(echo ${img}| awk -F'[/.:]' '{printf "gcr.io/%s",$2}')
+  image=$(echo ${img}| awk -F'[/.:]' '{printf "/%s",$3}')
+  tag=$(echo ${img}| awk -F'[:]' '{printf ":%s",$2}')
+  docker tag $img "${n}${image}${tag}"
+  [[ ${n} == "gcr.io/google-containers" ]] && docker tag $img "k8s.gcr.io${image}${tag}"
+done
+```
+
 # kubelet
 
 kubeadm 用于搭建并启动一个集群，kubelet 用于集群中所有节点上都有的用于做诸如启动 pod 或容器这种事情，kubectl 则是与集群交互的命令行接口。kubelet 和 kubectl 并不会随 kubeadm 安装而自动安装，需要手工安装。
