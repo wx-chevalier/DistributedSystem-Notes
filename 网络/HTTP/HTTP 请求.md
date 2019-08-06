@@ -4,7 +4,7 @@
 
 HTTP 的请求报文分为三个部分 请求行、请求头和请求体，格式如图: ![](http://upload-images.jianshu.io/upload_images/1724103-c43900117e983241.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 一个典型的请求消息头域，如下所示：
 
-```
+```xml
 　　POST/GET http://download.microtool.de:80/somedata.exe
 　　Host: download.microtool.de
 　　Accept:*/*
@@ -121,7 +121,7 @@ XML-RPC 协议简单、功能够用，各种语言的实现都有。它的使用
 
 ### Query String:application/x-www-form-urlencoded
 
-这算是最常见的 POST 提交数据的方式了。浏览器的原生 <form> 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样(无关的请求头在本文中都省略掉了)：
+这算是最常见的 POST 提交数据的方式了。浏览器的原生 `<form>` 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样(无关的请求头在本文中都省略掉了)：
 
 > POST http://www.example.com HTTP/1.1 Content-Type: application/x-www-form-urlencoded;charset=utf-8 title=test&sub%5B%5D=1&sub%5B%5D=2&sub%5B%5D=3
 
