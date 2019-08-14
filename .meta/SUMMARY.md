@@ -11,6 +11,7 @@
   - [文件操作](../Linux 与操作系统/Shell 编程/文件操作.md) 
   - [流程控制](../Linux 与操作系统/Shell 编程/流程控制.md) 
   - [语法基础](../Linux 与操作系统/Shell 编程/语法基础.md) 
+- [内核](../Linux 与操作系统/内核/README.md) 
 - [处理器](../Linux 与操作系统/处理器/README.md) 
 - [存储 IO](../Linux 与操作系统/存储 IO/README.md) 
   - [Zero Copy](../Linux 与操作系统/存储 IO/Zero Copy.md) 
