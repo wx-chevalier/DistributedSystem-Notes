@@ -41,7 +41,7 @@ spec:
 然后通过如下操作进行创建：
 
 ```sh
-$ kubectl create -f https://kubernetes.io/docs/user-guide/nginx-deployment.yaml --record
+$ kubectl create -f https://raw.githubusercontent.com/kubernetes-client/python/master/examples/nginx-deployment.yaml --record
 deployment "nginx-deployment" created
 
 $ kubectl get deployments

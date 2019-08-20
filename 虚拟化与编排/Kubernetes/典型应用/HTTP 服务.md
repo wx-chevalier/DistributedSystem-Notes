@@ -1,8 +1,72 @@
 # 应用部署
 
-# Deployment
+# Deployment & Service
 
-# Service
+```yml
+# nginx-deployment-service.yaml
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 3 # tells deployment to run 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: default
+  labels:
+    app: nginx
+spec:
+  externalTrafficPolicy: Local
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: nginx
+  type: NodePort
+```
+
+```sh
+$ kubectl create -f https://raw.githubusercontent.com/wx-chevalier/Backend-Boilerplates/master/K8s/Base/nginx-deployment-service.yaml
+
+$ kubectl get pod
+
+NAME                                             READY   STATUS    RESTARTS   AGE
+nginx-56db997f77-2q6qz                           1/1     Running   0          3m21s
+nginx-56db997f77-fv2zs                           1/1     Running   0          3m21s
+nginx-56db997f77-wx2q5                           1/1     Running   0          3m21s
+
+$ kubectl get deployment
+
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+nginx                           3/3     3            3           3m36s
+
+$ kubectl get svc
+
+NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP                              PORT(S)                      AGE
+kubernetes                      ClusterIP      10.43.0.1       <none>                                   443/TCP                      21h
+nginx                           NodePort       10.43.8.50      <none>                                   80:32356/TCP                 4m5s
+```
+
+![](https://i.postimg.cc/6qQZRXwh/image.png)
 
 # Ingress
 
@@ -138,6 +202,11 @@ NAME:  wordpress-test
 这里我们使用 Ingress 负载均衡进行访问，可以通过如下方式访问到服务：
 
 ```sh
+$ kubectl get ingress
+
+NAME                             HOSTS             ADDRESS                                  PORTS   AGE
+wordpress.local-wordpress-test   wordpress.local   172.19.157.1,172.19.157.2,172.19.157.3   80      59m
+
 $ curl -I http://wordpress.local -x 127.0.0.1:80
 
 HTTP/1.1 200 OK
