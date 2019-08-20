@@ -4,7 +4,7 @@
 
 # 镜像解析
 
-gcr.io 的很多镜像国内不便于访问，有[同学](https://github.com/anjia0532/gcr.io_mirror)将 gcr.io 相关镜像 pull 下来，然后 push 到 docker 官方仓库，相关转换语法如下：
+gcr.io 的很多镜像国内不便于访问，有同学将 [gcr.io 相关镜像](https://github.com/anjia0532/gcr.io_mirror) pull 下来，然后 push 到 docker 官方仓库，相关转换语法如下：
 
 ```sh
 gcr.io/namespace/image_name:image_tag

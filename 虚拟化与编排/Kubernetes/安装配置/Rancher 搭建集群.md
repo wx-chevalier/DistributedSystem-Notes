@@ -16,7 +16,7 @@
 假设现在我们有两个节点 master 和 node，请参考 [Rancher Quick Start Guide](https://rancher.com/docs/rancher/v2.x/en/quick-start-guide/deployment/quickstart-manual-setup/) 安装 Rancher。
 
 ```bash
-docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
+$ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
 ```
 
 ![](https://i.postimg.cc/4dFXp2Rw/image.png)
@@ -27,7 +27,7 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
 
 ![](https://i.postimg.cc/7hFDWC62/image.png)
 
-我们需要将脚本复制到对应的机器上运行，然后 Rancher 将自动创建 Kubernetes 集群，并默认在 80 端口运行 web server。
+我们需要将脚本复制到对应的机器上运行，然后 Rancher 将自动创建 Kubernetes 集群，并默认在 80 端口运行 Web Server。
 
 ## Node
 
@@ -40,6 +40,61 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
 ![](https://i.postimg.cc/jjtqTJh6/image.png)
 
 如果您习惯使用命令行与集群交互可以 Rancher 的 web 上找到集群首页上的 `Kubeconfig File` 下载按钮，将该文件中的内容保存到您自己电脑的 `~/.kube/config` 文件中。然后现在对应 Kubernetes 版本的 `kubectl` 命令并放到 `PATH` 路径下即可。如果您没有在本地安装 `kubectl` 工具，也可以通过 Rancher 的集群页面上的 `Launch kubectl` 命令通过 web 来操作集群。
+
+# Helm
+
+Helm 是由 Deis 发起的一个开源工具，有助于简化部署和管理 Kubernetes 应用。在本章的实践中，我们也会使用 Helm 来简化很多应用的安装操作。
+
+![](https://i.postimg.cc/HkrFs1Cb/image.png)
+
+在 Linux 中可以使用 Snap 安装 Heml：
+
+```sh
+$ sudo snap install helm --classic
+
+# 通过键入如下命令，在 Kubernetes 群集上安装 Tiller
+$ helm init --upgrade
+```
+
+在缺省配置下， Helm 会利用 "gcr.io/kubernetes-helm/tiller" 镜像在 Kubernetes 集群上安装配置 Tiller；并且利用 "https://kubernetes-charts.storage.googleapis.com" 作为缺省的 stable repository 的地址。由于在国内可能无法访问 "gcr.io", "storage.googleapis.com" 等域名，阿里云容器服务为此提供了镜像站点。请执行如下命令利用阿里云的镜像来配置 Helm：
+
+```sh
+$ helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.5.1 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+
+# 删除默认的源
+$ helm repo remove stable
+
+# 增加新的国内镜像源
+$ helm repo add stable https://burdenbear.github.io/kube-charts-mirror/
+$ helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+
+# 查看 Helm 源添加情况
+$ helm repo list
+```
+
+Helm 的常见命令如下：
+
+```sh
+# 查看在存储库中可用的所有 Helm Charts
+$ helm search
+
+# 更新 Charts 列表以获取最新版本
+$ helm repo update
+
+# 查看某个 Chart 的变量
+$ helm inspect values stable/mysql
+
+# 查看在群集上安装的 Charts 列表
+$ helm list
+
+# 删除某个 Charts 的部署
+$ helm del --purge wordpress-test
+
+# 为 Tiller 部署添加授权
+$ kubectl create serviceaccount --namespace kube-system tiller
+$ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+$ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+```
 
 # 链接
 
