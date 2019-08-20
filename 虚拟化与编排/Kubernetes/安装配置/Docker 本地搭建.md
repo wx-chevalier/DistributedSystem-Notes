@@ -33,7 +33,7 @@ k8s_POD_etcd-docker-for-desktop_kube-system_56a21c0a5f545c0cca5388c457bb1b3b_0  
 
 ```sh
 $ kubectl get namespaces
-$ kubectl get posts --namespace kube-system
+$ kubectl get pods --namespace kube-system
 ```
 
 接下来我们可以使用 kubectl 命令来创建简单的 kubernetes-dashboard 服务：
@@ -121,9 +121,9 @@ services:
     build: web
     image: dockerdemos/lab-web
     volumes:
-     - "./web/static:/static"
+      - './web/static:/static'
     ports:
-     - "80:80"
+      - '80:80'
 
   words:
     build: words
