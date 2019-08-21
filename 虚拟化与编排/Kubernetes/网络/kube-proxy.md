@@ -21,3 +21,7 @@ kube-proxy 通过配置 DNAT 规则（从容器出来的访问，从本地主机
 # kube-proxy 反向代理
 
 不管是通过集群内部服务入口 `<cluster ip>:port` 还是通过集群外部服务入口 `<node ip>:nodePort` 的请求都将重定向到本地 kube-proxy 端口（随机端口）的映射，然后将到这个 kube-proxy 端口的访问给代理到远端真实的 Pod 地址上去。
+
+![](https://i.postimg.cc/y8mx0P6p/image.png)
+
+![](https://i.postimg.cc/mrTDjHtL/image.png)
