@@ -8,7 +8,19 @@ Service 是对一组提供相同功能的 Pods 的抽象，并为它们提供一
 
 # 服务发现与负载均衡
 
-Kubernetes 在设计之初就充分考虑了针对容器的服务发现与负载均衡机制，提供了 Service 资源，并通过 kube-proxy 配合 cloud provider 来适应不同的应用场景。随着 kubernetes 用户的激增，用户场景的不断丰富，又产生了一些新的负载均衡机制。目前，kubernetes 中的负载均衡大致可以分为以下几种机制，每种机制都有其特定的应用场景：
+在 Kubernetes 中，我们可能会遇到许多不同的代理的概念，主要包含以下几类：
+
+- kubectl 代理：在用户的桌面或 pod 中运行，代理从本地主机地址到 Kubernetes apiserver；客户端到代理将使用 HTTP，代理到 apiserver 使用 HTTPS，定位 apiserver，添加身份验证 header。
+
+- apiserver 代理：内置于 apiserver 中，将集群外部的用户连接到集群 IP，否则这些 IP 可能无法访问。运行在 apiserver 进程中，客户端代理使用 HTTPS（也可配置为 http），代理将根据可用的信息决定使用 HTTP 或者 HTTPS 代理到目标。可用于访问节点、Pod 或服务，在访问服务时进行负载平衡。
+
+- kube proxy：运行在每个节点上，代理 UDP 和 TCP，不能代理 HTTP。提供负载均衡，只能用来访问服务。
+
+- 位于 apiserver 之前的 Proxy/Load-balancer：存在和实现因集群而异（例如 nginx），位于所有客户和一个或多个 apiserver 之间，如果有多个 apiserver，则充当负载均衡器。
+
+- 外部服务上的云负载均衡器：由一些云提供商提供（例如 AWS ELB，Google Cloud Load Balancer），当 Kubernetes 服务类型为 LoadBalancer 时自动创建，只使用 UDP/TCP，具体实现因云提供商而异。
+
+Kubernetes 在设计之初就充分考虑了针对容器的服务发现与负载均衡机制，提供了 Service 资源，并通过 kube-proxy 配合 Cloud Provider 来适应不同的应用场景。随着 kubernetes 用户的激增，用户场景的不断丰富，又产生了一些新的负载均衡机制。目前，kubernetes 中的负载均衡大致可以分为以下几种机制，每种机制都有其特定的应用场景：
 
 - Service：直接用 Service 提供 cluster 内部的负载均衡，并借助 cloud provider 提供的 LB 提供外部访问
 
