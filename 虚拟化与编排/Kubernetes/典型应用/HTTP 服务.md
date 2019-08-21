@@ -2,6 +2,8 @@
 
 # Deployment & Service
 
+在 [K8s Boilerplates](https://github.com/wx-chevalier/Backend-Boilerplates/tree/master/K8s) 中我们定义了简单的 Nginx 的部署与服务，分别用于集群构建与对外的服务暴露：
+
 ```yml
 # nginx-deployment-service.yaml
 ---
@@ -233,7 +235,3 @@ nginx-ingress  0s
 NAME           AGE
 nginx-ingress  0s
 ```
-
-# 链接
-
-- https://auth0.com/blog/kubernetes-tutorial-step-by-step-introduction-to-basic-concepts/#How-to-Deploy-Your-First-Kubernetes-Application

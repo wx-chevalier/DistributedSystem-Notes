@@ -1,10 +1,12 @@
+![](https://i.postimg.cc/cC1YKzNS/image.png)
+
 # Kubernetes 部署与实战
 
 Kubernetes 的官方定义为：Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.It groups containers that make up an application into logical units for easy management and discovery.
 
 ![](https://i.postimg.cc/BQSNR1yd/image.png)
 
-Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分布式容器编排架构，具有完备的功能用于支撑分布式系统以及微服务架构，同时具备超强的横向扩容能力；它提供了自动化容器的部署和复制，随时扩展或收缩容器规模，将容器组织成组，并且提供容器间的负载均衡，提供容器弹性等特性。Kubernetes 是 Google 基于 Borg 开源的容器编排调度引擎，作为 CNCF（Cloud Native Computing Foundation）最重要的组件之一，它的目标不仅仅是一个编排系统，而是提供一个规范，可以让你来描述集群的架构，定义服务的最终状态；以正确的方式使用 Kubernetes 可帮助 DevOps 即服务团队自动扩展应用程序并以零停机时间进行更新。Kubernetes 作为云原生应用的基石，相当于一个云操作系统，其重要性不言而喻。
+Kubernetes [koo-ber-nay'-tice] 是 Google 基于 Borg 开源的容器编排调度引擎，其支持多种底层容器虚拟化技术，具有完备的功能用于支撑分布式系统以及微服务架构，同时具备超强的横向扩容能力；它提供了自动化容器的部署和复制，随时扩展或收缩容器规模，将容器组织成组，并且提供容器间的负载均衡，提供容器弹性等特性。作为 CNCF（Cloud Native Computing Foundation）最重要的组件之一，可谓云操作系统；它的目标不仅仅是一个编排系统，而是提供一个规范，可以让你来描述集群的架构，定义服务的最终状态。
 
 # 功能特性
 
@@ -24,7 +26,7 @@ Kubernetes [koo-ber-nay'-tice] 是支持多种底层容器虚拟化技术的分�
 
 ## 优势
 
-- 它的速度很快：在不停机的情况下持续部署新功能时，Kubernetes 是一个完美的选择。Kubernetes 的目标是以恒定的正常运行时间更新应用程序。它的速度通过您每小时可以运送的许多功能来衡量，同时保持可用的服务。
+- 它的速度很快：在不停机的情况下持续部署新功能时，Kubernetes 是一个完美的选择。Kubernetes 的目标是以恒定的正常运行时间更新应用程序。它的速度通过您每小时可以运送的许多功能来衡量，同时保持可用的服务。以正确的方式使用 Kubernetes 可帮助 DevOps 即服务团队自动扩展应用程序并以零停机时间进行更新。
 
 - 遵循不可变基础架构的原则：以传统方式，如果多个更新出现任何问题，您就没有任何记录显示您部署了多少更新以及发生了哪个错误。在不可变基础结构中，如果您希望更新任何应用程序，则需要使用新标记构建容器映像并进行部署，从而使用旧映像版本终止旧容器。通过这种方式，您将获得一份记录，并了解您所做的事情以及是否有任何错误; 您可以轻松回滚到上一个图像。
 
