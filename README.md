@@ -16,7 +16,17 @@
 
 分布式场景下比较著名的难题就是 CAP 定理。CAP 定理认为，在分布式系统中，系统的一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance），三者不可能同时兼顾。在分布式系统中，由于网络通信的不稳定性，分区容忍性是必须要保证的，因此在设计应用的时候就需要在一致性和可用性之间权衡选择。互联网应用比企业级应用更加偏向保持可用性，因此通常用最终一致性代替传统事务的 ACID 强一致性。
 
-# Home & More | 延伸阅读
+# About
+
+## Copyright
+
+![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg) ![](https://parg.co/bDm)
+
+笔者所有文章遵循 [知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)，欢迎转载，尊重版权。如果觉得本系列对你有所帮助，欢迎给我家布丁买点狗粮(支付宝扫码)~
+
+![default](https://i.postimg.cc/y1QXgJ6f/image.png)
+
+## Home & More | 延伸阅读
 
 ![](https://i.postimg.cc/59QVkFPq/image.png)
 
@@ -41,13 +51,3 @@
 * 行业应用：《[行业迷思](https://github.com/wx-chevalier/Business-Series)》、《[功能域](https://github.com/wx-chevalier/Business-Series)》、《[电子商务](https://github.com/wx-chevalier/Business-Series)》、《[智能制造](https://github.com/wx-chevalier/Business-Series)》
 
 此外，你还可前往 [xCompass](https://wx-chevalier.github.io/home/#/search) 交互式地检索、查找需要的文章/链接/书籍/课程；或者在 [MATRIX 文章与代码索引矩阵](https://github.com/wx-chevalier/Developer-Zero-To-Mastery)中查看文章与项目源代码等更详细的目录导航信息。最后，你也可以关注微信公众号：『**某熊的技术之路**』以获取最新资讯。
-
-# About
-
-## Copyright
-
-![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg) ![](https://parg.co/bDm)
-
-笔者所有文章遵循 [知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)，欢迎转载，尊重版权。如果觉得本系列对你有所帮助，欢迎给我家布丁买点狗粮(支付宝扫码)~
-
-![default](https://i.postimg.cc/y1QXgJ6f/image.png)
