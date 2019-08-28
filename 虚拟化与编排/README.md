@@ -4,7 +4,7 @@
 
 如 [DevOps 与 SRE 实战](https://ngte-be.gitbook.io/i/devops) 中所述，容器解除了开发和运维之间的隔阂，但同时也带来了一些挑战，比如频繁的发布变更如何控制，如何控制容器集群的行为，如何拆分应用到容器之中等。这是一个专门用于容器编排调度的工具呼之欲出，Kubernetes 的出现彻底改变了局面，可以说它直接改变了应用的基础架构。
 
-![](https://i.postimg.cc/fL83bjCV/image.png)
+![应用基础架构变迁](https://i.postimg.cc/fL83bjCV/image.png)
 
 # 虚拟机
 
