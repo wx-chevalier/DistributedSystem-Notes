@@ -9,3 +9,7 @@
 URL 分为绝对 URL 与相对 URL 两种。绝对 URL 和访问时的状态完全无关。与之相对应的是省略了部分信息的相对（relative）URL，如 `../file.php?text=hello+world`，它需要根据当前浏览所在上下文环境里的基准 URL，才能确定完整的 URL 地址。
 
 # 通用头
+
+# 链接
+
+- https://zhuanlan.zhihu.com/p/76302817
