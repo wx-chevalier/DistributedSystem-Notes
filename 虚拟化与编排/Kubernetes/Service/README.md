@@ -29,3 +29,7 @@ Kubernetes 在设计之初就充分考虑了针对容器的服务发现与负载
 - Service Load Balancer：把 load balancer 直接跑在容器中，实现 Bare Metal 的 Service Load Balancer
 
 - Custom Load Balancer：自定义负载均衡，并替代 kube-proxy，一般在物理部署 Kubernetes 时使用，方便接入公司已有的外部服务
+
+# 链接
+
+- https://parg.co/kXe
