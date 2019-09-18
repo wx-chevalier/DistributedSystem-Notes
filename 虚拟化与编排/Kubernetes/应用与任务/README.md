@@ -2,9 +2,9 @@
 
 参考[云原生](https://ngte-be.gitbook.io/i/?q=云原生)一篇中的定义，将云原生的组件映射为 Kubernetes 的原语（即 Kubernetes 里的各种资源对象和概念组合），可以得到如下图：
 
-![](https://i.postimg.cc/0NxdMnYn/image.png)
+![云原生与 K8s 概念映射](https://i.postimg.cc/0NxdMnYn/image.png)
 
-总结概括为以下几条：
+在 K8s 中的应用部署我们往往应该遵循如下的规则：
 
 - 不要直接部署裸的 Pod。在 Pod 里增加 Readiness 和 Liveness 探针。给 Pod 这只 CPU 和内存资源限额。
 

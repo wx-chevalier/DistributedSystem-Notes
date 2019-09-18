@@ -450,6 +450,7 @@
     - [MySQL](../虚拟化与编排/Kubernetes/典型应用/MySQL.md) 
     - [Prometheus](../虚拟化与编排/Kubernetes/典型应用/Prometheus.md) 
     - [Traefik](../虚拟化与编排/Kubernetes/典型应用/Traefik.md) 
+    - [Web 资源](../虚拟化与编排/Kubernetes/典型应用/Web 资源.md) 
   - [基础概念](../虚拟化与编排/Kubernetes/基础概念/README.md) 
     - [Label 与 Selector](../虚拟化与编排/Kubernetes/基础概念/Label 与 Selector.md) 
     - [开放接口](../虚拟化与编排/Kubernetes/基础概念/开放接口.md) 

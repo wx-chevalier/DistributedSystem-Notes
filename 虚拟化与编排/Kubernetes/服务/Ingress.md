@@ -31,4 +31,4 @@ spec:
               servicePort: 80
 ```
 
-Ingress 本身并不会自动创建负载均衡器，cluster 中需要运行一个 Ingress Controller 来根据 Ingress 的定义来管理负载均衡器。
+Ingress 本身并不会自动创建负载均衡器，集群中需要运行一个 Ingress Controller 来根据 Ingress 的定义来管理负载均衡器。
