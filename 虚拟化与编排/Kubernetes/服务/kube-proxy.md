@@ -2,13 +2,13 @@
 
 当 service 有了 port 和 nodePort 之后，就可以对内/外提供服务。那么其具体是通过什么原理来实现的呢？奥妙就在 kube-proxy 在本地 node 上创建的 iptables 规则。
 
-![](https://i.postimg.cc/QtpTC39C/image.png)
+![kube-proxy 路由规则](https://i.postimg.cc/QtpTC39C/image.png)
 
-kube-proxy 通过配置 DNAT 规则（从容器出来的访问，从本地主机出来的访问两方面），将到这个服务地址的访问映射到本地的 kube-proxy 端口（随机端口）。然后 kube-proxy 会监听在本地的对应端口，将到这个端口的访问给代理到远端真实的 pod 地址上去。
+kube-proxy 通过配置 DNAT 规则（从容器出来的访问，从本地主机出来的访问两方面），将到这个服务地址的访问映射到本地的 kube-proxy 端口（随机端口）。然后 kube-proxy 会监听在本地的对应端口，将到这个端口的访问给代理到远端真实的 Pod 地址上去。
 
 # Chains
 
-创建 Service 以后，kube-proxy 会自动在集群里的 node 上创建以下两条规则：KUBE-PORTALS-CONTAINER、KUBE-PORTALS-HOST。如果是 NodePort 方式，还会额外生成两条：KUBE-NODEPORT-CONTAINER、KUBE-NODEPORT-HOST
+创建 Service 以后，kube-proxy 会自动在集群里的 Node 上创建以下两条规则：KUBE-PORTALS-CONTAINER、KUBE-PORTALS-HOST。如果是 NodePort 方式，还会额外生成两条：KUBE-NODEPORT-CONTAINER、KUBE-NODEPORT-HOST
 
 ## KUBE-PORTALS-CONTAINER
 
