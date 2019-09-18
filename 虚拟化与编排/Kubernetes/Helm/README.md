@@ -10,8 +10,6 @@ Helm 可以理解为 Kubernetes 的包管理工具，可以方便地发现、共
 
 - Repository：用于发布和存储 Chart 的仓库。
 
-## 功能特性
-
 # Helm 组件
 
 Helm 采用客户端/服务器架构，有如下组件组成：

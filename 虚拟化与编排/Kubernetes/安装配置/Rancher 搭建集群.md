@@ -64,6 +64,10 @@ $ helm init --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/til
 # 删除默认的源
 $ helm repo remove stable
 
+# 设置 Helm 命令自动补全
+$ source <(helm completion zsh)
+$ source <(helm completion bash)
+
 # 增加新的国内镜像源
 $ helm repo add stable https://burdenbear.github.io/kube-charts-mirror/
 $ helm repo add stable https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
