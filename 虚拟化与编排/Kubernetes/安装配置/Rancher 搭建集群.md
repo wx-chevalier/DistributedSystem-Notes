@@ -85,6 +85,9 @@ $ helm search
 # 更新 Charts 列表以获取最新版本
 $ helm repo update
 
+# 部署某个本地 Chart，指定命名空间与额外的配置文件
+$ helm install --namespace ufc --name ufc-dev -f ./deployment/ufc/dev-values.yaml ./charts/ufc/
+
 # 查看某个 Chart 的变量
 $ helm inspect values stable/mysql
 

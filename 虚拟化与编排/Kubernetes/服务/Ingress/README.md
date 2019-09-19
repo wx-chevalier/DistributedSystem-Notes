@@ -32,3 +32,7 @@ spec:
 ```
 
 Ingress 本身并不会自动创建负载均衡器，集群中需要运行一个 Ingress Controller 来根据 Ingress 的定义来管理负载均衡器。
+
+# 链接
+
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes

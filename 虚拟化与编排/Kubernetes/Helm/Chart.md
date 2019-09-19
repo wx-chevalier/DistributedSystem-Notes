@@ -234,7 +234,7 @@ env:
     value: '{{ .Release.Name }}-{{ .Values.image.env.SERVICE_NAME }}'
 ```
 
-这是使用了 Go template 的语法。至于{{ .Values.image.env.SERVICE_NAME }}的值是从 values.yaml 文件中获取的，所以需要在 values.yaml 中增加如下配置：
+这是使用了 Go template 的语法。至于 `{{ .Values.image.env.SERVICE_NAME }}` 的值是从 values.yaml 文件中获取的，所以需要在 values.yaml 中增加如下配置：
 
 ```yml
 image:
