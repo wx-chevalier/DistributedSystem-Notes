@@ -4,6 +4,7 @@
 
 - [Introduction](../Linux 与操作系统/README.md) 
 
+- [IoT](../Linux 与操作系统/IoT/README.md) 
 - [Shell 编程](../Linux 与操作系统/Shell 编程/README.md) 
   - [Funny Terminals](../Linux 与操作系统/Shell 编程/Funny Terminals.md) 
   - [命令执行](../Linux 与操作系统/Shell 编程/命令执行.md) 
@@ -33,6 +34,7 @@
   - [Vim](../Linux 与操作系统/文本处理/Vim.md) 
   - [文本检索](../Linux 与操作系统/文本处理/文本检索.md) 
   - [文本编辑](../Linux 与操作系统/文本处理/文本编辑.md) 
+- [物联网](../Linux 与操作系统/物联网/README.md) 
 - [用户权限](../Linux 与操作系统/用户权限/README.md) 
   - [权限控制](../Linux 与操作系统/用户权限/权限控制.md) 
   - [用户管理](../Linux 与操作系统/用户权限/用户管理.md) 
@@ -265,6 +267,7 @@
   - [消息消费](../分布式计算/消息中间件/消息消费.md) 
   - [消息类型](../分布式计算/消息中间件/消息类型.md) 
   - [集群与高可用](../分布式计算/消息中间件/集群与高可用.md) 
+- [边缘计算](../分布式计算/边缘计算/README.md) 
 
 ## [数据库](../数据库/README.md) 
 
