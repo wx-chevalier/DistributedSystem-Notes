@@ -100,6 +100,7 @@
 - [QuickSQL](../云计算与大数据/QuickSQL/README.md) 
 - [Sqoop](../云计算与大数据/Sqoop/README.md) 
   - [介绍与部署](../云计算与大数据/Sqoop/介绍与部署.md) 
+- [云上安全](../云计算与大数据/云上安全/README.md) 
 - [云计算](../云计算与大数据/云计算/README.md) 
 - [商业智能](../云计算与大数据/商业智能/README.md) 
 - [大数据](../云计算与大数据/大数据/README.md) 
