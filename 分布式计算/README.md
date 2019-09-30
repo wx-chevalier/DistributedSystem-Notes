@@ -10,6 +10,12 @@
 
 针对有状态节点的难题，我们提供了一套数据自动扩容和迁移的工具来满足用户的自动扩容缩容中所产生的数据迁移类的需求。 于是，无论是有状态的数据节点的扩容，还是无状态的数据节点的自动扩容，我们都可以使用自动化工具来完成了。
 
+Google 在 03-06 年发布了关于 GFS、BigTable、MapReduce 的三篇论文，开启了大数据时代。在发展的早期，就诞生了以 HDFS/HBase/MapReduce 为主的 Hadoop 技术栈，并一直延续到今天。
+
+最开始大数据的处理大多是离线处理，MapReduce 理念虽然好，但性能捉急，新出现的 Spark 抓住了这个机会，依靠其强大而高性能的批处理技术，顺利取代了 MapReduce，成为主流的大数据处理引擎。
+随着时代的发展，实时处理的需求越来越多，虽然 Spark 推出了 Spark Streaming 以微批处理来模拟准实时的情况，但在延时上还是不尽如人意。2011 年，Twitter 的 Storm 吹响了真正流处理的号角，而 Flink 则将之发扬光大。
+到现在，Flink 的目光也不再将自己仅仅视为流计算引擎，而是更为通用的处理引擎，开始正面挑战 Spark 的地位。
+
 # Batch Processing VS Stream Processing
 
 To me a stream processing system:
