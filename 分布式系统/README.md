@@ -6,7 +6,7 @@
 
 本篇主要讨论分布式系统核心理论的相关内容。
 
-![mindmap](https://i.postimg.cc/hPpjxqR9/Distributed-System.png)
+![分布式系统思维脑图](https://i.postimg.cc/hPpjxqR9/Distributed-System.png)
 
 # 分布式系统定义
 
