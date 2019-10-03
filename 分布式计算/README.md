@@ -1,4 +1,4 @@
-![](https://i.postimg.cc/dtd6t4MP/image.png)
+![分布式计算概念图](https://i.postimg.cc/dtd6t4MP/image.png)
 
 # 分布式计算
 
@@ -16,17 +16,22 @@ Google 在 03-06 年发布了关于 GFS、BigTable、MapReduce 的三篇论文�
 随着时代的发展，实时处理的需求越来越多，虽然 Spark 推出了 Spark Streaming 以微批处理来模拟准实时的情况，但在延时上还是不尽如人意。2011 年，Twitter 的 Storm 吹响了真正流处理的号角，而 Flink 则将之发扬光大。
 到现在，Flink 的目光也不再将自己仅仅视为流计算引擎，而是更为通用的处理引擎，开始正面挑战 Spark 的地位。
 
-# Batch Processing VS Stream Processing
+# 批处理（Batch Processing）与流处理（Stream Processing）
 
-To me a stream processing system:
-Computes a function of one data element, or a smallish window of recent data
-Computes something relatively simple
-Needs to complete each computation in near-real-time -- probably seconds at most
-Computations are generally independent
-Asynchronous - source of data doesn't interact with the stream processing directly, like by waiting for an answer
+基本的区别在于每一条新数据在到达时是被处理的，还是作为一组新数据的一部分稍后处理。这种区分将处理分为两类：批处理和流处理。
 
-A batch processing system to me is just the general case, rather than a special type of processing, but I suppose you could say that a batch processing system:
-Has access to all data
-Might compute something big and complex
-Is generally more concerned with throughput than latency of individual components of the computation
-Has latency measured in minutes or more
+## 批处理
+
+在批处理中，新到达的数据元素被收集到一个组中。整个组在未来的时间进行处理（作为批处理，因此称为“批处理”）。确切地说，何时处理每个组可以用多种方式来确定，它可以基于预定的时间间隔（例如，每五分钟，处理任何新的数据已被收集）或在某些触发的条件下（例如，处理只要它包含五个数据元素或一旦它拥有超过 1MB 的数据）。
+
+![基于时间的批处理间歇过程](https://s2.ax1x.com/2019/10/03/uwHkQJ.png)
+
+通过类比的方式，批处理就像你的朋友（你当然知道这样的人）从干衣机中取出一大堆衣物，并简单地把所有东西都扔进一个抽屉里，只有当它很难找到东西时才分类和组织它。这个人避免每次洗衣时都要进行分拣工作，但是他们需要花费大量时间在抽屉里搜索抽屉，并最终需要花费大量时间分离衣服，匹配袜子等。当它变得很难找到东西的时候。历史上，绝大多数数据处理技术都是为批处理而设计的。传统的数据仓库和 Hadoop 是专注于批处理的系统的两个常见示例。
+
+术语 MicroBatch 经常用于描述批次小和/或以小间隔处理的情况。即使处理可能每隔几分钟发生一次，数据仍然一次处理一批。Spark Streaming 是设计用于支持微批处理的系统的一个例子。
+
+## 流处理
+
+流处理系统的设计是为了在数据到达时对其进行响应。这就要求它们实现一个由事件驱动的体系结构, 即系统的内部工作流设计为在接收到数据后立即连续监视新数据和调度处理。另一方面, 批处理系统中的内部工作流只定期检查新数据, 并且只在下一个批处理窗口发生时处理该数据。
+
+流处理和批处理之间的差异对于应用程序来说也是非常重要的。为批处理而构建的应用程序，通过定义处理数据，具有延迟性。在具有多个步骤的数据管道中，这些延迟会累积。此外，新数据的到达与该数据的处理之间的延迟将取决于直到下一批处理窗口的时间--从在某些情况下完全没有时间到批处理窗口之间的全部时间不等，这些数据是在批处理开始后到达的。因此，批处理应用程序(及其用户)不能依赖一致的响应时间，需要相应地调整以适应这种不一致性和更大的延迟。
