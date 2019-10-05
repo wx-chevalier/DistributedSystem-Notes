@@ -10,4 +10,4 @@ Samba 最大的功能就是可以用于 Linux 与 windows 系统直接的文件�
 
 # SMB
 
-SMB 是基于客户机/服务器型的协议，因而一台 Samba 服务器既可以充当文件共享服务器，也可以充当一个 Samba 的客户端，例如，一台在 Linux 下已经架设好的 Samba 服务器，windows 客户端就可以通过 SMB 协议共享 Samba 服务器上的资源文件，同时，Samba 服务器也可以访问网络中其它 windows 系统或者 Linux 系统共享出来的文件。 Samba 在 windows 下使用的是 NetBIOS 协议，如果你要使用 Linux 下共享出来的文件，请确认你的 windows 系统下是否安装了 NetBIOS 协议。
+SMB 是基于客户机/服务器型的协议，因而一台 Samba 服务器既可以充当文件共享服务器，也可以充当一个 Samba 的客户端，例如，一台在 Linux 下已经架设好的 Samba 服务器，windows 客户端就可以通过 SMB 协议共享 Samba 服务器上的资源文件，同时，Samba 服务器也可以访问网络中其它 windows 系统或者 Linux 系统共享出来的文件。Samba 在 windows 下使用的是 NetBIOS 协议，如果你要使用 Linux 下共享出来的文件，请确认你的 windows 系统下是否安装了 NetBIOS 协议。

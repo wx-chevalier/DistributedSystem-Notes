@@ -17,7 +17,7 @@ HTTP 的请求报文分为三个部分 请求行、请求头和请求体，格�
 
 # Request Line: 请求行
 
-请求行(Request Line )分为三个部分：请求方法、请求地址和协议及版本，以 CRLF(\r\n) 结束。 HTTP/1.1 定义的请求方法有 8 种：GET 、 POST、PUT 、 DELETE、PATCH 、 HEAD、OPTIONS 、 TRACE, 最常的两种 GET 和 POST，如果是 RESTful 接口的话一般会用到 GET、POST 、 DELETE、PUT 。
+请求行(Request Line )分为三个部分：请求方法、请求地址和协议及版本，以 CRLF(\r\n) 结束。HTTP/1.1 定义的请求方法有 8 种：GET 、 POST、PUT 、 DELETE、PATCH 、 HEAD、OPTIONS 、 TRACE, 最常的两种 GET 和 POST，如果是 RESTful 接口的话一般会用到 GET、POST 、 DELETE、PUT 。
 
 ## Request Methods
 
@@ -28,14 +28,14 @@ HTTP 的请求报文分为三个部分 请求行、请求头和请求体，格�
 | Header              | 解释                                                                                           | 示例                                                    |
 | ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | Accept              | 指定客户端能够接收的内容类型                                                                   | Accept: text/plain, text/html,application/json          |
-| Accept-Charset      | 浏览器可以接受的字符编码集。                                                                   | Accept-Charset: iso-8859-5                              |
-| Accept-Encoding     | 指定浏览器可以支持的 web 服务器返回内容压缩编码类型。                                          | Accept-Encoding: compress, gzip                         |
+| Accept-Charset      | 浏览器可以接受的字符编码集。                                                                  | Accept-Charset: iso-8859-5                              |
+| Accept-Encoding     | 指定浏览器可以支持的 web 服务器返回内容压缩编码类型。                                         | Accept-Encoding: compress, gzip                         |
 | Accept-Language     | 浏览器可接受的语言                                                                             | Accept-Language: en,zh                                  |
 | Accept-Ranges       | 可以请求网页实体的一个或者多个子范围字段                                                       | Accept-Ranges: bytes                                    |
 | Authorization       | HTTP 授权的授权证书                                                                            | Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==       |
 | Cache-Control       | 指定请求和响应遵循的缓存机制                                                                   | Cache-Control: no-cache                                 |
 | Connection          | 表示是否需要持久连接。( HTTP 1.1 默认进行持久连接)                                             | Connection: close                                       |
-| Cookie              | HTTP 请求发送时，会把保存在该请求域名下的所有 cookie 值一起发送给 web 服务器。                 | Cookie: \$Version=1; Skin=new;                          |
+| Cookie              | HTTP 请求发送时，会把保存在该请求域名下的所有 cookie 值一起发送给 web 服务器。                | Cookie: \$Version=1; Skin=new;                          |
 | Content-Length      | 请求的内容长度                                                                                 | Content-Length: 348                                     |
 | Content-Type        | 请求的与实体对应的 MIME 信息                                                                   | Content-Type: application/x-www-form-urlencoded         |
 | Date                | 请求发送的日期和时间                                                                           | Date: Tue, 15 Nov 2010 08:12:31 GMT                     |
@@ -125,7 +125,7 @@ XML-RPC 协议简单、功能够用，各种语言的实现都有。它的使用
 
 > POST http://www.example.com HTTP/1.1 Content-Type: application/x-www-form-urlencoded;charset=utf-8 title=test&sub%5B%5D=1&sub%5B%5D=2&sub%5B%5D=3
 
-首先，Content-Type 被指定为 application/x-www-form-urlencoded；这里的格式要求就是 URL 中 Query String 的格式要求：多个键值对之间用 & 连接，键与值之前用 = 连接，且只能用 ASCII 字符，非 ASCII 字符需使用 UrlEncode 编码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$\_POST['title'] 可以获取到 title 的值，$\_POST['sub'] 可以得到 sub 数组。 ![](http://upload-images.jianshu.io/upload_images/1724103-18847d9a34c50bdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+首先，Content-Type 被指定为 application/x-www-form-urlencoded；这里的格式要求就是 URL 中 Query String 的格式要求：多个键值对之间用 & 连接，键与值之前用 = 连接，且只能用 ASCII 字符，非 ASCII 字符需使用 UrlEncode 编码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$\_POST['title'] 可以获取到 title 的值，$\_POST['sub'] 可以得到 sub 数组。![](http://upload-images.jianshu.io/upload_images/1724103-18847d9a34c50bdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 文件分割
 

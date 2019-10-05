@@ -77,7 +77,7 @@ roomSensors.toSink(roomSensorSink)
 execEnv.execute()
 ```
 
-你可能会发现上面这个例子中没有体现流处理中两个重要的方面：基于窗口的聚合与关联。下面我就会解释下怎么在 SQL 中表达关于窗口的操作。 Apache Calcite 社区关于这方面已经有所讨论：[SQL on streams](https://calcite.apache.org/docs/stream.html)。Calcite 的流 SQL 被认为是一个标准 SQL 的扩展，而不是另一个类似于 SQL 的语言。这会有几个方面的好处，首先，已经熟悉了标准 SQL 语法的同学就没必要花时间再学一波新的语法了，皆大欢喜。现在对于静态表与流数据的查询已经基本一致了，可以很方便地进行转换。Flink 一直主张的是批处理只是流处理的一个特殊情况，因此用户也可以同时在静态表与流上进行查询，譬如处理有限的流。最后，未来也会有很多工具支持进行标准的 SQL 进行数据分析。
+你可能会发现上面这个例子中没有体现流处理中两个重要的方面：基于窗口的聚合与关联。下面我就会解释下怎么在 SQL 中表达关于窗口的操作。Apache Calcite 社区关于这方面已经有所讨论：[SQL on streams](https://calcite.apache.org/docs/stream.html)。Calcite 的流 SQL 被认为是一个标准 SQL 的扩展，而不是另一个类似于 SQL 的语言。这会有几个方面的好处，首先，已经熟悉了标准 SQL 语法的同学就没必要花时间再学一波新的语法了，皆大欢喜。现在对于静态表与流数据的查询已经基本一致了，可以很方便地进行转换。Flink 一直主张的是批处理只是流处理的一个特殊情况，因此用户也可以同时在静态表与流上进行查询，譬如处理有限的流。最后，未来也会有很多工具支持进行标准的 SQL 进行数据分析。
 尽管我们还没有完全地定义好在 Flink SQL 表达式与 Table API 中如何进行窗口等设置，下面这个简单的例子会指明如何在 SQL 与 Table API 中进行滚动窗口式查询：
 
 ### SQL (following the syntax proposal of Calcite’s streaming SQL document)

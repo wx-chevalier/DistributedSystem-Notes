@@ -38,5 +38,5 @@ http://blog.csdn.net/huashetianzu/article/details/7823326
 
 在 Hadoop 中，默认情况下是按照 key 进行排序，如果要按照 value 进行排序怎么办？即：对于同一个 key，reduce 函数接收到的 value list 是按照 value 排序的。这种应用需求在 join 操作中很常见，比如，希望相同的 key 中，小表对应的 value 排在前面。
 有两种方法进行二次排序，分别为：buffer and in memory sort 和 value-to-key conversion。
-对于 buffer and in memory sort，主要思想是：在 reduce()函数中，将某个 key 对应的所有 value 保存下来，然后进行排序。 这种方法最大的缺点是：可能会造成 out of memory。
+对于 buffer and in memory sort，主要思想是：在 reduce()函数中，将某个 key 对应的所有 value 保存下来，然后进行排序。这种方法最大的缺点是：可能会造成 out of memory。
 对于 value-to-key conversion，主要思想是：将 key 和部分 value 拼接成一个组合 key(实现 WritableComparable 接口或者调用 setSortComparatorClass 函数)，这样 reduce 获取的结果便是先按 key 排序，后按 value 排序的结果，需要注意的是，用户需要自己实现 Paritioner，以便只按照 key 进行数据划分。Hadoop 显式的支持二次排序，在 Configuration 类中有个 setGroupingComparatorClass()方法，可用于设置排序 group 的 key 值，具体参考：http://www.cnblogs.com/xuxm2007/archive/2011/09/03/2165805.html
