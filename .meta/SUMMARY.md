@@ -77,6 +77,7 @@
   - [消息类型](../分布式计算/Kafka/消息类型.md) 
   - [部署配置](../分布式计算/Kafka/部署配置.md) 
   - [集群与高可用](../分布式计算/Kafka/集群与高可用.md) 
+  - [Kafka Streams](../分布式计算/Kafka/Kafka Streams/README.md) 
 - [Pulsar](../分布式计算/Pulsar/README.md) 
   - [消息存储](../分布式计算/Pulsar/消息存储.md) 
   - [消息消费](../分布式计算/Pulsar/消息消费.md) 
