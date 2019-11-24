@@ -147,3 +147,5 @@ RocketMQ 的消息整体是有序的，所以这 5 条消息按顺序将内容�
 - https://mp.weixin.qq.com/s/nAjYhuN3ptAqaE67bqc4aQ
 
 - https://github.com/qunarcorp/qmq 学习 qmq 中的实践
+
+- https://mp.weixin.qq.com/s/j905XZcZewI-0m-mcU7Wng 消息中间件的四种投递模式对比
