@@ -14,7 +14,7 @@
 | Age                | 从原始服务器到代理缓存形成的估算时间(以秒计，非负)                                  | Age: 12                                               |
 | Allow              | 对某网络资源的有效的请求行为，不允许则返回 405                                      | Allow: GET, HEAD                                      |
 | Cache-Control      | 告诉所有的缓存机制是否可以缓存及哪种类型                                            | Cache-Control: no-cache                               |
-| Content-Encoding   | web 服务器支持的返回内容压缩编码类型。                                            | Content-Encoding: gzip                                |
+| Content-Encoding   | web 服务器支持的返回内容压缩编码类型。                                           | Content-Encoding: gzip                                |
 | Content-Language   | 响应体的语言                                                                        | Content-Language: en,zh                               |
 | Content-Length     | 响应体的长度                                                                        | Content-Length: 348                                   |
 | Content-Location   | 请求资源可替代的备用的另一地址                                                      | Content-Location: /index.htm                          |
