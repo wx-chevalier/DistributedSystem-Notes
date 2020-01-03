@@ -36,8 +36,8 @@
 | Hive      | Metastore         | 9083     | /etc/default/hive-metastore 中 export PORT=<port>来更新默认端口                    |                                                                    |
 | Hive      | HiveServer        | 10000    | /etc/hive/conf/hive-env.sh 中 export HIVE_SERVER2_THRIFT_PORT=<port>来更新默认端口 |                                                                    |
 | ZooKeeper | Server            | 2181     | /etc/zookeeper/conf/zoo.cfg 中 clientPort=<port>                                   | 对客户端提供服务的端口                                             |
-| ZooKeeper | Server            | 2888     | /etc/zookeeper/conf/zoo.cfg 中 server.x=[hostname]:nnnnn[:nnnnn]，标蓝部分         | follower 用来连接到 leader，只在 leader 上监听该端口。         |
-| ZooKeeper | Server            | 3888     | /etc/zookeeper/conf/zoo.cfg 中 server.x=[hostname]:nnnnn[:nnnnn]，标蓝部分         | 用于 leader 选举的。只在 electionAlg 是 1,2 或 3(默认)时需要。 |
+| ZooKeeper | Server            | 2888     | /etc/zookeeper/conf/zoo.cfg 中 server.x=[hostname]:nnnnn[:nnnnn]，标蓝部分         | follower 用来连接到 leader，只在 leader 上监听该端口，        |
+| ZooKeeper | Server            | 3888     | /etc/zookeeper/conf/zoo.cfg 中 server.x=[hostname]:nnnnn[:nnnnn]，标蓝部分         | 用于 leader 选举的。只在 electionAlg 是 1,2 或 3(默认)时需要，|
 
 # EcoSystem
 
