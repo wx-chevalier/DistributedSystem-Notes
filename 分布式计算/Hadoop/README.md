@@ -12,7 +12,7 @@
 | HDFS      | DataNode          | 50020    | dfs.datanode.ipc.address                                                           | ipc 服务的端口                                                     |
 | HDFS      | NameNode          | 50070    | dfs.namenode.http-address                                                          | http 服务的端口                                                    |
 | HDFS      | NameNode          | 50470    | dfs.namenode.https-address                                                         | https 服务的端口                                                   |
-| HDFS      | NameNode          | 8020     | fs.defaultFS                                                                       | 接收 Client 连接的 RPC 端口，用于获取文件系统 metadata 信息。   |
+| HDFS      | NameNode          | 8020     | fs.defaultFS                                                                       | 接收 Client 连接的 RPC 端口，用于获取文件系统 metadata 信息。  |
 | HDFS      | journalnode       | 8485     | dfs.journalnode.rpc-address                                                        | RPC 服务                                                           |
 | HDFS      | journalnode       | 8480     | dfs.journalnode.http-address                                                       | HTTP 服务                                                          |
 | HDFS      | ZKFC              | 8019     | dfs.ha.zkfc.port                                                                   | ZooKeeper FailoverController，用于 NN HA                           |
