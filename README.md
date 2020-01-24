@@ -40,6 +40,12 @@
 
 # Nav | 导读
 
+- 如果你想了解数据库相关，可以参阅 [Database-Series](https://github.com/wx-chevalier/Database-Series)。
+
+- 如果你想了解虚拟化与云计算相关，可以参阅 [Cloud-Series](https://github.com/wx-chevalier/Cloud-Series)。
+
+- 如果你想了解 Linux 与操作系统相关，可以参阅 [Linux-Series](https://github.com/wx-chevalier/Linux-Series)。
+
 # About
 
 ## Copyright & More | 延伸阅读
