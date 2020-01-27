@@ -118,7 +118,7 @@ Kafka 采用了基于分区(Partation)的模型
 
 ![image](https://user-images.githubusercontent.com/5803001/49648965-ae21f480-fa62-11e8-8d77-18906db2d4bd.png)
 
-Kafka 中关于消息的存储只有一种文件，叫做 Partition，它是以文件的形式存储在文件系统中，比如，创建了一个名 为 page_visits 的 topic，其有 5 个 partition，那么在 Kafka 的数据目录中(由配置文件中的 log.dirs 指定的)中就有这样 5 个目录: page_visits-0， page_visits-1，page_visits-2，page_visits-3，page_visits-4，其命名规则 为-，里面存储的分别就是这 5 个 partition 的数据。
+Kafka 中关于消息的存储只有一种文件，叫做 Partition，它是以文件的形式存储在文件系统中，比如，创建了一个名 为 page_visits 的 topic，其有 5 个 partition，那么在 Kafka 的数据目录中(由配置文件中的 log.dirs 指定的)中就有这样 5 个目录: page_visits-0，page_visits-1，page_visits-2，page_visits-3，page_visits-4，其命名规则 为-，里面存储的分别就是这 5 个 partition 的数据。
 
 ![image](https://user-images.githubusercontent.com/5803001/49649147-44eeb100-fa63-11e8-92b2-e352642f16c9.png)
 

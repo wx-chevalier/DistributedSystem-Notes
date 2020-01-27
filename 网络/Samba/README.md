@@ -4,7 +4,7 @@ Samba 是一个能让 Linux 系统应用 Microsoft 网络通讯协议的软件�
 
 Samba 最大的功能就是可以用于 Linux 与 windows 系统直接的文件共享和打印共享，Samba 既可以用于 windows 与 Linux 之间的文件共享，也可以用于 Linux 与 Linux 之间的资源共享，由于 NFS(网络文件系统）可以很好的完成 Linux 与 Linux 之间的数据共享，因而 Samba 较多的用在了 Linux 与 windows 之间的数据共享上面。
 
-组成 Samba 运行的有两个服务，一个是 SMB，另一个是 NMB；SMB 是 Samba 的核心启动服务，主要负责建立 Linux Samba 服务器与 Samba 客户机之间的对话， 验证用户身份并提供对文件和打印系统的访问，只有 SMB 服务启动，才能实现文件的共享，监听 139 TCP 端口；而 NMB 服务是负责解析用的，类似与 DNS 实现的功能，NMB 可以把 Linux 系统共享的工作组名称与其 IP 对应起来，如果 NMB 服务没有启动，就只能通过 IP 来访问共享文件，监听 137 和 138 UDP 端口。
+组成 Samba 运行的有两个服务，一个是 SMB，另一个是 NMB；SMB 是 Samba 的核心启动服务，主要负责建立 Linux Samba 服务器与 Samba 客户机之间的对话，验证用户身份并提供对文件和打印系统的访问，只有 SMB 服务启动，才能实现文件的共享，监听 139 TCP 端口；而 NMB 服务是负责解析用的，类似与 DNS 实现的功能，NMB 可以把 Linux 系统共享的工作组名称与其 IP 对应起来，如果 NMB 服务没有启动，就只能通过 IP 来访问共享文件，监听 137 和 138 UDP 端口。
 
 例如，某台 Samba 服务器的 IP 地址为 10.0.0.163，对应的工作组名称为 davidsamba，那么在 Windows 的 IE 浏览器输入下面两条指令都可以访问共享文件。其实这就是 Windows 下查看 Linux Samba 服务器共享文件的方法。
 

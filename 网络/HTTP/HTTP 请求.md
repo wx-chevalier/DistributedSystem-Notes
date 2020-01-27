@@ -29,13 +29,13 @@ HTTP 的请求报文分为三个部分 请求行、请求头和请求体，格�
 | ------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | Accept              | 指定客户端能够接收的内容类型                                                                   | Accept: text/plain, text/html,application/json          |
 | Accept-Charset      | 浏览器可以接受的字符编码集。                                                               | Accept-Charset: iso-8859-5                              |
-| Accept-Encoding     | 指定浏览器可以支持的 web 服务器返回内容压缩编码类型，                                     | Accept-Encoding: compress, gzip                         |
+| Accept-Encoding     | 指定浏览器可以支持的 web 服务器返回内容压缩编码类型，                                    | Accept-Encoding: compress, gzip                         |
 | Accept-Language     | 浏览器可接受的语言                                                                             | Accept-Language: en,zh                                  |
 | Accept-Ranges       | 可以请求网页实体的一个或者多个子范围字段                                                       | Accept-Ranges: bytes                                    |
 | Authorization       | HTTP 授权的授权证书                                                                            | Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==       |
 | Cache-Control       | 指定请求和响应遵循的缓存机制                                                                   | Cache-Control: no-cache                                 |
 | Connection          | 表示是否需要持久连接。( HTTP 1.1 默认进行持久连接)                                             | Connection: close                                       |
-| Cookie              | HTTP 请求发送时，会把保存在该请求域名下的所有 cookie 值一起发送给 web 服务器，            | Cookie: \$Version=1; Skin=new;                          |
+| Cookie              | HTTP 请求发送时，会把保存在该请求域名下的所有 cookie 值一起发送给 web 服务器，           | Cookie: \$Version=1; Skin=new;                          |
 | Content-Length      | 请求的内容长度                                                                                 | Content-Length: 348                                     |
 | Content-Type        | 请求的与实体对应的 MIME 信息                                                                   | Content-Type: application/x-www-form-urlencoded         |
 | Date                | 请求发送的日期和时间                                                                           | Date: Tue, 15 Nov 2010 08:12:31 GMT                     |
@@ -167,7 +167,7 @@ But if you have to send non-ASCII text or large binary data, the form-data is fo
 
 网页中的表单使用 POST 方法提交时，数据内容的类型是 application/x-www-form-urlencoded，这种类型会：
 
-1. 字符 "a"-"z"，"A"-"Z" ， "0"-"9"，"." ， "-"，"\*" ，和 "\_" 都不会被编码 ;
+1. 字符 "a"-"z"，"A"-"Z" ，"0"-"9"，"." ，"-"，"\*" ，和 "\_" 都不会被编码 ;
 
 2. 将空格转换为加号 (+)
 

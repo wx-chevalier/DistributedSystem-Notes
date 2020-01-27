@@ -264,7 +264,7 @@ Paxos 协议分为两个阶段。
 
 1. 每个 Server 都向 Proposer 发消息称自己要成为 leader，Server1 往 Proposer1 发、Server2 往 Proposer2 发、Server3 往 Proposer3 发；
 2. 现在每个 Proposer 都接收到了 Server1 发来的消息但时间不一样，Proposer2 先接收到了，然后是 Proposer1，接着才是 Proposer3；
-3. Proposer2 首先接收到消息所以他从系统中取得一个编号 1，Proposer2 向 Acceptor2 和 Acceptor3 发送一条，编号为 1 的消息；接着 Proposer1 也接收到了 Server1 发来的消息，取得一个编号 2，Proposer1 向 Acceptor1 和 Acceptor2 发送一条，编号为 2 的消息； 最后 Proposer3 也接收到了 Server3 发来的消息，取得一个编号 3，Proposer3 向 Acceptor2 和 Acceptor3 发送一条，编号为 3 的消息；
+3. Proposer2 首先接收到消息所以他从系统中取得一个编号 1，Proposer2 向 Acceptor2 和 Acceptor3 发送一条，编号为 1 的消息；接着 Proposer1 也接收到了 Server1 发来的消息，取得一个编号 2，Proposer1 向 Acceptor1 和 Acceptor2 发送一条，编号为 2 的消息；最后 Proposer3 也接收到了 Server3 发来的消息，取得一个编号 3，Proposer3 向 Acceptor2 和 Acceptor3 发送一条，编号为 3 的消息；
 4. 这时 Proposer1 发送的消息先到达 Acceptor1 和 Acceptor2，这两个都没有接收过请求所以接受了请求返回[2,null]给 Proposer1，并承诺不接受编号小于 2 的请求；
 5. 此时 Proposer2 发送的消息到达 Acceptor2 和 Acceptor3，Acceprot3 没有接收过请求返回[1,null]给 Proposer2，并承诺不接受编号小于 1 的请求，但这时 Acceptor2 已经接受过 Proposer1 的请求并承诺不接受编号小于的 2 的请求了，所以 Acceptor2 拒绝 Proposer2 的请求；
 6. 最后 Proposer3 发送的消息到达 Acceptor2 和 Acceptor3，Acceptor2 接受过提议，但此时编号为 3 大于 Acceptor2 的承诺 2 与 Accetpor3 的承诺 1，所以接受提议返回[3,null];

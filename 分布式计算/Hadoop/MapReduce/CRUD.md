@@ -6,7 +6,7 @@
 
 reduce side join 是一种最简单的 join 方式，其主要思想如下：
 在 map 阶段，map 函数同时读取两个文件 File1 和 File2，为了区分两种来源的 key/value 数据对，对每条数据打一个标签(tag),比如：tag=0 表示来自文件 File1，tag=2 表示来自文件 File2。即：map 阶段的主要任务是对不同文件中的数据打标签。
-在 reduce 阶段，reduce 函数获取 key 相同的来自 File1 和 File2 文件的 value list， 然后对于同一个 key，对 File1 和 File2 中的数据进行 join(笛卡尔乘积)。即：reduce 阶段进行实际的连接操作。
+在 reduce 阶段，reduce 函数获取 key 相同的来自 File1 和 File2 文件的 value list，然后对于同一个 key，对 File1 和 File2 中的数据进行 join(笛卡尔乘积)。即：reduce 阶段进行实际的连接操作。
 REF：hadoop join 之 reduce side join
 http://blog.csdn.net/huashetianzu/article/details/7819244
 
