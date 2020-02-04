@@ -25,17 +25,10 @@
 
 事实上，Kafka Streams 的随机排序与 Flink 或者 Spark Streaming 中的随机排序存在巨大差异。下面来看看 JavaDoc 中关于其工作原理的描述：
 
-> 如果某个键变更运算符在实际使用之前发生了变化（例如 selectKey(KeyValueMapper)、map(KeyValueMapper), flatMap(KeyValueMapper) 或者 transform(TransformerSupplier, String…)），且此后没有发生数据重新分发（例如通过 through(String)），那么在 Kafka 当中创建一个内部重新分区主题。该主题将被命名为“${applicationId}-XXX-repartition”的形式，其中，“applicationId”由用户在 StreamsConfig 中通过 APPLICATION_ID_CONFIG 参数进行指定，“XXX”为内部生成的名称，而“-repartition”则为固定后缀。开发者可以通过 KafkaStreams.toString() 检索所有已生成的内部主题名称。
+> 如果某个键变更运算符在实际使用之前发生了变化（例如 selectKey(KeyValueMapper)、map(KeyValueMapper), flatMap(KeyValueMapper) 或者 transform(TransformerSupplier, String…)），且此后没有发生数据重新分发（例如通过 through(String)），那么在 Kafka 当中创建一个内部重新分区主题。该主题将被命名为“\${applicationId}-XXX-repartition”的形式，其中，“applicationId”由用户在 StreamsConfig 中通过 APPLICATION_ID_CONFIG 参数进行指定，“XXX”为内部生成的名称，而“-repartition”则为固定后缀。开发者可以通过 KafkaStreams.toString() 检索所有已生成的内部主题名称。
 
 这意味着只要变更键（一般用于分析），Kafka Streams 就会新建一个主题来实现随机排序。这种随机排序实现方法，证实了我在与开发者沟通时做出的几个基本假设：我曾与多位前 Kafka Streams 开发者进行过交流，他们并不清楚这种新的主题机制。他们直接在集群上执行实时分析，但这会快速增加代理上的负载与数据总量，并最终导致系统崩溃。但从使用者的角度来看，他们只是在正常执行数据处理。
 
 如果开发者对性能并不关注，那么这种方法似乎也能接受。但是，其他一些处理框架（例如 Apache Flink）显然更加理想，它们提供更完善的内置随机排序功能，而且也能与 Kafka 配合使用。这些系统，无疑能够带来更顺畅的使用体验。
 
 结论：由于缺少两大关键功能，Kafka Streams 实用性会大打折扣。我们不可能接受在实时生产系统上经历长达数小时的停机，无法接受随机排序功能导致集群崩溃。而且除非在每一项 KSQL 查询之前都进行解释，否则我们也弄不明白可能出现哪些随机排序操作。
-
-
-
-
-
-
-

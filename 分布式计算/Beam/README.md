@@ -16,4 +16,3 @@ Apache Beam 最初叫 Apache Dataflow，由谷歌和其合作伙伴向 Apache �
 Beam SDK 提供了一个统一的编程模型，来处理任意规模的数据集，其中包括有限的数据集，无限的流数据。Apache Beam SDK 使用相同的类来表达有限和无限的数据，同样使用相同的转换方法对数据进行操作。Beam 提供了多种 SDK，你可以选择一种你熟悉的来建立数据处理管道，如上述的图，我们可以知道，目前 Beam 支持 Java，Python 以及其他待开发的语言。
 
 在 Beam 管道上运行引擎会根据你选择的分布式处理引擎，其中兼容的 API 转换你的 Beam 程序应用，让你的 Beam 应用程序可以有效的运行在指定的分布式处理引擎上。因而，当运行 Beam 程序的时候，你可以按照自己的需求选择一种分布式处理引擎。当前 Beam 支持的管道运行引擎有以下几种：Apache Apex，Apache Flink，Apache Spark，Google Cloud Dataflow。
-

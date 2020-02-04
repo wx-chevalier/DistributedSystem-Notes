@@ -84,18 +84,18 @@ hdfs 写数据流程: ![](http://img.blog.csdn.net/20160525131839917) 1. 客户�
 
 NameNode HA 架构如下: ![](http://img.blog.csdn.net/20160525134854724)
 
-* Active NameNode 和 Standby NameNode：
+- Active NameNode 和 Standby NameNode：
 
 两台 NameNode 形成互备，一台处于 Active 状态，为主 NameNode，另外一台处于 Standby 状态，为备 NameNode，只有主 NameNode 才能对外提供读写服务。
 
-* 主备切换控制器 ZKFailoverController：
+- 主备切换控制器 ZKFailoverController：
 
   ZKFailoverController 作为独立的进程运行，对 NameNode 的主备切换进行总体控制。ZKFailoverController 能及时检测到 NameNode 的健康状况，在主 NameNode 故障时借助 Zookeeper 实现自动的主备选举和切换。
 
-* Zookeeper 集群：
+- Zookeeper 集群：
 
   为主备切换控制器提供主备选举支持。
 
-* 共享存储系统：
+- 共享存储系统：
 
   共享存储系统是实现 NameNode 的高可用最为关键的部分，共享存储系统保存了 NameNode 在运行过程中所产生的 HDFS 的元数据。主 NameNode 和备用 NameNode 通过共享存储系统实现元数据同步。在进行主备切换的时候，新的主 NameNode 在确认元数据完全同步之后才能继续对外提供服务。
