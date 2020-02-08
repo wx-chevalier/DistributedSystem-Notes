@@ -12,4 +12,4 @@
 
 ![基于领导者(主-从)的复制](https://s2.ax1x.com/2020/02/08/1WwR1O.png)
 
-这种复制模式是许多关系数据库的内置功能，如 PostgreSQL（从 9.0 版本开始），MySQL，Oracle Data Guard 【2】和 SQL Server 的 AlwaysOn 可用性组【3】。 它也被用于一些非关系数据库，包括 MongoDB，RethinkDB 和 Espresso 【4】。 最后，基于领导者的复制并不仅限于数据库：像 Kafka 【5】和 RabbitMQ 高可用队列【6】这样的分布式消息代理也使用它。 某些网络文件系统，例如 DRBD 这样的块复制设备也与之类似。
+这种复制模式是许多关系数据库的内置功能，如 PostgreSQL（从 9.0 版本开始），MySQL，Oracle Data Guard 和 SQL Server 的 AlwaysOn 可用性组。 它也被用于一些非关系数据库，包括 MongoDB，RethinkDB 和 Espresso 。 最后，基于领导者的复制并不仅限于数据库：像 Kafka 和 RabbitMQ 高可用队列这样的分布式消息代理也使用它。 某些网络文件系统，例如 DRBD 这样的块复制设备也与之类似。
