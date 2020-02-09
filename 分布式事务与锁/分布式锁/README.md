@@ -25,7 +25,7 @@
 
 require_once 'RedisFactory.php';
 
-/**
+/
 * 在 Redis 上实现的分布式锁
 */
 class RedisLock {
@@ -53,7 +53,7 @@ class RedisLock {
     }
 
 
-/**
+/
 
 * 加锁
 
@@ -116,7 +116,7 @@ class RedisLock {
     }
 
 
-/**
+/
 
 * 给当前锁增加指定的生存时间(秒), 必须大于 0
 
@@ -137,7 +137,7 @@ class RedisLock {
     }
 
 
-/**
+/
 
 * 判断当前是否拥有指定名称的锁
 
@@ -154,7 +154,7 @@ class RedisLock {
     }
 
 
-/**
+/
 
 * 释放锁
 
@@ -174,7 +174,7 @@ class RedisLock {
     }
 
 
-/** 释放当前已经获取到的所有锁 */
+/ 释放当前已经获取到的所有锁 */
     public function unlockAll() {
         $allSuccess = true;
         foreach($this->lockedNames as $name => $item) {

@@ -260,7 +260,7 @@ Paxos 协议分为两个阶段。
 
 ![enter image description here](http://www.solinx.co/wp-content/uploads/2015/10/Paxos.png)
 
-### **Phase1(准备阶段)**
+### Phase1(准备阶段)
 
 1. 每个 Server 都向 Proposer 发消息称自己要成为 leader，Server1 往 Proposer1 发、Server2 往 Proposer2 发、Server3 往 Proposer3 发；
 2. 现在每个 Proposer 都接收到了 Server1 发来的消息但时间不一样，Proposer2 先接收到了，然后是 Proposer1，接着才是 Proposer3；
@@ -270,7 +270,7 @@ Paxos 协议分为两个阶段。
 6. 最后 Proposer3 发送的消息到达 Acceptor2 和 Acceptor3，Acceptor2 接受过提议，但此时编号为 3 大于 Acceptor2 的承诺 2 与 Accetpor3 的承诺 1，所以接受提议返回[3,null];
 7. Proposer2 没收到过半的回复所以重新取得编号 4，并发送给 Acceptor2 和 Acceptor3，然后 Acceptor2 和 Acceptor3
 
-### **Phase2(决议阶段)**
+### Phase2(决议阶段)
 
 1. Proposer3 收到过半(三个 Server 中两个)的返回，并且返回的 Value 为 null，所以 Proposer3 提交了[3,server3]的议案；
 2. Proposer1 收到过半返回，返回的 Value 为 null，所以 Proposer1 提交了[2,server1]的议案；
@@ -280,4 +280,4 @@ Paxos 协议分为两个阶段。
 6. Acceptor2、Acceptor3 接收到 Proposer3 的提案[3,server3]请求，Acceptor2、Acceptor3 承诺编号大于 4 所以拒绝了提案；
 7. 此时过半的 Acceptor 都接受了 Proposer2 的提案[4,server2],Larner 感知到了提案的通过，Larner 学习提案，server2 成为 Leader；
 
-**一个 Paxos 过程只会产生一个议案所以至此这个流程结束，选举结果 server2 为 Leader；**
+一个 Paxos 过程只会产生一个议案所以至此这个流程结束，选举结果 server2 为 Leader；

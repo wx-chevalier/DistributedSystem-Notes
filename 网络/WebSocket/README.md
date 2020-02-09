@@ -18,21 +18,21 @@ HTTP 协议经过多年的使用，发现了一些不足，主要是性能方面
 
 由于使用 HTTP 的端口，因此 TCP 连接建立后的握手消息是基于 HTTP 的，由服务器判断这是一个 HTTP 协议，还是 WebSocket 协议。WebSocket 连接除了建立和关闭时的握手，数据传输和 HTTP 没丁点关系了。
 
-| Feature            | **HTTP/2**                  | **WebSocket**     |
-| ------------------ | --------------------------- | ----------------- |
-| **Headers**        | Compressed (HPACK)          | None              |
-| **Binary**         | Yes                         | Binary or Textual |
-| **Multiplexing**   | Yes                         | Yes               |
-| **Prioritization** | Yes                         | No                |
-| **Compression**    | Yes                         | Yes               |
-| **Direction**      | Client/Server + Server Push | Bidirectional     |
-| **Full-duplex**    | Yes                         | Yes               |
+| Feature        | HTTP/2                      | WebSocket         |
+| -------------- | --------------------------- | ----------------- |
+| Headers        | Compressed (HPACK)          | None              |
+| Binary         | Yes                         | Binary or Textual |
+| Multiplexing   | Yes                         | Yes               |
+| Prioritization | Yes                         | No                |
+| Compression    | Yes                         | Yes               |
+| Direction      | Client/Server + Server Push | Bidirectional     |
+| Full-duplex    | Yes                         | Yes               |
 
 # WebSocket
 
 WebSocket 也有自己一套帧协议。
 
-**1) Why is the WebSockets protocol better?**
+1. Why is the WebSockets protocol better?
 
 WebSockets is better for situations that involve low-latency communication especially for low latency for client to server messages. For server to client data you can get fairly low latency using long-held connections and chunked transfer. However, this doesn't help with client to server latency which requires a new connection to be established for each client to server message.
 

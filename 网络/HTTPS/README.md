@@ -8,7 +8,7 @@
 
 ## Definition
 
-**HTTPS = HTTP + 加密 + 认证 + 完整性保护**，HTTPS 也就是 HTTP 加上加密处理、认证以及完整性保护。使用 HTTPS 通信时，用的是 https://，而不是 http://。另外，当浏览器访问 HTTPS 的 Web 网站时，浏览器地址栏会出现一个带锁的标记。要注意，HTTPS 并非是应用层的新协议，而是 HTTP 通信接口部分用 SSL 协议代替而已。本来，HTTP 是直接基于 TCP 通信。在 HTTPS 中，它先和 SSL 通信，SSL 再和 TCP 通信。所以说 HTTPS 是披了层 SSL 外壳的 HTTP。SSL 是独立于 HTTP 的协议，所以其他类似于 HTTP 的应用层 SMTP 等协议都可以配合 SSL 协议使用，也可以给它们增强安全性。整个架构如下图所示: ![](https://segmentfault.com/image?src=http://sean-images.qiniudn.com/tls-ssl-_tcp-ip_protocol.png&objectId=1190000004523659&token=6517aceb1d4a4e88003533f1c268c256)
+HTTPS = HTTP + 加密 + 认证 + 完整性保护，HTTPS 也就是 HTTP 加上加密处理、认证以及完整性保护。使用 HTTPS 通信时，用的是 https://，而不是 http://。另外，当浏览器访问 HTTPS 的 Web 网站时，浏览器地址栏会出现一个带锁的标记。要注意，HTTPS 并非是应用层的新协议，而是 HTTP 通信接口部分用 SSL 协议代替而已。本来，HTTP 是直接基于 TCP 通信。在 HTTPS 中，它先和 SSL 通信，SSL 再和 TCP 通信。所以说 HTTPS 是披了层 SSL 外壳的 HTTP。SSL 是独立于 HTTP 的协议，所以其他类似于 HTTP 的应用层 SMTP 等协议都可以配合 SSL 协议使用，也可以给它们增强安全性。整个架构如下图所示: ![](https://segmentfault.com/image?src=http://sean-images.qiniudn.com/tls-ssl-_tcp-ip_protocol.png&objectId=1190000004523659&token=6517aceb1d4a4e88003533f1c268c256)
 
 ## Performance
 
@@ -27,7 +27,7 @@ empty state -------------------> pending state ------------------> current state
              Handshake Protocol                Change Cipher Spec
 ```
 
-初始当前状态(Current State )没有指定加密，压缩和 MAC 算法，因而在完成 TLS Handshaking Protocols 一系列动作之前，客户端和服务端的数据都是**明文传输**的；当 TLS 完成握手过程后，客户端和服务端确定了加密，压缩和 MAC 算法及其参数，数据(Record )会通过指定算法处理。
+初始当前状态(Current State )没有指定加密，压缩和 MAC 算法，因而在完成 TLS Handshaking Protocols 一系列动作之前，客户端和服务端的数据都是明文传输的；当 TLS 完成握手过程后，客户端和服务端确定了加密，压缩和 MAC 算法及其参数，数据(Record )会通过指定算法处理。
 
 ## Why HTTPS?
 
