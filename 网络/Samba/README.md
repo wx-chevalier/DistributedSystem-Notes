@@ -1,6 +1,6 @@
 # Samba
 
-Samba 是一个能让 Linux 系统应用 Microsoft 网络通讯协议的软件，而 SMB 是 Server Message Block 的缩写，即为服务器消息块 ，SMB 主要是作为 Microsoft 的网络通讯协议，后来 Samba 将 SMB 通信协议应用到了 Linux 系统上，就形成了现在的 Samba 软件。后来微软又把 SMB 改名为 CIFS（Common Internet File System），即公共 Internet 文件系统，并且加入了许多新的功能，这样一来，使得 Samba 具有了更强大的功能。
+Samba 是一个能让 Linux 系统应用 Microsoft 网络通讯协议的软件，而 SMB 是 Server Message Block 的缩写，即为服务器消息块，SMB 主要是作为 Microsoft 的网络通讯协议，后来 Samba 将 SMB 通信协议应用到了 Linux 系统上，就形成了现在的 Samba 软件。后来微软又把 SMB 改名为 CIFS（Common Internet File System），即公共 Internet 文件系统，并且加入了许多新的功能，这样一来，使得 Samba 具有了更强大的功能。
 
 Samba 最大的功能就是可以用于 Linux 与 windows 系统直接的文件共享和打印共享，Samba 既可以用于 windows 与 Linux 之间的文件共享，也可以用于 Linux 与 Linux 之间的资源共享，由于 NFS(网络文件系统）可以很好的完成 Linux 与 Linux 之间的数据共享，因而 Samba 较多的用在了 Linux 与 windows 之间的数据共享上面。
 

@@ -165,7 +165,7 @@ But if you have to send non-ASCII text or large binary data, the form-data is fo
 
 网页中的表单使用 POST 方法提交时，数据内容的类型是 application/x-www-form-urlencoded，这种类型会：
 
-1. 字符 "a"-"z"，"A"-"Z" ，"0"-"9"，"." ，"-"，"\*" ，和 "\_" 都不会被编码 ;
+1. 字符 "a"-"z"，"A"-"Z"，"0"-"9"，"."，"-"，"\*"，和 "\_" 都不会被编码 ;
 
 2. 将空格转换为加号 (+)
 
