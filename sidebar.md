@@ -116,6 +116,7 @@
       
     - [批处理](/分布式计算/批处理/README.md)
       - [MapReduce](/分布式计算/批处理/MapReduce/README.md)
+        - [Map 端连接](/分布式计算/批处理/MapReduce/Map%20端连接.md)
         - [Reduce 端连接与分组](/分布式计算/批处理/MapReduce/Reduce%20端连接与分组.md)
         - [作业执行](/分布式计算/批处理/MapReduce/作业执行.md)
     - [流计算](/分布式计算/流计算/README.md)
