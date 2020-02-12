@@ -115,7 +115,9 @@
     - [Waltz](/分布式计算/Waltz/README.md)
       
     - [批处理](/分布式计算/批处理/README.md)
-      
+      - [MapReduce](/分布式计算/批处理/MapReduce/README.md)
+        - [Reduce 端连接与分组](/分布式计算/批处理/MapReduce/Reduce%20端连接与分组.md)
+        - [作业执行](/分布式计算/批处理/MapReduce/作业执行.md)
     - [流计算](/分布式计算/流计算/README.md)
       - [Dataflow 模型](/分布式计算/流计算/Dataflow%20模型.md)
       - [分布式快照](/分布式计算/流计算/分布式快照.md)
