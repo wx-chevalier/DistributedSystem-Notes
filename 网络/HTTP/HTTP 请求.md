@@ -15,7 +15,7 @@ HTTP 的请求报文分为三个部分 请求行、请求头和请求体，格�
 
 # Request Line: 请求行
 
-请求行(Request Line )分为三个部分：请求方法、请求地址和协议及版本，以 CRLF(\r\n) 结束。HTTP/1.1 定义的请求方法有 8 种：GET 、 POST、PUT 、 DELETE、PATCH 、 HEAD、OPTIONS 、 TRACE, 最常的两种 GET 和 POST，如果是 RESTful 接口的话一般会用到 GET、POST 、 DELETE、PUT 。
+请求行(Request Line )分为三个部分：请求方法、请求地址和协议及版本，以 CRLF(\r\n) 结束。HTTP/1.1 定义的请求方法有 8 种：GET 、 POST、PUT 、 DELETE、PATCH 、 HEAD、OPTIONS 、 TRACE, 最常的两种 GET 和 POST，如果是 RESTful 接口的话一般会用到 GET、POST 、 DELETE、PUT。
 
 ## Request Methods
 
