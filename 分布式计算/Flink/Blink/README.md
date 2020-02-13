@@ -1,8 +1,8 @@
 # Blink
 
-Blink 是 Flink 的一个分支，最初在阿里巴巴内部创建的，针对内部用例对 Flink 进行改进。Blink 添加了一系列改进和集成（https://github.com/apache/flink/blob/blink/README.md ），其中有很多与有界数据 / 批处理和 SQL 有关。实际上，在上面的功能列表中，除了第 4 项外，Blink 在其他方面都迈出了重要的一步：
+Blink 是 Flink 的一个分支，最初在阿里巴巴内部创建的，针对内部用例对 Flink 进行改进。Blink 添加了一系列改进和集成（https://github.com/apache/flink/blob/blink/README.md），其中有很多与有界数据 / 批处理和 SQL 有关。实际上，在上面的功能列表中，除了第 4 项外，Blink 在其他方面都迈出了重要的一步：
 
-- 统一的流式操作符：Blink 扩展了 Flink 的流式运行时操作符模型，支持选择性读取不同的输入源，同时保持推送模型的低延迟特性。这种对输入源的选择性读取可以更好地支持一些算法（例如相同操作符的混合散列连接）和线程模型（通过 RocksDB 的连续对称连接）。这些操作符为“侧边输入”（https://cwiki.apache.org/confluence/display/FLINK/FLIP-17+Side+Inputs+for+DataStream+API ）等新功能打下了基础。
+- 统一的流式操作符：Blink 扩展了 Flink 的流式运行时操作符模型，支持选择性读取不同的输入源，同时保持推送模型的低延迟特性。这种对输入源的选择性读取可以更好地支持一些算法（例如相同操作符的混合散列连接）和线程模型（通过 RocksDB 的连续对称连接）。这些操作符为“侧边输入”（https://cwiki.apache.org/confluence/display/FLINK/FLIP-17+Side+Inputs+for+DataStream+API）等新功能打下了基础。
 
 - Table API 和 SQL 查询处理器：与最新的 Flink 主分支相比，SQL 查询处理器是演变得最多的一个组件：
 
