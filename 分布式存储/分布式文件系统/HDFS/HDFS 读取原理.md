@@ -16,7 +16,7 @@ HDFS 资源 URI 格式：
 
 scheme://authority/path
 
-scheme ：协议名，file 或 hdfs
+scheme：协议名，file 或 hdfs
 
 authority：namenode 主机名
 
