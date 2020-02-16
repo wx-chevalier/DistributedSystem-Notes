@@ -6,7 +6,7 @@ Flink 包含了一个网络栈，支持低延迟 / 高吞吐的流式数据交�
 
 ![](https://ww1.sinaimg.cn/large/007rAy9hgy1g25vrpwkhzj30v00gkabw.jpg)
 
-Apache Flink 已经被业界公认是最好的流计算引擎。然而 Flink 的计算能力不仅仅局限于做流处理。Apache Flink 的定位是一套兼具流、批、机器学习等多种计算功能的大数据引擎。在最近的一段时间，Flink 在批处理以及机器学习等诸多大数据场景都有长足的突破。
+Apache Flink 已经被业界公认是最好的流处理引擎。然而 Flink 的计算能力不仅仅局限于做流处理。Apache Flink 的定位是一套兼具流、批、机器学习等多种计算功能的大数据引擎。在最近的一段时间，Flink 在批处理以及机器学习等诸多大数据场景都有长足的突破。
 
 # API
 
