@@ -10,7 +10,7 @@
 
 分布式事务同样需要满足原子性，一致性，隔离性等特征：
 
-- 事务的原子性：事务操作跨不同节点，当多个节点某一节点操作失败时，需要保证多节点操作的要么不做，要么全做（All or Nothing）的原子性。
+- 事务的原子性：事务操作跨不同节点，当多个节点某一节点操作失败时，需要保证多节点操作的要么不做，要么全做（All or Nothing）的原子性。在《一致性与共识》章节中我们也讨论过，共识算法的典型应用场景之一就是原子提交（atomic commit）。
 
 - 事务的一致性：当发生网络传输故障或者节点故障，节点间数据复制通道中断，在进行事务操作时需要保证数据一致性，保证事务的任何操作都不会使得数据违反数据库定义的约束、触发器等规则。
 
@@ -50,7 +50,7 @@ XA 协议最早的分布式事务模型是由 X/Open 国际联盟提出的 X/Ope
 
 ## XA 事务
 
-X/Open XA（扩展架构（eXtended Architecture）的缩写）是跨异构技术实现两阶段提交的标准【76,77】。它于 1991 年推出并得到了广泛的实现：许多传统关系数据库（包括 PostgreSQL，MySQL，DB2，SQL Server 和 Oracle）和消息代理（包括 ActiveMQ，HornetQ，MSMQ 和 IBM MQ） 都支持 XA。XA 不是一个网络协议——它只是一个用来与事务协调者连接的 C API。其他语言也有这种 API 的绑定；例如在 Java EE 应用的世界中，XA 事务是使用 Java 事务 API（JTA, Java Transaction API）实现的，而许多使用 Java 数据库连接（JDBC, Java Database Connectivity）的数据库驱动，以及许多使用 Java 消息服务（JMS）API 的消息代理都支持 Java 事务 API（JTA）。
+X/Open XA（扩展架构（eXtended Architecture）的缩写）是跨异构技术实现两阶段提交的标准。它于 1991 年推出并得到了广泛的实现：许多传统关系数据库（包括 PostgreSQL，MySQL，DB2，SQL Server 和 Oracle）和消息代理（包括 ActiveMQ，HornetQ，MSMQ 和 IBM MQ） 都支持 XA。XA 不是一个网络协议——它只是一个用来与事务协调者连接的 C API。其他语言也有这种 API 的绑定；例如在 Java EE 应用的世界中，XA 事务是使用 Java 事务 API（JTA, Java Transaction API）实现的，而许多使用 Java 数据库连接（JDBC, Java Database Connectivity）的数据库驱动，以及许多使用 Java 消息服务（JMS）API 的消息代理都支持 Java 事务 API（JTA）。
 
 XA 假定你的应用使用网络驱动或客户端库来与参与者进行通信（数据库或消息服务）。如果驱动支持 XA，则意味着它会调用 XA API 以查明操作是否为分布式事务的一部分；如果是，则将必要的信息发往数据库服务器。驱动还会向协调者暴露回调接口，协调者可以通过回调来要求参与者准备，提交或中止。事务协调者需要实现 XA API。标准没有指明应该如何实现，但实际上协调者通常只是一个库，被加载到发起事务的应用的同一个进程中（而不是单独的服务）。它在事务中个跟踪所有的参与者，并在要求它们准备之后收集参与者的响应（通过驱动回调），并使用本地磁盘上的日志记录每次事务的决定（提交/中止）。
 
