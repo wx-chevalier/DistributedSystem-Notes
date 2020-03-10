@@ -2,6 +2,12 @@
 
 共识是分布式计算中最重要也是最基本的问题之一，所谓共识，就是让所有的节点对某件事达成一致（Get serveral nodes to agree on something），例如，如果有几个人同时（concurrently）尝试预订飞机上的最后一个座位，或剧院中的同一个座位，或者尝试使用相同的用户名注册一个帐户。共识算法可以用来确定这些互不相容（mutually incompatible）的操作中，哪一个才是赢家。
 
+Distributed consensus algorithms can be seen as solving the problem of replicating a deterministic state machine across multiple servers. The term state machine is used to represent an arbitrary service; after all, state machines are one of the foundations of computer science and everything can be represented by them. Databases, file servers, lock servers etc. can all be thought of as complex state machines.
+
+Each server has a state machine and a log. The state machine is the component that we want to make fault-tolerant, such as a hash table. It will appear to clients that they are interacting with a single, reliable state machine, even if a minority of the servers in the cluster fail. Each state machine takes as input commands from its log. In our hash table example, the log would include commands like set x to 3. A consensus algorithm is used to agree on the commands in the servers' logs. The consensus algorithm must ensure that if any state machine applies set x to 3 as the nth command, no other state machine will ever apply a different nth command. As a result, each state machine processes the same series of commands and thus produces the same series of results and arrives at the same series of states.
+
+## 典型场景
+
 因为分布式系统中存在着的网络故障与流程故障，可靠地达成共识是一个令人惊讶的棘手问题。一旦达成共识，应用可以将其用于各种目的。共识的典型场景包括了：
 
 - 领导选举：在单主复制的数据库中，所有节点需要就哪个节点是领导者达成一致。如果一些节点由于网络故障而无法与其他节点通信，则可能会对领导权的归属引起争议。在这种情况下，共识对于避免错误的故障切换非常重要。错误的故障切换会导致两个节点都认为自己是领导者。如果有两个领导者，它们都会接受写入，它们的数据会发生分歧，从而导致不一致和数据丢失。
