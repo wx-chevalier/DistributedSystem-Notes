@@ -91,7 +91,7 @@
     - [Flink](/分布式计算/Flink/README.md)
       - [Blink](/分布式计算/Flink/Blink/README.md)
         
-      - [SQL](/分布式计算/Flink/SQL.md)
+      - [Table API](/分布式计算/Flink/Table%20API.md)
       - [代码开发](/分布式计算/Flink/代码开发.md)
       - [环境配置](/分布式计算/Flink/环境配置.md)
     - [Hadoop](/分布式计算/Hadoop/README.md)
