@@ -1,5 +1,7 @@
 # 共识算法
 
+分布式一致性（Consensus）作为分布式系统的基石，一直都是计算机系统领域的热点。近年来随着分布式系统的规模越来越大，对可用性和一致性的要求越来越高，分布式一致性的应用也越来越广泛。纵观分布式一致性在工业界的应用，从最开始的鼻祖Paxos的一统天下，到横空出世的Raft的流行，再到如今Leaderless的EPaxos开始备受关注。       
+
 共识是分布式计算中最重要也是最基本的问题之一，所谓共识，就是让所有的节点对某件事达成一致（Get serveral nodes to agree on something），例如，如果有几个人同时（concurrently）尝试预订飞机上的最后一个座位，或剧院中的同一个座位，或者尝试使用相同的用户名注册一个帐户。共识算法可以用来确定这些互不相容（mutually incompatible）的操作中，哪一个才是赢家。
 
 Distributed consensus algorithms can be seen as solving the problem of replicating a deterministic state machine across multiple servers. The term state machine is used to represent an arbitrary service; after all, state machines are one of the foundations of computer science and everything can be represented by them. Databases, file servers, lock servers etc. can all be thought of as complex state machines.
