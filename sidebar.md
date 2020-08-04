@@ -16,8 +16,10 @@
         - [Multiple Paxos](/一致性与共识/共识算法/Paxos/Multiple-Paxos.md)
         - [Paxos](/一致性与共识/共识算法/Paxos/Paxos.md)
       - [Raft](/一致性与共识/共识算法/Raft/README.md)
-        - [Raft](/一致性与共识/共识算法/Raft/Raft.md)
-      - [系统模型](/一致性与共识/共识算法/系统模型/README.md)
+        - [与 Multi Paxos 对比](/一致性与共识/共识算法/Raft/与%20Multi-Paxos%20对比.md)
+        - [成员变更](/一致性与共识/共识算法/Raft/成员变更.md)
+        - [选举与同步](/一致性与共识/共识算法/Raft/选举与同步.md)
+      - [算法模型](/一致性与共识/共识算法/算法模型/README.md)
         
     - [分布式 ID](/一致性与共识/分布式%20ID/README.md)
       - [Leaf](/一致性与共识/分布式%20ID/Leaf.md)
