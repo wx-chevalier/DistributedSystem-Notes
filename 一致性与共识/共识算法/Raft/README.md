@@ -8,7 +8,11 @@ Raft 是斯坦福的 Diego Ongaro、John Ousterhout 两个人以易懂（Underst
 
 Raft 是一个用于日志复制，同步的一致性算法。它提供了和 Paxos 一样的功能和性能，但是它的算法结构与 Paxos 不同。这使得 Raft 相比 Paxos 更好理解，并且更容易构建实际的系统。为了强调可理解性，Raft 将一致性算法分解为几个关键流程（模块），例如选主，安全性，日志复制，通过将分布式一致性这个复杂的问题转化为一系列的小问题进而各个击破的方式来解决问题。同时它通过实施一个更强的一致性来减少一些不必要的状态，进一步降低了复杂性。Raft 还包括了一个新机制，允许线上进行动态的集群扩容，利用有交集的大多数机制来保证安全性。
 
-与 Paxos 不同 Raft 强调的是易懂（Understandability），Raft 和 Paxos 一样只要保证 `n/2+1` 节点正常就能够提供服务；众所周知但问题较为复杂时可以把问题分解为几个小问题来处理，Raft 也使用了分而治之的思想把算法流程分为三个子问题：选举（Leader election）、日志复制（Log replication）、安全性（Safety）三个子问题；这里先简单介绍下 Raft 的流程：
+与 Paxos 不同 Raft 强调的是易懂（Understandability），Raft 和 Paxos 一样只要保证 `n/2+1` 节点正常就能够提供服务。不同于 Paxos 算法直接从分布式一致性问题出发推导出来，Raft 算法则是从多副本状态机的角度提出，用于管理多副本状态机的日志复制。Raft 实现了和 Paxos 相同的功能，它将一致性分解为多个子问题：Leader 选举（Leader election）、日志同步（Log replication）、安全性（Safety）、日志压缩（Log compaction）、成员变更（Membership change）等。同时，Raft 算法使用了更强的假设来减少了需要考虑的状态，使之变的易于理解和实现。
+
+![复制状态机](https://s1.ax1x.com/2020/08/06/agwY9g.png)
+
+Raft 的主要流程包含以下步骤：
 
 - Raft 开始时在集群中选举出 Leader 负责日志复制的管理；
 - Leader 接受来自客户端的事务请求（日志），并将它们复制给集群的其他节点，然后负责通知集群中其他节点提交日志，Leader 负责保证其他节点与他的日志同步；
