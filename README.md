@@ -2,7 +2,7 @@
 
 ![default](https://i.postimg.cc/2SVpd63d/image.png)
 
-# 深入浅出分布式系统
+# Distributed Series（分布式系统·实践笔记）
 
 参考[某熊的技术之路指北 ☯](https://github.com/wx-chevalier/Developer-Zero-To-Mastery)，深入浅出分布式基础架构是笔者归档自己，在学习与实践软件分布式架构过程中的，笔记与代码的仓库；主要包含分布式计算、分布式系统、数据存储、虚拟化、网络、操作系统等几个部分。
 
