@@ -1,9 +1,8 @@
   - [一致性与共识](/一致性与共识/README.md)
     - [BFT](/一致性与共识/BFT/README.md)
       
-    - CAP
+    - [CAP](/一致性与共识/CAP/README.md)
       - [BASE](/一致性与共识/CAP/BASE.md)
-      - [CAP](/一致性与共识/CAP/CAP.md)
       - [DLS](/一致性与共识/CAP/DLS.md)
     - [一致性模型](/一致性与共识/一致性模型/README.md)
       - [其他一致性模型](/一致性与共识/一致性模型/其他一致性模型.md)
