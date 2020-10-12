@@ -72,7 +72,7 @@ HDFS 块内行存储的例子: ![](http://dl.iteye.com/upload/attachment/0083/51
 
 # 数据读取
 
-hdfs 读取数据流程图: ![](http://img.blog.csdn.net/20160525114335782) 1 、首先调用 FileSystem 对象的 open 方法，其实获取的是一个 DistributedFileSystem 的实例。2 、DistributedFileSystem 通过 RPC( 远程过程调用 ) 获得文件的第一批 block 的 locations，同一 block 按照重复数会返回多个 locations，这些 locations 按照 hadoop 拓扑结构排序，距离客户端近的排在前面。3 、前两步会返回一个 FSDataInputStream 对象，该对象会被封装成 DFSInputStream 对象，DFSInputStream 可以方便的管理 datanode 和 namenode 数据流。客户端调用 read 方 法，DFSInputStream 就会找出离客户端最近的 datanode 并连接 datanode。4 、数据从 datanode 源源不断的流向客户端。5 、如果第一个 block 块的数据读完了，就会关闭指向第一个 block 块的 datanode 连接，接着读取下一个 block 块。这些操作对客户端来说是透明的，从客户端的角度来看只是读一个持续不断的流。6 、如果第一批 block 都读完了，DFSInputStream 就会去 namenode 拿下一批 blocks 的 location，然后继续读，如果所有的 block 块都读完，这时就会关闭掉所有的流。
+hdfs 读取数据流程图: ![](http://img.blog.csdn.net/20160525114335782) 1、首先调用 FileSystem 对象的 open 方法，其实获取的是一个 DistributedFileSystem 的实例。2、DistributedFileSystem 通过 RPC( 远程过程调用 ) 获得文件的第一批 block 的 locations，同一 block 按照重复数会返回多个 locations，这些 locations 按照 hadoop 拓扑结构排序，距离客户端近的排在前面。3、前两步会返回一个 FSDataInputStream 对象，该对象会被封装成 DFSInputStream 对象，DFSInputStream 可以方便的管理 datanode 和 namenode 数据流。客户端调用 read 方 法，DFSInputStream 就会找出离客户端最近的 datanode 并连接 datanode。4、数据从 datanode 源源不断的流向客户端。5、如果第一个 block 块的数据读完了，就会关闭指向第一个 block 块的 datanode 连接，接着读取下一个 block 块。这些操作对客户端来说是透明的，从客户端的角度来看只是读一个持续不断的流。6、如果第一批 block 都读完了，DFSInputStream 就会去 namenode 拿下一批 blocks 的 location，然后继续读，如果所有的 block 块都读完，这时就会关闭掉所有的流。
 
 # 数据写入
 

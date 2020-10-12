@@ -22,7 +22,7 @@ hdfs.server.common 包含了一些名字节点和数据节点共享的功能，�
 
 hdfs.protocol 和 hdfs.server.protocol 提供了 HDFS 各个实体间通过 IPC 交互的接口的定义和实现。
 
-hdfs.server.namenode 、hdfs.server.datanode 和 hdfs 分别包含了名字节点、数据节点和客户端的实现。上述代码是 HDFS 代码分析的重点。
+hdfs.server.namenode、hdfs.server.datanode 和 hdfs 分别包含了名字节点、数据节点和客户端的实现。上述代码是 HDFS 代码分析的重点。
 
 hdfs.server.namenode.metrics 和 hdfs.server.datanode.metrics 实现了名字节点和数据节点上度量数据的收集功能。度量数据包括名字节点进程和数据节点进程上事件的计数，例如数据节点上就可以收集到写入字节数、被复制的块的数量等信息。
 
@@ -72,6 +72,6 @@ Balancer.java---- 继承实现类：负载均衡进程，各节点基于他来�
 
 4.WebHDFS 相关包
 
-包括 hdfs.web.resources、hdfs.server.namenode.metrics.web.resources 、hdfs.server.datanode.web.resources 和 hdfs.web 共 4 个包。
+包括 hdfs.web.resources、hdfs.server.namenode.metrics.web.resources、hdfs.server.datanode.web.resources 和 hdfs.web 共 4 个包。
 
 WebHDFS 是 HDFS 1.0 中引入的新功能，它提供了一个完整的、通过 HTTP 访问 HDFS 的机制。对比只读的 hftp 文件系统，WebHDFS 提供了 HTTP 上读写 HDFS 的能力，并在此基础上实现了访问 HDFS 的 C 客户端和用户空间文件系统(FUSE )。
