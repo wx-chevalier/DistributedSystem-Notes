@@ -64,7 +64,7 @@ func (m *Map) Get(key string) string {
 }
 ```
 
-# 链接
+# TBD
 
 - https://mp.weixin.qq.com/s?__biz=MzIyMzgyODkxMQ==&mid=2247484108&idx=1&sn=87df95335ca97aa5d44475fc2c8d1e4b&scene=21#wechat_redirect
 - http://blog.carlosgaldino.com/consistent-hashing.html

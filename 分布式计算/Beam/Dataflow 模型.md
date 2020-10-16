@@ -28,6 +28,6 @@ Dataflow 模型从流处理的角度重新审视数据处理过程，将批和�
 
 累计类型（Accumulation）累计类型是处理单个窗口的输出数据是如何随着流处理的进程而发生变化的。
 
-# 链接
+# TBD
 
 - https://www.zhihu.com/question/30151872/answer/640568211

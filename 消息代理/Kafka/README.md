@@ -66,7 +66,7 @@ Kafka 是一种分布式的，基于发布/订阅的消息系统。主要设计�
 
 ### Stream Processing | 流处理
 
-# 链接
+# TBD
 
 - https://mp.weixin.qq.com/s/fX26tCdYSMgwM54_2CpVrw
 
@@ -196,6 +196,6 @@ Pulsar 是以 Segment 为中心的，因此在扩展容量时不需要数据重�
 
 # 配置与实践
 
-# 链接
+# TBD
 
 - https://www.cnblogs.com/huxi2b/p/6223228.html

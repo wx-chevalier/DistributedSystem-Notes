@@ -12,6 +12,6 @@
 
 ![组合使用复制和分区：每个节点充当某些分区的领导者，其他分区充当追随者。](https://s2.ax1x.com/2020/02/09/1huDR1.md.png)
 
-# 链接
+# TBD
 
 - https://blog.csdn.net/jiafu1115/article/details/53908715

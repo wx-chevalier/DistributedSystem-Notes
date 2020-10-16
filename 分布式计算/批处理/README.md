@@ -8,6 +8,6 @@
 
 术语 MicroBatch 经常用于描述批次小和/或以小间隔处理的情况。即使处理可能每隔几分钟发生一次，数据仍然一次处理一批。Spark Streaming 是设计用于支持微批处理的系统的一个例子。
 
-# 链接
+# TBD
 
 - http://dist-prog-book.com/chapter/8/big-data.html
