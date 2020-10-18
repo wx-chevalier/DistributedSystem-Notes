@@ -59,3 +59,5 @@
 - [分布式系统一致性的发展历史](http://36kr.com/p/5037166.html)
 
 - [关于分布式一致性的探究](http://www.hollischuang.com/archives/663)
+
+- https://mp.weixin.qq.com/s/3odLhBtebF4cm58hl-87JA 条分缕析分布式：浅析强弱一致性
