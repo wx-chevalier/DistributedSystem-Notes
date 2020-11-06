@@ -43,7 +43,7 @@
 
 这些统计值通常是在固定时间区间内进行计算的，例如，你可能想知道在过去 5 分钟内服务每秒查询次数的均值，以及此时间段内响应时间的第 99 百分位点。在几分钟内取平均，能抹平秒和秒之间的无关波动，且仍然能向你展示流量模式的时间图景。聚合的时间间隔称为窗口（window）。
 
-流分析系统有时会使用概率算法，例如 Bloom filter 来管理成员资格，HyperLogLog ，用于基数估计以及各种百分比估计算法。概率算法产出近似的结果，但比起精确算法的优点是内存使用要少得多。使用近似算法有时让人们觉得流处理系统总是有损的和不精确的，但这是错误看法：流处理并没有任何内在的近似性，而概率算法只是一种优化。许多开源分布式流处理框架的设计都是针对分析设计的：例如 Apache Storm，Spark Streaming，Flink，Concord，Samza 和 Kafka Streams 。托管服务包括 Google Cloud Dataflow 和 Azure Stream Analytics。
+流分析系统有时会使用概率算法，例如 Bloom filter 来管理成员资格，HyperLogLog，用于基数估计以及各种百分比估计算法。概率算法产出近似的结果，但比起精确算法的优点是内存使用要少得多。使用近似算法有时让人们觉得流处理系统总是有损的和不精确的，但这是错误看法：流处理并没有任何内在的近似性，而概率算法只是一种优化。许多开源分布式流处理框架的设计都是针对分析设计的：例如 Apache Storm，Spark Streaming，Flink，Concord，Samza 和 Kafka Streams 。托管服务包括 Google Cloud Dataflow 和 Azure Stream Analytics。
 
 ## 维护物化视图
 
