@@ -153,6 +153,8 @@
         - [时间窗口](/分布式计算/流处理/编程模型/时间窗口.md)
     - [边缘计算](/分布式计算/边缘计算/README.md)
       
+    - [量子计算](/分布式计算/量子计算/README.md)
+      
   - [消息代理](/消息代理/README.md)
     - [Kafka](/消息代理/Kafka/README.md)
       - [Kafka Streams](/消息代理/Kafka/Kafka%20Streams/README.md)
