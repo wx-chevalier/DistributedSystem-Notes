@@ -99,5 +99,5 @@ val avgRoomTemp: Table = tableEnv.ingest("sensorData")
   .where('location.like("room%"))
   .partitionBy('location)
   .window(Tumbling every Days(1) on 'time as 'w)
-  .select('w.end, 'location, , (('tempF - 32) * 0.556).avg as 'avgTempCs)
+  .select('w.end, 'location,, (('tempF - 32) * 0.556).avg as 'avgTempCs)
 ```
