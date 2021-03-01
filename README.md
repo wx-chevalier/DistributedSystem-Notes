@@ -30,7 +30,7 @@
 
 ![A Unified Data Infrastructure Architecture](https://s1.ax1x.com/2020/10/18/0XOno9.png)
 
-## Nav | 导读
+## Nav | 关联导航
 
 > 如果你想了解微服务/云原生等分布式系统的应用实践，可以参阅；如果你想了解数据库相关，可以参阅 [Database-Series](https://github.com/wx-chevalier/Database-Series)；如果你想了解虚拟化与云计算相关，可以参阅 [Cloud-Series](https://github.com/wx-chevalier/Cloud-Series)；如果你想了解 Linux 与操作系统相关，可以参阅 [Linux-Series](https://github.com/wx-chevalier/Linux-Series)。
 
