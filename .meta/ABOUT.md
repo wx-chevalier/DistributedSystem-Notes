@@ -11,5 +11,3 @@
 ![](https://cdn-images-1.medium.com/max/1800/1*BOTGqwpA7mefNBi_muyAJQ.jpeg)
 
 # Links
-
-- 永久链接：[分布式基础架构 https://url.wx-coder.cn/14I5g](https://url.wx-coder.cn/14I5g)
