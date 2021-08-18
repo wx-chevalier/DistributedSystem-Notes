@@ -43,3 +43,5 @@
 - https://zhuanlan.zhihu.com/p/80311843
 
 - https://zhuanlan.zhihu.com/p/88607398
+
+- https://mp.weixin.qq.com/s/hOPT41HIAGE8iZ5jLlREmg 看似忠良的分布式锁
