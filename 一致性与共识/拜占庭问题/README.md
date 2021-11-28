@@ -16,4 +16,4 @@
 
 # Links
 
-- [2021-白话讲解，拜占庭将军问题](https://xie.infoq.cn/article/879cdfde772401f17a42c1025): 作为服务端开发的同学，你可能听说过 Paxos、Raft 这类分布式一致性算法，也在工作中使用过 ZooKeeper、etcd 等工具来解决一致性问题。但你可能不知道，这些算法和工具解决的并不是一致性中最难的问题，要讨论这个最难的问题，这就要追溯到 Leslie Lamport 1982 年发表的著名论文 《拜占庭将军问题》（The Byzantine Generals Problem ）上了。
+- [2021-白话讲解，拜占庭将军问题](https://xie.infoq.cn/article/879cdfde772401f17a42c1025): 作为服务端开发的同学，你可能听说过 Paxos、Raft 这类分布式一致性算法，也在工作中使用过 ZooKeeper、etcd 等工具来解决一致性问题。但你可能不知道，这些算法和工具解决的并不是一致性中最难的问题，要讨论这个最难的问题，这就要追溯到 Leslie Lamport 1982 年发表的著名论文 《拜占庭将军问题》（The Byzantine Generals Problem）上了。
