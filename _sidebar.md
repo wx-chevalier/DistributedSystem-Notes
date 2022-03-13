@@ -76,6 +76,7 @@
         
     - 4.5 .more
       - [4.5.1 Patterns of Distributed Systems](/分布式基础/.more/Patterns%20of%20Distributed%20Systems.md)
+      - [4.5.2 分布式系统的八大谬误](/分布式基础/.more/分布式系统的八大谬误.md)
   - [5 分布式存储](/分布式存储/README.md)
     
   - [6 分布式计算](/分布式计算/README.md)
