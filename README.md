@@ -8,7 +8,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/wx-chevalier/DistributedSystem-Series">
-    <img src="header.svg" alt="Logo" style="width: 100vw;height: 400px" />
+    <img src="https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/header.svg" alt="Logo" style="width: 100vw;height: 400px" />
   </a>
 
   <p align="center">
