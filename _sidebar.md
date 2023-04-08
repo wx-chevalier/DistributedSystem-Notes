@@ -74,9 +74,9 @@
         
       - [4.4.2 分割日志](/分布式基础/4.日志模型/分割日志/README.md)
         
-    - 4.5 999.参考资料 [2]
-      - [4.5.1 Patterns of Distributed Systems](/分布式基础/999.参考资料/Patterns%20of%20Distributed%20Systems.md)
-      - [4.5.2 分布式系统的八大谬误](/分布式基础/999.参考资料/分布式系统的八大谬误.md)
+    - 4.5 99.参考资料 [2]
+      - [4.5.1 Patterns of Distributed Systems](/分布式基础/99.参考资料/Patterns%20of%20Distributed%20Systems.md)
+      - [4.5.2 分布式系统的八大谬误](/分布式基础/99.参考资料/分布式系统的八大谬误.md)
   - [5 分布式存储](/分布式存储/README.md)
     
   - [6 分布式计算](/分布式计算/README.md)
