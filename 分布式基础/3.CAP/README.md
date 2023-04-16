@@ -2,7 +2,7 @@
 
 CAP 定理又被称作布鲁尔定理，是加州大学的计算机科学家布鲁尔在 2000 年提出的一个猜想；2002 年，麻省理工学院的赛斯·吉尔伯特和南希·林奇发表了布鲁尔猜想的证明，使之成为分布式计算领域公认的一个定理。CAP 定理认为，在分布式系统中，系统的一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）三者不可能同时兼顾。而由于网络通信的不稳定性，分区容忍性是必须要保证的，因此 CAP 理论在实践中往往指明了在设计应用的时候就需要在一致性和可用性之间权衡选择。互联网应用比企业级应用更加偏向保持可用性，因此通常用最终一致性代替传统事务的 ACID 强一致性。
 
-![](https://i.postimg.cc/6pQXVrH1/image.png)
+![](https://assets.ng-tech.icu/item/20230416205608.png)
 
 布鲁尔在提出 CAP 猜想时并没有具体定义 Consistency、Availability、Partition Tolerance 这 3 个词的含义，不同资料的具体定义也有差别：
 
