@@ -7,12 +7,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/wx-chevalier/DistributedSystem-Series">
+  <a href="https://github.com/wx-chevalier/DistributedSystem-Notes">
     <img src="https://assets.ng-tech.icu/item/header.svg" alt="Logo" style="width: 100vw;height: 400px" />
   </a>
 
   <p align="center">
-    <a href="https://ng-tech.icu/books/DistributedSystem-Series"><strong>在线阅读 >> </strong></a>
+    <a href="https://ng-tech.icu/books/DistributedSystem-Notes"><strong>在线阅读 >> </strong></a>
     <br />
     <br />
     <a href="https://github.com/wx-chevalier">代码案例</a>
@@ -30,7 +30,7 @@
 
 ## Nav | 关联导航
 
-> 如果你想了解微服务/云原生等分布式系统的应用实践，可以参阅；如果你想了解数据库相关，可以参阅 [Database-Series](https://github.com/wx-chevalier/Database-Series)；如果你想了解虚拟化与云计算相关，可以参阅 [Cloud-Series](https://github.com/wx-chevalier/Cloud-Series)；如果你想了解 Linux 与操作系统相关，可以参阅 [Linux-Series](https://github.com/wx-chevalier/Linux-Series)。
+> 如果你想了解微服务/云原生等分布式系统的应用实践，可以参阅；如果你想了解数据库相关，可以参阅 [Database-Notes](https://github.com/wx-chevalier/Database-Notes)；如果你想了解虚拟化与云计算相关，可以参阅 [Cloud-Notes](https://github.com/wx-chevalier/Cloud-Notes)；如果你想了解 Linux 与操作系统相关，可以参阅 [Linux-Notes](https://github.com/wx-chevalier/Linux-Notes)。
 
 # About
 
@@ -43,13 +43,13 @@
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/wx-chevalier/DistributedSystem-Series.svg?style=flat-square
-[contributors-url]: https://github.com/wx-chevalier/DistributedSystem-Series/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/wx-chevalier/DistributedSystem-Series.svg?style=flat-square
-[forks-url]: https://github.com/wx-chevalier/DistributedSystem-Series/network/members
-[stars-shield]: https://img.shields.io/github/stars/wx-chevalier/DistributedSystem-Series.svg?style=flat-square
-[stars-url]: https://github.com/wx-chevalier/DistributedSystem-Series/stargazers
-[issues-shield]: https://img.shields.io/github/issues/wx-chevalier/DistributedSystem-Series.svg?style=flat-square
-[issues-url]: https://github.com/wx-chevalier/DistributedSystem-Series/issues
-[license-shield]: https://img.shields.io/github/license/wx-chevalier/DistributedSystem-Series.svg?style=flat-square
-[license-url]: https://github.com/wx-chevalier/DistributedSystem-Series/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/wx-chevalier/DistributedSystem-Notes.svg?style=flat-square
+[contributors-url]: https://github.com/wx-chevalier/DistributedSystem-Notes/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/wx-chevalier/DistributedSystem-Notes.svg?style=flat-square
+[forks-url]: https://github.com/wx-chevalier/DistributedSystem-Notes/network/members
+[stars-shield]: https://img.shields.io/github/stars/wx-chevalier/DistributedSystem-Notes.svg?style=flat-square
+[stars-url]: https://github.com/wx-chevalier/DistributedSystem-Notes/stargazers
+[issues-shield]: https://img.shields.io/github/issues/wx-chevalier/DistributedSystem-Notes.svg?style=flat-square
+[issues-url]: https://github.com/wx-chevalier/DistributedSystem-Notes/issues
+[license-shield]: https://img.shields.io/github/license/wx-chevalier/DistributedSystem-Notes.svg?style=flat-square
+[license-url]: https://github.com/wx-chevalier/DistributedSystem-Notes/blob/master/LICENSE.txt
