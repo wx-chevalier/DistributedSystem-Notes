@@ -247,7 +247,7 @@ PredicateResults predicateResults = driver.getsTheLock(client, children, sequenc
     }
 ```
 
-这里解释一下 maxLease 这个参数的意义：默认值为 1，就是互斥锁；如果默认值大于 1，假设 maxLease 的值是 5，则最小的 5 个临时有序节点都可以认为是能持有锁的节点，此时最多可以有 5 个线程并发访问临界区， 在功能上类似于 Java 中 Semaphore（信号量）机制 。
+这里解释一下 maxLease 这个参数的意义：默认值为 1，就是互斥锁；如果默认值大于 1，假设 maxLease 的值是 5，则最小的 5 个临时有序节点都可以认为是能持有锁的节点，此时最多可以有 5 个线程并发访问临界区，在功能上类似于 Java 中 Semaphore（信号量）机制 。
 
 #### 2. 释放锁源码解析
 
