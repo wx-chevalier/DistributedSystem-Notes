@@ -1,4 +1,4 @@
-## 二、 Apache Curator
+## 二、Apache Curator
 
 ### 2.1 基本使用
 
