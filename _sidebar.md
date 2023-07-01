@@ -76,14 +76,15 @@
       - [4.4.2 分割日志](/分布式基础/04.日志模型/分割日志/README.md)
         
     - 4.5 99.参考资料 [3]
-      - [4.5.1 Distributed Systems for Fun and Profit [7]](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/README.md)
-        - [4.5.1.1 00.General](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/00.General.md)
-        - [4.5.1.2 01.Basics](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/01.Basics.md)
-        - [4.5.1.3 02.Abstraction](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/02.Abstraction.md)
-        - [4.5.1.4 03.TimeAndOrder](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/03.TimeAndOrder.md)
-        - [4.5.1.5 04.PreventingDivergence](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/04.PreventingDivergence.md)
-        - [4.5.1.6 05.AcceptingDivergence](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/05.AcceptingDivergence.md)
-        - [4.5.1.7 10.Appendix](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/10.Appendix.md)
+      - [4.5.1 Distributed Systems for Fun and Profit [1]](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/README.md)
+        - 4.5.1.1 中文翻译 [7]
+          - [4.5.1.1.1 00.引言](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/00.引言.md)
+          - [4.5.1.1.2 01.Basics](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/01.Basics.md)
+          - [4.5.1.1.3 02.Abstraction](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/02.Abstraction.md)
+          - [4.5.1.1.4 03.TimeAndOrder](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/03.TimeAndOrder.md)
+          - [4.5.1.1.5 04.PreventingDivergence](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/04.PreventingDivergence.md)
+          - [4.5.1.1.6 05.AcceptingDivergence](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/05.AcceptingDivergence.md)
+          - [4.5.1.1.7 10.Appendix](/分布式基础/99.参考资料/Distributed%20Systems%20for%20Fun%20and%20Profit/中文翻译/10.Appendix.md)
       - [4.5.2 Patterns of Distributed Systems [25]](/分布式基础/99.参考资料/Patterns%20of%20Distributed%20Systems/README.md)
         - [4.5.2.1 consistent core](/分布式基础/99.参考资料/Patterns%20of%20Distributed%20Systems/consistent-core.md)
         - [4.5.2.2 follower reads](/分布式基础/99.参考资料/Patterns%20of%20Distributed%20Systems/follower-reads.md)
