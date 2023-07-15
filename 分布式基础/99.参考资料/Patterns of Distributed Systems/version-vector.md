@@ -351,7 +351,7 @@ class ClusterClient…
 
 比如，[riak](https://riak.com/posts/technical/vector-clocks-revisited/index.html?p=9545.html)就允许提供冲突解决器，就像这里解释的那样。
 
-##### 最后写入胜（Last Write Wins， LWW）的冲突解决
+##### 最后写入胜（Last Write Wins，LWW）的冲突解决
 
 虽然版本向量允许检测不同服务器组的并发写入，但在产生冲突的情况下，其本身并不能帮助给客户端提供识别出选择哪个值。解决问题的责任在客户端身上。有时，客户端倾向于让键值存储根据时间戳来解决冲突。虽然通过跨服务器的时间戳存在一些已知的问题，但这种方式胜在简单，使其成为了客户端的首选方案，即便是由于跨服务器时间戳的问题，存在丢失一些更新的风险。它们完全要依赖于像 NTP 这样的服务得到良好的配置，能够跨集群工作正常。像 [riak](https://riak.com/posts/technical/vector-clocks-revisited/index.html?p=9545.html) 和 [voldemort](https://www.project-voldemort.com/voldemort/) 这样的数据库允许用户选择“最后写入胜”的冲突解决策略。
 
