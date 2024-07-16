@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.github.openfeign:feign-slf4j:10.10.1">
+    <CLASSES>
+      <root url="jar:///usr/local/apache-maven-3.6.3/repo/io/github/openfeign/feign-slf4j/10.10.1/feign-slf4j-10.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///usr/local/apache-maven-3.6.3/repo/io/github/openfeign/feign-slf4j/10.10.1/feign-slf4j-10.10.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///usr/local/apache-maven-3.6.3/repo/io/github/openfeign/feign-slf4j/10.10.1/feign-slf4j-10.10.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

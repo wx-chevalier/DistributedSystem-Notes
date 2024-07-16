@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.kerry.seata.demo.storageservice.mapper.StorageMapper">
+
+    <select id="findOneByProductId" resultType="pers.kerry.seata.demo.storageservice.pojo.StorageDO">
+       select *
+       from storage
+       where product_id=#{productId}
+       limit 1
+   </select>
+
+    <update id="updateFrozen">
+        UPDATE storage SET residue=#{residue},frozen=#{frozen} WHERE product_id=#{productId}
+    </update>
+
+    <update id="updateFrozenToUsed">
+        UPDATE storage SET frozen=frozen-#{count} WHERE product_id=#{productId}
+    </update>
+
+    <update id="updateFrozenToResidue">
+        UPDATE storage SET frozen=frozen-#{count}, residue=residue+#{count} WHERE product_id=#{productId}
+    </update>
+
+</mapper>

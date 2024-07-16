@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.netflix.archaius:archaius-core:0.7.6">
+    <CLASSES>
+      <root url="jar:///usr/local/apache-maven-3.6.3/repo/com/netflix/archaius/archaius-core/0.7.6/archaius-core-0.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///usr/local/apache-maven-3.6.3/repo/com/netflix/archaius/archaius-core/0.7.6/archaius-core-0.7.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///usr/local/apache-maven-3.6.3/repo/com/netflix/archaius/archaius-core/0.7.6/archaius-core-0.7.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

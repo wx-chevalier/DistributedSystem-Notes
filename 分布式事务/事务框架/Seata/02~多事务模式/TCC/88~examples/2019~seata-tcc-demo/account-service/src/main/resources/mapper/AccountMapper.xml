@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.kerry.seata.demo.accountservice.mapper.AccountMapper">
+
+   <select id="findOneByUserId" resultType="pers.kerry.seata.demo.accountservice.pojo.AccountDO">
+       select *
+       from account
+       where user_id=#{userId}
+       limit 1
+   </select>
+
+    <update id="updateFrozen">
+        UPDATE account SET `residue`=#{residue},`frozen`=#{frozen} WHERE `user_id`=#{userId}
+    </update>
+
+    <update id="updateFrozenToUsed">
+        UPDATE account SET `frozen`=`frozen`-#{money} WHERE `user_id`=#{userId}
+    </update>
+
+    <update id="updateFrozenToResidue">
+        UPDATE account SET `frozen`=`frozen`-#{money}, `residue`=`residue`+#{money} WHERE `user_id`=#{userId}
+    </update>
+
+</mapper>
