@@ -1,4 +1,4 @@
-![分布式系统题图](https://assets.ng-tech.icu/item/20230503195406.png)
+![分布式系统题图](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/20230503195406.png)
 
 # 分布式基础
 
