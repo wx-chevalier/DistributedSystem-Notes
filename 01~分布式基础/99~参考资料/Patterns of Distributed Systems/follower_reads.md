@@ -156,25 +156,8 @@ class ClusterClient…
 ```java
 class ClusterClient…
 
-  ReplicaDescriptor findNearestFollower(List<ReplicaDescriptor> allFollowers) {
-      List<ReplicaDescriptor> sameRegionFollowers = matchLocality(allFollowers, clientRegion);
-      List<ReplicaDescriptor> finalList
-              = sameRegionFollowers.isEmpty() ? allFollowers
-                                                :sameRegionFollowers;
-      return finalList.stream().sorted((r1, r2) -> {
-          if (!latenciesAvailableFor(r1, r2)) {
-              return 0;
-          }
-          return Long.compare(latencyMap.get(r1).getAverageLatency(),
-                              latencyMap.get(r2).getAverageLatency());
-
       }).findFirst().get();
   }
-
-  private boolean latenciesAvailableFor(ReplicaDescriptor r1, ReplicaDescriptor r2) {
-      return latencyMap.containsKey(r1) && latencyMap.containsKey(r2);
-  }
-```
 
 ### 断连或缓慢的追随者
 

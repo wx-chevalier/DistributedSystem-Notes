@@ -213,10 +213,6 @@ consistentCoreClient.setValue("/servers/1", "{address:192.168.199.10, port:8000}
 
 一致性内核接收到消息后，把键值保存在键值存储中，它还会将键值同这个特定的租约关联在一起。
 
-```java
-class ReplicatedKVStore…
-  private ConcurrentHashMap<String, Lease> leases = new ConcurrentHashMap<>();
-
 class ReplicatedKVStore…
   private Response applySetValueCommand(Long walEntryId, SetValueCommand setValueCommand) {
       getLogger().info("Setting key value " + setValueCommand);

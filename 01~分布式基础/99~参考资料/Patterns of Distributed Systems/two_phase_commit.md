@@ -156,12 +156,6 @@ class TransactionalKVStore…
 ```java
 class TransactionalKVStore…
 
-  public void put(TransactionRef transactionRef, String key, String value) {
-      TransactionState state = getOrCreateTransactionState(transactionRef);
-      state.addPendingUpdates(key, value);
-  }
-```
-
 值得注意的是，这些锁是长期存在的，请求完成之后并不释放。只有事务提交时，才会释放这些锁。这种在事务期间持有锁，仅在事务提交或回滚时释放的技术称为 [两阶段锁定(2PL two-phase-locking)](https://en.wikipedia.org/wiki/Two-phase_locking)。对于提供串行隔离级别（serializable isolation level）而言，两阶段锁定至关重要。串行意味着，事务的效果就像一次一个地执行。
 
 #### 防止死锁
